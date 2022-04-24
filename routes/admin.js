@@ -57,8 +57,9 @@ router.get('/add-product',verifylogin,(req,res)=>{
 })
 router.post('/add-product',(req,res)=>{
   productHelper.addproduct(req.body,(id)=>{
+    let images =req.files.images
     let image=req.files.image
-    image.mv('./public/product-images/'+id+'.jpg',(err,done)=>{
+    if(  image.mv('./public/product-images/'+id+'.jpg') && images.mv('./public/product-images1/'+id+'.jpg'),(err,done)=>{
       if(!err){
         res.render("admin/add-product",{admin:true})
       }else{
@@ -81,9 +82,14 @@ router.post('/edit-product/:id',(req,res)=>{
   productHelpers.updateProduct(req.params.id,req.body).then(()=>{
     let id=req.params.id
     res.redirect('/admin/')
-    if(req.files.image){
+    if(req.files.image && req.files.images){
+      let images =req.files.images
       let image=req.files.image
+      
       image.mv('./public/product-images/'+id+'.jpg',(err,done)=>{
+       
+      })
+      images.mv('./public/product-images1/'+id+'.jpg',(err,done)=>{
        
       })
 
@@ -95,7 +101,7 @@ router.get('/delete-product/:id',verifylogin,(req,res)=>{
   console.log(proId);
   
   productHelpers.deleteProduct(proId).then((response)=>{
-    res.redirect('/admin')
+    res.redirect('/admin/products')
   })
 
 })

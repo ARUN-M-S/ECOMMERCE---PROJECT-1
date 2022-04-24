@@ -233,10 +233,9 @@ router.get('/category-view/:id',(req,res)=>{
 // quantity
 router.post('/change-product-quantity',(req,res,next)=>{
   console.log(req.body);
-  console.log("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
+  
   userHelpers.changeProductQuantity(req.body).then(async(response)=>{
   
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>");
      response.total=await userHelpers.getTotalAmount(req.body.user)
   
   res.json(response)
@@ -274,7 +273,7 @@ router.get('/order-success',(req,res)=>{
 })
 
 
-router.get('/orders',async(req,res)=>{
+router.get('/orders',verifylogin,async(req,res)=>{
   console.log(req.session.user?._id);
   let orders=await userHelpers.getUserOrders(req.session.user?._id)
 res.render('user/orders',{user:req.session.user,orders})

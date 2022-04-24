@@ -19,6 +19,12 @@ module.exports={
     },
     getAllproducts:()=>{
         return new Promise(async(resolve,reject)=>{
+            // let OP = db.get().collection(collection.PRODUCT_COLLECTION).find({$convert:{ input: "", to: "int" }}).project({orginalPrice:1, _id:0}).toArray()
+            // let OFP = await db.get().collection(collection.PRODUCT_COLLECTION).find({}).project({offerPrice:1, _id:0}).toArray()
+            // let offer = {$convert:{ input: "OP", to: "int" }}
+
+            // console.log(OP);
+            // console.log(offer);
             let products= await db.get().collection(collection.PRODUCT_COLLECTION).find().toArray()
             resolve(products)
         })

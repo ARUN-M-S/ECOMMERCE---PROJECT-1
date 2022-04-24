@@ -1,17 +1,23 @@
 <section>
-    <div class="container">
+    <div class="container mt-5">
     <div class="row">
         <form action="/admin/add-category" method="post" enctype="multipart/form-data">
   <div class="col-md-6">
-    <label for="" class="form-label">brand:</label>
-    <input type="text" name="brand" class="form-control">
-  <div class="mt-3">
+    
+    <input type="text" placeholder="Brand" name="brand" class="form-control">
+  {{!-- <div class="mt-3">
     <label for="" class="form-label">category:</label>
     <input type="text" name="category" class="form-control" id="exampleInputPassword1">
-  </div>
+  </div> --}}
+  <select class="form-select mt-3" type="text" name="category" class="form-control"  aria-label="Default select example">
+  <option selected>Category</option>
+  <option value="BOYS">BOYS</option>
+  <option value="GIRLS">GIRLS</option>
+  <option value="FOOTWEAR">FOOTWEAR</option>
+</select>
 
  
-z
+
 
   <div class="mt-3">
     <label for="" class="form-label">image:</label>
