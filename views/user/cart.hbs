@@ -1,0 +1,177 @@
+<section class="h-100 gradient-custom">
+  <div class="container py-5">
+    <div class="row d-flex justify-content-center my-4">
+      <div class="col-md-8">
+        <div class="card mb-4">
+          <div class="card-header py-3 bg-dark">
+            <h5 class="mb-0 text-light">Cart - {{cartCount}} items</h5>
+          </div>
+          <div class="card-body">
+            <!-- Single item -->
+            <div class="row ">
+              {{#each products}}
+             
+              <div class="col-lg-3 col-md-12 mb-4  mt-2 mb-lg-0">
+                <!-- Image -->
+                <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                  <img src="/product-images/{{this.product._id}}.jpg"
+                    class="w-100 " s alt="Blue Jeans Jacket" />
+                  <a href="#!">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                  </a>
+                </div>
+                <!-- Image -->
+              </div>
+
+              <div class="col-lg-5 col-md-6 mb-4 mt-2 mb-lg-0">
+                <!-- Data -->
+                <p><strong>{{this.product.description}}</strong></p>
+                <p>Color: blue</p>
+                <p>Size: M</p>
+                <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                  title="Remove item" onclick="removeCartProduct('{{this._id}}','{{this.product._id}}')">
+                  <i class="fas fa-trash"></i>
+                </button>
+                <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
+                  title="Move to the wish list">
+                  <i class="fas fa-heart"></i>
+                </button>
+                <!-- Data -->
+              </div>
+              
+
+              <div class="col-lg-4 col-md-6 mb-4 mt-2 mb-lg-0 ">
+                <!-- Quantity -->
+                <div class="d-flex mb-4">
+                <label class="form-label ms-3 mt-3 me-3" for="form1">Quantity:</label>
+                <button class="cart-item-count mr-3 mt-3 h-25 text-success fs-6"  onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',1)">+</button><span class="fs-5 mt-3 me-3" id="{{this.product._id}}">{{this.quantity}}</span><button class="cart-item-count mr-3 mt-3 text-danger h-25 fs-6" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',-1)">-</button>
+                   
+                 {{!-- <a href="#" class="fs-2 mb-3 me-2 text-decoration-none text-success" >+</a>
+                  <div class="form-outline mt-2">
+                    <input id="form1" name="quantity" value="{{this.quantity}}" type="button" class="form-control" />
+                   
+                  </div> --}}
+                  {{!-- <a href="#" class="fs-2 mb-3 ms-2 text-decoration-none text-danger" >-</a> --}}
+
+                </div>
+                <!-- Quantity -->
+
+                <!-- Pr ice -->
+              
+                <p class="text-start text-md-center mt-5">
+                  <strong>${{this.product.offerPrice}}</strong>
+                </p>
+                
+               
+                <!-- Price -->
+              </div>
+              {{/each}}
+            </div>
+          
+            <!-- Single item -->
+          </div>
+        </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <p><strong>Expected shipping delivery</strong></p>
+            <p class="mb-0">12.10.2020 - 14.10.2020</p>
+          </div>
+        </div>
+        <div class="card mb-4 mb-lg-0">
+          <div class="card-body">
+            <p><strong>We accept</strong></p>
+            <img class="me-2" width="45px"
+              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+              alt="Visa" />
+            <img class="me-2" width="45px"
+              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+              alt="American Express" />
+            <img class="me-2" width="45px"
+              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+              alt="Mastercard" />
+            <img class="me-2" width="45px"
+              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.webp"
+              alt="PayPal acceptance mark" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-header py-3 bg-dark">
+            <h5 class="mb-0 text-light" >Summary</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                Products
+                <span>$53.98</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                Shipping
+                <span>Gratis</span>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                <div>
+                  <strong>Total amount</strong>
+                  <strong>
+                    <p class="mb-0">(including VAT)</p>
+                  </strong>
+                </div>
+                <span><strong>$<span id="total">{{totalValue}}</span></strong></span>
+              </li>
+            </ul>
+
+            <button type="button" class="btn btn-success btn-lg btn-block text-light">
+              <a href="/place-order" class="text-decoration-none text-light"> Go to checkout</a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  function changeQuantity(cartId,proId,userId,count){
+    let quantity=parseInt(document.getElementById(proId).innerHTML)
+   count=parseInt(count)
+    $.ajax({
+      url:'/change-product-quantity',
+      data:{
+        user:userId,
+        cart:cartId,
+        product:proId,
+        count:count,
+        quantity:quantity
+      },
+      method:'post',
+      success:(response)=>{
+        if(response.removeProduct){
+          alert("product Removed From Cart")
+          location.reload()
+        }else{
+         document.getElementById(proId).innerHTML=quantity+count
+         document.getElementById('total').innerHTML=response.total
+         
+         
+        }
+        
+      }
+    })
+  }
+  function removeCartProduct(cardId,proId){
+    $.ajax({
+      url:'/remove-product-cart',
+      data:{
+        cart:cardId,
+        product:proId
+      },
+      method:'post',
+      success:(response)=>{
+        alert("product Removed From Cart")
+        location.reload()
+      }
+    })
+  }
+</script>

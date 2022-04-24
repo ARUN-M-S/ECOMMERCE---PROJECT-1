@@ -1,0 +1,32 @@
+
+
+<section>
+    <div class="container mt-5">
+    <div class="row">
+        {{#each products}}
+        <div class="col-md-3">
+            <div class="card mt-3 xzoom  text-center bg-light" style="width: 18rem;height:30rem;border-radius: 1rem">
+
+  <a href="/view-image/{{this._id}}">      
+  <img src="/product-images/{{this._id}}.jpg" style="width: 200px;height:250px"  class="card-img-top mx-auto" alt="..."></a>
+  <div class="">
+    <p><span class="text-muted ms-3">{{this.brand}}</span><br>
+    <span >{{this.description}}</span>
+    
+    <br><span><span class="text-success fs-5">₹{{this.offerPrice}} </span>orginal price <span class="text-danger text-decoration-line-through fs-5">  ₹{{this.orginalPrice}}</span></span> 
+    <br><span class="fs-5"><span class=" fs-5">{{this.offerpercentage}}% off</span><br>Hurry, Only 7 left!</span></p>
+    
+    
+    <p class="text-center">
+    <a href="#" class="btn btn-primary  ">ADD CART</a>
+    </p>
+    
+    
+  </div>
+</div>
+</div>
+{{/each}}
+        </div>
+    </div>
+</section>
+    

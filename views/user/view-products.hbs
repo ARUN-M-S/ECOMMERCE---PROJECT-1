@@ -1,0 +1,108 @@
+
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img style="height: 70%; width:100%" src="/product-images/6259456e24607b5148d6d92d.jpg" alt="First slide">
+            <div class="carousel-caption d-none d-md-block">
+               
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img style="height: 70%; width:100%"  src="/product-images/6259456e24607b5148d6d92d.jpg" alt="Second slide">
+        </div>
+        <div class="carousel-item">
+            <img style="height: 70%; width:100%"  src="/product-images/6259456e24607b5148d6d92d.jpg" alt="Third slide">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+
+<h1 class="text-center mt-5"> CATEGORY</h1>
+
+
+<section>
+    <div class="container mt-5">
+    <div class="row">
+        {{#each category}}
+        <div class="col-md-3">
+            <div class="card mt-3 border-0 bg-dark" style="width: 18rem;height:15rem; border-radius: 1rem">
+        <a href="/category-view/{{this.category}}">
+  <img class="rounded-circle ms-4" alt="100x100" src="/category-image/{{this._id}}.jpg" style="width: 250px;height:200px"  class="card-img-top" alt="..."></a>
+  <div class="card-body">
+    <h5 class="card-title text-center text-light">{{this.category}}</h5>
+  </div>
+</div>
+</div>
+{{/each}}
+        </div>
+    </div>
+</section>
+    
+
+
+
+
+
+
+<section>
+    <div class="container mt-5">
+    <div class="row">
+        {{#each products}}
+        <div class="col-md-3">
+            <div class="card mt-3 xzoom  text-center bg-light" style="width: 18rem;height:30rem;border-radius: 1rem">
+
+  <a href="/view-image/{{this._id}}">      
+  <img src="/product-images/{{this._id}}.jpg" style="width: 200px;height:250px"  class="card-img-top mx-auto" alt="..."></a>
+  <div class="">
+    <p><span class="text-muted ms-3">{{this.brand}}</span><br>
+    <span >{{this.description}}</span>
+    
+    <br><span><span class="text-success fs-5">₹{{this.offerPrice}} </span>orginal price <span class="text-danger text-decoration-line-through fs-5">  ₹{{this.orginalPrice}}</span></span> 
+    <br><span class="fs-5"><span class=" fs-5">{{this.offerpercentage}}% off</span><br>Hurry, Only 7 left!</span></p>
+    
+    
+    <p class="text-center">
+    <button onclick="addToCart('{{this._id}}')" class=" btn btn-dark">Add to Cart</button>
+    </p>
+    
+    
+  </div>
+</div>
+</div>
+{{/each}}
+        </div>
+    </div>
+</section>
+    
+
+
+
+    <script>
+        function addToCart(proId){
+            $.ajax({
+                url:'/add-to-cart/'+proId,
+                method:'get',
+                success:(response)=>{
+                    if(response.status){
+                        let count=$('#cartCount').html()
+                        count=parseInt(count)+1
+                        $("#cartCount").html(count)
+                    }
+                    
+                }
+            })
+        }
+    </script>
