@@ -4,20 +4,20 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th scope="col">no</th>
-          <th scope="col">brand</th>
-          <th scope="col">category</th>
-          <th scope="col">description</th>
-          <th scope="col">orginal price</th>
-          <th scope="col">offer price</th>
-          <th scope="col">offer percentage</th>
-          <th scope="col">image</th>
+          <th scope="col">No</th>
+          <th scope="col">Brand</th>
+          <th scope="col">Category</th>
+          <th scope="col">Description</th>
+          <th scope="col">OP</th>
+          <th scope="col">OfrP</th>
+          <th scope="col">Ofr%</th>
+          <th scope="col">Images</th>
         </tr>
       </thead>
       <tbody>
         {{#each products}}
           <tr>
-            <th scope="row">1</th>
+            <th scope="row">{{@index}}</th>
             <td>
               {{this.brand}}
             </td>
@@ -47,12 +47,12 @@
             <td>
               <a
                 href="/admin/edit-product/{{this._id}}"
-                class="btn btn-primary"
+                class="btn btn-primary w-"
               >Edit</a>
               <a
                 href="/admin/delete-product/{{this._id}}"
                 class="btn btn-danger"
-                onclick="return confirm('Are You Want to Delete {{this.name}}?')"
+                onclick="return confirm('Are You Want to Delete {{this.brand}}?')"
               >delete</a>
             </td>
           </tr>

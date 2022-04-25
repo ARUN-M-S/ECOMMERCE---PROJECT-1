@@ -1,4 +1,4 @@
-<section>
+{{!-- <section>
   <div class="container mt-5">
     <div class="row ">
         {{#each products}}
@@ -40,7 +40,7 @@
     
       
       
-</section>
+</section> --}}
     
 <section>
    <div class="container mt-5">
@@ -80,3 +80,21 @@
         </div>
 
 </section>
+
+
+<script>
+        function addToCart(proId){
+            $.ajax({
+                url:'/add-to-cart/'+proId,
+                method:'get',
+                success:(response)=>{
+                    if(response.status){
+                        let count=$('#cartCount').html()
+                        count=parseInt(count)+1
+                        $("#cartCount").html(count)
+                    }
+                    
+                }
+            })
+        }
+    </script>

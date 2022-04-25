@@ -3,10 +3,10 @@
    
   <thead class="table-dark">
      <tr>
-      <th scope="col">name</th>
-       <th scope="col">email</th>
-      <th scope="col">phoneNumber</th>
-      <th scope="col">password</th>
+      <th scope="col">Name</th>
+       <th scope="col">Email</th>
+      <th scope="col">PhoneNumber</th>
+      {{!-- <th scope="col">password</th> --}}
         <th scope="col">Options</th>
         <th scope="col">Delete</th>
     </tr>
@@ -15,9 +15,9 @@
        {{#each users}}
     <tr class="table-active">
       <td class="table-light">{{this.name}}</td>
-      <td class="table-dark">{{this.email}}</td>
+      <td class="table-light">{{this.email}}</td>
        <td class="table-light">{{this.phoneNumber}}</td>
-       <td class="table-dark">{{this.password}}</td>
+       {{!-- <td class="table-dark">{{this.password}}</td> --}}
       
        <td class="table-light">
           {{#if this.userBlock}}
@@ -27,7 +27,7 @@
       </td>
       {{/if}}
       
-          <td class="table-dark"><a href="/admin/delete-users/{{this._id}}" class="btn btn-danger">Delete</a></td>
+          <td class="table-orange"><a href="/admin/delete-users/{{this._id}}" class="btn btn-danger">Delete</a></td>
 
     </tr>
     {{/each}}

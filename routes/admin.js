@@ -9,7 +9,7 @@ var productHelper=require('../helpers/product-helpers')
 /* GET users listing. */
 
 const cridential={
-  email:"asifsaheer7034@gmail.com",
+  email:"arunms96official@gmail.com",
   password:1234
 }
 
