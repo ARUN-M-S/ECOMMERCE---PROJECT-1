@@ -1,8 +1,9 @@
 <section>
   <div class="container mt-5">
-    <div class="row">
-      {{#each products}}
-      <div class="col-md-3">
+    <div class="row ">
+        {{#each products}}
+      <div class="col-md-3 col-sm-6">
+      
         <div class="card mt-3 xzoom  text-center bg-light" style="width: 18rem;height:30rem;border-radius: 1rem">
 
           <a href="/view-image/{{this._id}}">
@@ -20,21 +21,62 @@
 
 
             <p class="text-center">
-              <a href="#" class="btn btn-primary  ">ADD CART</a>
+              <a onclick="addToCart('{{this._id}}')" class="btn btn-primary  ">ADD CART</a>
             </p>
 
 
           </div>
+         
         </div>
-   
 
 
-
-
-      {{/each}}
+         {{/each}}
+      </div>
     </div>
-  </div>
+
+
+
 
     
+      
+      
 </section>
+    
+<section>
+   <div class="container mt-5">
+    <div class="row">
+        {{#each products}}
+        <div class="col-md-4 col-sm-6">
+            <div class="product-grid" style="width: 18rem; height:auto">
+                <div class="product-image" >
+                    <a href="/view-image/{{this._id}}" class="image">
+                        <img class="pic-1" src="/product-images/{{this._id}}.jpg" style="width: 18rem; height:15rem">
+                        <img class="pic-2" src="/product-images1/{{this._id}}.jpg" style="width: 18rem; height:15rem">
+                    </a>
+                  
+                    <span class="product-discount-label" style="background-color: #ffa600;" >{{this.offerpercentage}}% off</span>
+                </div>
+                <div class="product-content">
+                    <p><span class="text-muted ms-3">{{this.brand}}</span><br>
+              <span>{{this.description}}</span>
 
+              <br><span><span class="text-success fs-5">₹{{this.offerPrice}} </span>orginal price <span
+                  class="text-danger text-decoration-line-through fs-5"> ₹{{this.orginalPrice}}</span></span>
+              <br><span class="fs-5"><span class=" fs-5">{{this.offerpercentage}}% off</span><br>Hurry, Only 7
+                left!</span>
+            </p>
+                    <h3 class="title"><a href="#">{{this.brand}}</a></h3>
+                    <div class="price"><span> ₹{{this.orginalPrice}}</span> ₹{{this.offerPrice}}</div>
+                    <div class="product-button-group">
+                        <a class="product-like-icon" href="#"><i class="fas fa-heart"></i></a>
+                        <a class="add-to-cart" onclick="addToCart('{{this._id}}')"><i class="fa fa-shopping-bag"></i>ADD TO CART</a>
+                        <a class="product-compare-icon" href="#"><i class="fas fa-random"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+        </div>
+        </div>
+
+</section>
