@@ -1,4 +1,4 @@
-
+{{!-- =========================================carousel====================================== --}}
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -30,10 +30,11 @@
 </div>
 
 <div >
-<h1 class="text-center mt-5"   > CATEGORY</h1>
+<h1 class="text-center mt-5"> CATEGORY</h1>
 </div>
 
 
+{{!-- =========================================carousel====================================== --}}
 
 
 <section >
@@ -115,7 +116,7 @@
                     <h3 class="title"><a href="#">{{this.brand}}</a></h3>
                     <div class="price"><span> ₹{{this.orginalPrice}}</span> ₹{{this.offerPrice}}</div>
                     <div class="product-button-group">
-                        <a class="product-like-icon" href="#"><i class="fas fa-heart"></i></a>
+                        <a class="add-to-wishlist" href="/add-to-wishlist/{{this._id}}"><i class="fas fa-heart"></i></a>
                         <a class="add-to-cart" onclick="addToCart('{{this._id}}')"><i class="fa fa-shopping-bag"></i>ADD TO CART</a>
                         <a class="product-compare-icon" href="#"><i class="fas fa-random"></i></a>
                     </div>
@@ -180,4 +181,19 @@
                 }
             })
         }
+      
     </script>
+       {{!-- function addToWishlist(proId){
+            $.ajax({
+                url:'/add-to-wishlist/'+proId,
+                method:'get',
+                success:(response)=>{
+                    if(response.status){
+                        let count=$('#wishlistCount').html()
+                        count=parseInt(count)+1
+                        $("#wishlistCount").html(count)
+                    }
+                    
+                }
+            })
+        } --}}

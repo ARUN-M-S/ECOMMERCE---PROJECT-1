@@ -1,0 +1,64 @@
+body {
+    font-family: "Lobster", cursive;
+  }
+  .nav-link {
+    color: #fff !important;
+  }
+  .cate-bg {
+    background-color: #000;
+  }
+  .background {
+    background-color: #000;
+  }
+  .nav-tabs {
+    border-bottom: 1px solid #eee;
+  }
+  .nav-tabs .nav-link {
+    margin-bottom: -1px;
+    background: none;
+    border: 1px solid transparent;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .nav-tabs .nav-link:hover,
+  .nav-tabs .nav-link:focus {
+    border-color: #f5f5f5 #f5f5f5 #eee;
+    isolation: isolate;
+  }
+  .nav-tabs .nav-link.active,
+  .nav-tabs .nav-item.show .nav-link {
+    color: #757575;
+    background-color: #000;
+    border-color: transparent;
+  }
+  .wine-tabs {
+    border-bottom: 0;
+  }
+  .wine-tabs .nav-link:hover,
+  .wine-tabs .nav-link:focus {
+    border-color: transparent;
+  }
+  .wine-tabs .nav-link.active,
+  .wine-tabs .nav-item.show .nav-link {
+    border-bottom-color: #757575;
+  }
+  .effect {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0) 33.33%,
+      rgba(255, 255, 255, 1) 66.66%,
+      rgba(255, 255, 255, 0) 99.99%
+    );
+    background-size: 300% 300%;
+    background-position: 0% 100%;
+    transition: 0.5s;
+  }
+  .card {
+    background-color: rgb(0, 0, 0, 0.2);
+  }
+  .bg-footer {
+    background-color: #2c2c2c5b;
+  }
+  

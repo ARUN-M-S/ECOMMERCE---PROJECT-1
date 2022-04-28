@@ -1,0 +1,879 @@
+{{!-- <div class="container mt-5 mb-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-11">
+            <div class="">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="images p-3">
+                            <div class="text-center p-4"> <img id="main-image" src="https://i.imgur.com/Dhebu4F.jpg"
+                                    width="250" /> </div>
+                            <div class="row col-2  display-flex" id="enthino">
+                                {{#each products}}
+                                <div class="thumbnail text-center"> <img onclick="change_image(this)"
+                                        src="{{this.image}}" width="30">
+                                    
+                                </div>
+                               {{/each}}
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product p-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center"> <i class="fa fa-long-arrow-left"></i> <span
+                                        class="ml-1">Back</span> </div> <i class="fa fa-shopping-cart text-muted"></i>
+                            </div>
+                            <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand">Orianz</span>
+                                <h5 class="text-uppercase">Men's slim fit t-shirt</h5>
+                                <div class="price d-flex flex-row align-items-center"> <span
+                                        class="act-price">$20</span>
+                                    <div class="ml-2"> <small class="dis-price">$59</small> <span>40% OFF</span> </div>
+                                </div>
+                            </div>
+                            <p class="about">Shop from a wide range of t-shirt from orianz. Pefect for your everyday
+                                use, you could pair it with a stylish pair of jeans or trousers complete the look.</p>
+                            <div class="sizes mt-5">
+                                <h6 class="text-uppercase">Size</h6> <label class="radio"> <input type="radio"
+                                        name="size" value="S" checked> <span>S</span> </label> <label class="radio">
+                                    <input type="radio" name="size" value="M"> <span>M</span> </label> <label
+                                    class="radio"> <input type="radio" name="size" value="L"> <span>L</span> </label>
+                                <label class="radio"> <input type="radio" name="size" value="XL"> <span>XL</span>
+                                </label> <label class="radio"> <input type="radio" name="size" value="XXL">
+                                    <span>XXL</span> </label>
+                            </div>
+                            <div class="cart mt-4 align-items-center"> <button
+                                    class="btn btn-danger text-uppercase mr-2 px-4">Add to cart</button> <i
+                                    class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<script>
+    function change_image(image) {
+
+        var container = document.getElementById("main-image");
+
+        container.src = image.src;
+    }
+
+
+
+    document.addEventListener("DOMContentLoaded", function (event) {
+
+
+
+
+
+
+
+    });
+</script> --}}
+
+
+
+
+{{!-- 
+<section>
+    <div class="container-fluid mt-5">
+    <div class="row">
+        <div class=" co-xxl-6 col-xl-6 col-md-6 col-sm-12 " >
+        <div class="zoom mx-auto" id="img-container">
+      
+        </div>
+       
+        </div>
+        <div class=" co-xxl-6 col-xl-6 col-md-6 col-sm-12">
+        
+        <span class="fs-2 ">{{product.description}}</span>
+         <p> <span  class="text-success fs-3">₹{{product.offerPrice}}</span><span class="text-danger text-decoration-line-through fs-5 ps-3" >₹{{product.orginalPrice}}</span> <span class="fs-3">{{product.offerpercentage}}%off</span></p>
+        <p><span class="fs-5"> Available offers </span><br>
+
+<i class="bi bi-bookmark-fill pe-1 text-success"></i>Bank Offer10% off on Slice Cards, up to ₹200. On orders of ₹1000 and  <a href="#" class="text-decoration-none">aboveT&C</a><br>
+
+<i class="bi bi-bookmark-fill pe-1 text-success" ></i>Bank Offer5% Cashback on Flipkart Axis Bank a <a href="#" class="text-decoration-none" >CardT&C</a> <br>
+
+<i class="bi bi-bookmark-fill pe-1 text-success"></i>Partner OfferBuy this product and get upto ₹500 off on Flipkart Furniture <a href="#" class="text-decoration-none"> Know More</a><br>
+
+<i class="bi bi-bookmark-fill pe-1 text-success"></i>Partner OfferSign up for Men's card Pay Later and get Card worth ₹100* <a href="#" class="text-decoration-none">Know More</a><br>     
+   
+
+    <div class="dropdown">
+        Available:
+  <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    size
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="#">small</a></li>
+    <li><a class="dropdown-item" href="#">medium</a></li>
+    <li><a class="dropdown-item" href="#">large</a></li>
+    <li><a class="dropdown-item" href="#">extra large</a></li>
+  </ul>
+</div>
+</span>
+</p>
+
+   
+   <div class="text-center">
+       <button type="submit" class="btn btn-dark">Add Cart</button>
+   </div>
+      
+        </div>
+      </div>
+            
+        
+  
+
+
+
+        </div>
+    </div>
+</section>
+<script>
+    var options = {
+        width: 400,
+        height: 400,
+        zoomWidth: 400,
+        offset: {vertical: 0,horizontal: 10},
+        scale: .7
+    }
+
+    new ImageZoom(document.getElementById("img-container"), options)
+</script> --}}
+
+
+
+
+
+
+
+
+
+
+{{!-- ==============================tryit==================== --}}
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+
+    <title>E-commerce bootstrap 5 Tutorial</title>
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+    <script
+      src="https://kit.fontawesome.com/332a215f17.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!---header-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark shadow">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a class="navbar-brand h1" href="index.html">
+          <span class="text-danger h4">Wine</span>
+          <span class="text-white h4">Shop</span>
+        </a>
+        <button
+          class="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbar-toggler-success"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="
+            align-self-center
+            collapse
+            navbar-collapse
+            flex-fill
+            d-lg-flex
+            justify-content-lg-between
+          "
+          id="navbar-toggler-success"
+        >
+          <div class="flex-fill mx-xl-5 mb-2">
+            <ul
+              class="
+                nav
+                navbar-nav
+                d-flex
+                justify-content-between
+                mx-xl-5
+                text-center text-dark
+              "
+            >
+              <li class="nav-item">
+                <a
+                  class="nav-link btn-outline-danger rounded-pill px-3"
+                  href="#"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link btn-outline-danger rounded-pill px-3"
+                  href="#"
+                  >Categories</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link btn-outline-danger rounded-pill px-3"
+                  href="#"
+                  >Shop Now</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link btn-outline-danger rounded-pill px-3"
+                  href="#"
+                  >Services</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link btn-outline-danger rounded-pill px-3"
+                  href="#"
+                  >Special Offers</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="navbar align-self-center d-flex">
+            <a class="nav-link" href="">
+              <i class="fab fa-facebook text-danger"></i>
+            </a>
+            <a class="nav-link" href="">
+              <i class="fab fa-instagram text-danger"></i>
+            </a>
+            <a class="nav-link" href="">
+              <i class="fab fa-youtube text-danger"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!--End of Header-->
+    <!--Hero Section-->
+    <div
+      id="carouselExampleCaptions"
+      class="carousel slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="/images1/chris-hardy-H5Ffv4I5ZMI-unsplash.jpg" class="d-block w-100 h-100" alt="..." />
+          <div class="carousel-caption d-none d-md-block">
+            <h5>First slide label</h5>
+            <p>Some representative placeholder content for the first slide.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="/images1/jonathan-borba-ptCuvqe9Okg-unsplash.jpg" class="d-block w-100 h-100" alt="..." />
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Second slide label</h5>
+            <p>Some representative placeholder content for the second slide.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="/images1/annie-spratt-hqSdNrqPBbw-unsplash.jpg" class="d-block w-100 h-100" alt="..." />
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Third slide label</h5>
+            <p>Some representative placeholder content for the third slide.</p>
+          </div>
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <!--end of Hero Section-->
+    <!---Categories Section-->
+    <section class="container-fluid py-5 cate-bg">
+      <div class="row text-center pt-3">
+        <div class="col-lg-6 m-auto">
+          <h1 class="text-white">Categories of the month</h1>
+          <p class="text-white">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
+            maxime enim asperiores doloribus laborum facere?
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-4 p-5 mt-3">
+          <a href="">
+            <img
+              src="/images1/jonathan-borba-ptCuvqe9Okg-unsplash.jpg"
+              class="rounded-circle img-fluid border"
+            />
+          </a>
+          <h5 class="text-center text-white mt-3 mb-3">Wine-1</h5>
+          <p class="text-center">
+            <a class="btn btn-danger rounded-pill">Go Shop</a>
+          </p>
+        </div>
+        <div class="col-12 col-md-4 p-5 mt-3">
+          <a href="">
+            <img
+              src="/images1/senjuti-kundu-JfolIjRnveY-unsplash.jpg"
+              class="rounded-circle img-fluid border"
+            />
+          </a>
+          <h5 class="text-center text-white mt-3 mb-3">Wine-2</h5>
+          <p class="text-center">
+            <a class="btn btn-danger rounded-pill">Go Shop</a>
+          </p>
+        </div>
+        <div class="col-12 col-md-4 p-5 mt-3">
+          <a href="">
+            <img
+              src="/images1/chris-hardy-H5Ffv4I5ZMI-unsplash.jpg"
+              class="rounded-circle img-fluid border"
+            />
+          </a>
+          <h5 class="text-center text-white mt-3 mb-3">Wine-3</h5>
+          <p class="text-center">
+            <a class="btn btn-danger rounded-pill">Go Shop</a>
+          </p>
+        </div>
+      </div>
+    </section>
+    <!--End of the Categories Section-->
+    <!---Shop Now -->
+    <section class="py-0 pb-6 background" id="collections">
+      <div class="container">
+        <div class="row h-100">
+          <div class="col-lg-7 mt-7">
+            <h5 class="fs-3 fs-lg-5 lh-sm mb-0 text-uppercase text-white">
+              Shop Now
+            </h5>
+          </div>
+          <div class="col-12">
+            <nav>
+              <div
+                class="nav nav-tabs wine-tabs mb-4 justify-content-end"
+                id="nav-tab"
+                role="tablist"
+              >
+                <button
+                  class="nav-link active"
+                  id="nav-latest-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#nav-latest"
+                  type="button"
+                  role="tab"
+                  aria-controls="nav-latest"
+                  aria-selected="true"
+                >
+                  Latest
+                </button>
+                <button
+                  class="nav-link"
+                  id="nav-popular-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#nav-popular"
+                  type="button"
+                  role="tab"
+                  aria-controls="nav-popular"
+                  aria-selected="false"
+                >
+                  Popular
+                </button>
+              </div>
+            </nav>
+            <div class="tab-content"id="nav-tabContent">
+              <div class="tab-pane fade show active" id=" nav-latest"role="tabpanel"aria-labelledby="nav-latest-tab">
+                <div class="carousel slide" id="carouselLatest"data-bs-ride="carousel">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval ="10000">
+                      <div class="row h-100 align-items-center">
+                        <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
+                          <div class="card bg-black text-white p-6 pb-8">
+                            <img class="card-img" src="/product-images1/62658fd79c6baa2d1c5e263b.jpg" alt="..">
+                            <div class="card-img-overlay effect bg-dark-gradient d-flex flex-column-reverse align-items-center">
+                              <h6 class="text-danger btn btn-outline-light rounded-pill">$50.00</h6>
+                              <h4 class="text-danger">Cline</h4>
+                            </div>
+                             </div>
+                             </div>
+                             <!------------------->
+                             <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
+                              <div class="card bg-black text-white p-6 pb-8">
+                                <img class="card-img"src="/product-images1/62658fd79c6baa2d1c5e263b.jpg"alt="..">
+                                <div class="card-img-overlay effect bg-dark-gradient d-flex flex-column-reverse align-items-center">
+                                  <h6 class="text-danger btn btn-outline-light rounded-pill">$50.00</h6>
+                                  <h4 class="text-danger">Cline</h4>
+                                </div>
+                                 </div>
+                                 </div>
+                                 <!------------------->
+                                 <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
+                                  <div class="card bg-black text-white p-6 pb-8">
+                                    <img class="card-img"src="/product-images1/62658fd79c6baa2d1c5e263b.jpg"alt="..">
+                                    <div class="card-img-overlay effect bg-dark-gradient d-flex flex-column-reverse align-items-center">
+                                      <h6 class="text-danger btn btn-outline-light rounded-pill">$50.00</h6>
+                                      <h4 class="text-danger">Cline</h4>
+                                    </div>
+                                     </div>
+                                     </div>
+                                     <!------------------->
+
+                                     
+                      </div>
+
+                    </div>
+                    <!---------------->
+                    <div class="carousel-item" data-bs-interval ="5000">
+                      <div class="row h-100 align-items-center">
+                        <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
+                          <div class="card bg-black text-white p-6 pb-8">
+                            <img class="card-img"src="/product-images1/62658fd79c6baa2d1c5e263b.jpg"alt="..">
+                            <div class="card-img-overlay effect bg-dark-gradient d-flex flex-column-reverse align-items-center">
+                              <h6 class="text-danger btn btn-outline-light rounded-pill">$50.00</h6>
+                              <h4 class="text-danger">Cline</h4>
+                            </div>
+                             </div>
+                             </div>
+                             <!------------------->
+                             <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
+                              <div class="card bg-black text-white p-6 pb-8">
+                                <img class="card-img"src="/product-images1/62658fd79c6baa2d1c5e263b.jpg"alt="..">
+                                <div class="card-img-overlay effect bg-dark-gradient d-flex flex-column-reverse align-items-center">
+                                  <h6 class="text-danger btn btn-outline-light rounded-pill">$50.00</h6>
+                                  <h4 class="text-danger">Cline</h4>
+                                </div>
+                                 </div>
+                                 </div>
+                                 <!------------------->
+                                 <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
+                                  <div class="card bg-black text-white p-6 pb-8">
+                                    <img class="card-img"src="/product-images1/62658fd79c6baa2d1c5e263b.jpg"alt="..">
+                                    <div class="card-img-overlay effect bg-dark-gradient d-flex flex-column-reverse align-items-center">
+                                      <h6 class="text-danger btn btn-outline-light rounded-pill">$50.00</h6>
+                                      <h4 class="text-danger">Cline</h4>
+                                    </div>
+                                     </div>
+                                     </div>
+                                     <!------------------->
+
+                                     
+                      </div>
+
+
+                    </div>
+                    <!---------------->
+                    <div class="row">
+                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselLatest"data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#carouselLatest"data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
+                      
+                    </div>
+
+
+                  </div>
+
+                </div>
+              </div>
+              <div class="tab-pane fade" id="nav-popular" role="tabpanel"aria-labelledby="nav-popular-tab">
+                <div class="carousel slide" id="carouselPopular" data-bs-ride="carousel">
+                  <div class="carousel-inner">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active" data-bs-interval="10000">
+                        <div class="row h-100 align-items-center">
+                          <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
+                            <div class="card bg-black text-white p-6 pb-8">
+                              <img class="card-img" src="/product-images1/62658fd79c6baa2d1c5e263b.jpg"alt="..">
+                              <div class="card-img-overlay effect bg-dark-gradient d-flex flex-column-reverse align-items-center">
+                                <h6 class="text-danger btn btn-outline-light rounded-pill">$120.00</h6>
+                                <h4 class="text-danger">Even Keel</h4>
+                              </div>
+                            </div>
+                          </div>
+                          <!---------------------->
+                          <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
+                            <div class="card bg-black text-white p-6 pb-8">
+                              <img class="card-img" src="/product-images1/62658fd79c6baa2d1c5e263b.jpg"alt="..">
+                              <div class="card-img-overlay effect bg-dark-gradient d-flex flex-column-reverse align-items-center">
+                                <h6 class="text-danger btn btn-outline-light rounded-pill">$120.00</h6>
+                                <h4 class="text-dange">Even Keel</h4>
+                              </div>
+                            </div>
+                          </div>
+                          <!---------------------->
+                          <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
+                            <div class="card bg-black text-white p-6 pb-8">
+                              <img class="card-img" src="/product-images1/62658fd79c6baa2d1c5e263b.jpg"alt="..">
+                              <div class="card-img-overlay effect bg-dark-gradient d-flex flex-column-reverse align-items-center">
+                                <h6 class="text-danger btn btn-outline-light rounded-pill">$120.00</h6>
+                                <h4 class="text-dange">Even Keel</h4>
+                              </div>
+                            </div>
+                          </div>
+                          <!---------------------->
+                        </div>
+                      </div>
+                      <!------------------->
+                      <div class="carousel-item">
+                        <div class="row h-100 align-items-center">
+                          <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
+                            <div class="card bg-black text-white p-6 pb-8">
+                              <img class="card-img" src="/product-images1/62658fd79c6baa2d1c5e263b.jpg"alt="..">
+                              <div class="card-img-overlay effect bg-dark-gradient d-flex flex-column-reverse align-items-center">
+                                <h6 class="text-danger btn btn-outline-light rounded-pill">$120.00</h6>
+                                <h4 class="text-dange">Even Keel</h4>
+                              </div>
+                            </div>
+                          </div>
+                          <!---------------------->
+                          <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
+                            <div class="card bg-black text-white p-6 pb-8">
+                              <img class="card-img" src="/product-images1/62658fd79c6baa2d1c5e263b.jpg"alt="..">
+                              <div class="card-img-overlay effect bg-dark-gradient d-flex flex-column-reverse align-items-center">
+                                <h6 class="text-danger btn btn-outline-light rounded-pill">$120.00</h6>
+                                <h4 class="text-dange">Even Keel</h4>
+                              </div>
+                            </div>
+                          </div>
+                          <!---------------------->
+                          <div class="col-sm-6 col-md-4 mb-3 mb-md-0">
+                            <div class="card bg-black text-white p-6 pb-8">
+                              <img class="card-img" src="/product-images1/62658fd79c6baa2d1c5e263b.jpg"alt="..">
+                              <div class="card-img-overlay effect bg-dark-gradient d-flex flex-column-reverse align-items-center">
+                                <h6 class="text-danger btn btn-outline-light rounded-pill">$120.00</h6>
+                                <h4 class="text-dange">Even Keel</h4>
+                              </div>
+                            </div>
+                          </div>
+                          <!---------------------->
+                        </div>
+                      </div>
+                      <!------------------->
+                      <div class="row">
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselPopular" data-bs-slide="next">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next"type="button"data-bs-target="#carouselPopular" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+        </div>
+      </div>
+    </section>
+    <!---End of Shop Now-->
+    <!--services Section-->
+    <div class="container-fluid background py-5">
+      <div class="row justify-content-center">
+        <div class=" col- xxl-10">
+          <div class="card card-span shadow"style="border-radius:35px;">
+            <div class="card-body py-5">
+              <div class="row justify-content-evenly">
+                <div class="col-md-3">
+                  <div class="d-flex d-md-block d-xl-flex justify-content-evenly justify-content-lg-between">
+                    <i class="fas fa-tags fa-3x text-danger"></i>
+                    <div class="d-flex d-lg-block d-xl-flex flex-center">
+                      <h2 class="fw-bolder text-1000 mb-0 text-danger">Daily Discounts</h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 hr-vertical">
+                  <div class="d-flex d-md-block d-xl-flex justify-content-evenly justify-content-lg-between">
+                    <i class="fas fa-phone-alt fa-3x text-danger"></i>
+                    <div class="d-flex d-lg-block d-xl-flex flex-center">
+                      <h2 class="fw-bolder text-1000 mb-0 text-danger">Available on Call</h2>
+                    </div>
+                  </div>
+                </div>
+                <!----->
+                <div class="col-md-3 hr-vertical">
+                  <div class="d-flex d-md-block d-xl-flex justify-content-evenly justify-content-lg-between">
+                    <i class="fas fa-truck fa-3x text-danger"></i>
+                    <div class="d-flex d-lg-block d-xl-flex flex-center">
+                      <h2 class="fw-bolder text-1000 mb-0 text-danger">Quick Delivery</h2>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          
+          
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!---End of th services Section-->
+    <!---Offers Section-->
+    <section class="background">
+      <div class="container">
+        <div class="row h-100">
+          <div class=" col-lg-7 mx-auto text-center mb-6">
+            <h2 class="fw-bold fs-3 fs-lg-5 lh-sm mb-3 mt-5 text-white">
+              Today's Offer
+            </h2>
+        </div>
+        </div>
+        <div class="row gx-2">
+          <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">
+            <div class="card card-span h-100 text-white rounded-3">
+              <img class="img-fluid rounded-3 h-100" src="images/img-4.jpg"alt="..">
+              <div class="card-img-overlay ps-0">
+                <span class="badge bg-danger p-2 ms-3">
+                  <i class="fas fa-tag ,s-2 fs-0"></i>
+                  <span class="fs-0">20% Off</span>
+                </span>
+              </div>
+
+            </div>
+           
+
+          </div>
+          <!------>
+          <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">
+            <div class="card card-span h-100 text-white rounded-3">
+              <img class="img-fluid rounded-3 h-100" src="images/img-3.jpg"alt="..">
+              <div class="card-img-overlay ps-0">
+                <span class="badge bg-danger p-2 ms-3">
+                  <i class="fas fa-tag ,s-2 fs-0"></i>
+                  <span class="fs-0">20% Off</span>
+                </span>
+              </div>
+
+            </div>
+           
+
+          </div>
+          <!------>
+          <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">
+            <div class="card card-span h-100 text-white rounded-3">
+              <img class="img-fluid rounded-3 h-100" src="images/img-5.jpg"alt="..">
+              <div class="card-img-overlay ps-0">
+                <span class="badge bg-danger p-2 ms-3">
+                  <i class="fas fa-tag ,s-2 fs-0"></i>
+                  <span class="fs-0">20% Off</span>
+                </span>
+              </div>
+
+            </div>
+           
+
+          </div>
+          <!------><div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">
+            <div class="card card-span h-100 text-white rounded-3">
+              <img class="img-fluid rounded-3 h-100" src="images/img-6.jpg"alt="..">
+              <div class="card-img-overlay ps-0">
+                <span class="badge bg-danger p-2 ms-3">
+                  <i class="fas fa-tag ,s-2 fs-0"></i>
+                  <span class="fs-0">20% Off</span>
+                </span>
+              </div>
+
+            </div>
+           
+
+          </div>
+          <!------>
+        </div>
+      </div>
+
+    </section>
+    <!--End of the Offers section-->
+    <footer class="background pt-4">
+      <div class="container">
+        <div class="row py-4">
+          <div class="col-lg-3 col-12 align-left">
+            <a class="navbar-brand" href="#">
+              <i class="fas fa-wine-bottle fa-2x text-danger"></i>
+              <span class="text-white h3">Wine</span>
+              <span class="text-danger h3 semi-bold-600">Shop</span>
+            </a>
+            <p class="text-light my-lg-4 my-2">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illo qui enim provident atque dignissimos odio?
+            </p>
+            <ul class="list-inline footer-icons  light-300">
+              <li class="list-inline-item m-0">
+                <a class="text-light">
+                  <i class="fab fa-facebook-square fa-2x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item m-0">
+                <a class="text-light">
+                  <i class="fab fa-instagram fa-2x"></i>
+                </a>
+              </li>
+              <li class="list-inline-item m-0">
+                <a class="text-light">
+                  <i class="fab fa-whatsapp-square fa-2x"></i>
+                </a>
+              </li>
+            </ul>
+
+          </div>
+          <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
+            <h3 class="h4 pb-lg-3 text-light light-300">Useful Links</h3>
+            <ul class="list-unstyled text-light light-300">
+              <li class="pb-2">
+                <i class="fas fa-chevron-right"></i>
+                <a class="text-decoration-none text-light"href="">Home</a>
+              </li>
+              <li class="pb-2">
+                <i class="fas fa-chevron-right"></i>
+                <a class="text-decoration-none text-light"href="">Categories</a>
+              </li>
+              <li class="pb-2">
+                <i class="fas fa-chevron-right"></i>
+                <a class="text-decoration-none text-light"href="">Services</a>
+              </li>
+              <li class="pb-2">
+                <i class="fas fa-chevron-right"></i>
+                <a class="text-decoration-none text-light"href="">Shop Now</a>
+              </li>
+              <li class="pb-2">
+                <i class="fas fa-chevron-right"></i>
+                <a class="text-decoration-none text-light"href="">Contact</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
+            <h2 class="h4 pb-lg-3 text-light light-300">About Us</h2>
+            <p class="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium nobis incidunt officiis magnam beatae accusantium.</p>
+          </div>
+          <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
+            <h2 class="h4 pb-lg-3 text-light light-300">
+              Contact Us
+            </h2>
+            <ul class="list-unstyled text-light light-300">
+              <li class="pb-2">
+                <i class="fas fa-phone-alt fa-2x"></i>
+                <a class="text-decoration-none text-light py-1" href="">611234567</a>
+              </li>
+              <li class="pb-2">
+              <a class="text-decoration-none text-light py-1"href="">info@company.com</a>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+      <div class="w-100 bg-footer py-3">
+        <div class="container">
+          <div class="row pt-2">
+            <div class="col-lg-6 col-sm-12">
+              <p class="text-lg-start text-center text-light light-300">
+                Copyright textasfhhdfjkaj
+              </p>
+
+          </div>
+          <div class="col-lg-6 col-sm-12">
+            <p class="text-lg-end text-center text-light light-300">
+              Designed by <a class="text-decoration-none text-light">
+                <strong>Lorem Ipsum</strong>
+              </a>
+            </p>
+        </div>
+
+      </div>
+
+
+
+
+
+
+
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

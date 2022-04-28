@@ -20,18 +20,18 @@
 
   <div class="mt-3">
     
-    <input type="text" name="orginalPrice" placeholder="CP={{product.orginalPrice}}" class="form-control" id="exampleInputPassword1">
+    <input type="text" name="orginalPrice" placeholder="CP={{product.orginalPrice}}" class="form-control" id="OP">
   </div>
  
   <div class="mt-3">
    
-    <input type="text" name="offerPrice" placeholder="Ofr.P={{product.offerPrice}}" class="form-control" id="exampleInputPassword1">
+    <input type="text" name="offerPrice" placeholder="Ofr.P={{product.offerPrice}}" class="form-control" id="OFFER PRICE">
   </div>
 
 
   <div class="mt-3">
     
-    <input type="text" name="offerpercentage" placeholder="Offer%={{product.offerpercentage}}" class="form-control" id="exampleInputPassword1">
+    <input type="text" name="offerpercentage" placeholder="Offer%={{product.offerpercentage}}" class="form-control" id="OFR %">
   </div>
 
   <div class="mt-3">
@@ -41,8 +41,8 @@
   </div>
     <div class="mt-3">
     <label for="" class="form-label">image:</label>
-    <img src="/product-images1/{{product._id}}.jpg" alt="" style="width: 50px; height:auto" id="imgView">
-    <input type="file" name="images"  value="{{product._id}}.jpg" class="form-control" id="exampleInputPassword1" onchange="viewImage(event)">
+    <img src="/product-images1/{{product._id}}.jpg" alt="" style="width: 50px; height:auto" id="imgView1">
+    <input type="file" name="images"  value="{{product._id}}.jpg" class="form-control" id="exampleInputPassword1" onchange="viewImage1(event)">
   </div>
 
   <button type="submit" class="btn btn-primary mt-3">Submit</button>
@@ -54,5 +54,8 @@
   function viewImage(event){
     document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
   }
-  )
+   function viewImage1(event){
+    document.getElementById('imgView1').src=URL.createObjectURL(event.target.files[0])
+  }
+
 </script>

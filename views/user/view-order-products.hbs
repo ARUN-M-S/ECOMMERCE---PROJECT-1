@@ -1,0 +1,67 @@
+
+<section>
+    <div class="container-fluid mt-5">
+    <div class="row">
+        <div class=" co-xxl-6 col-xl-6 col-md-6 col-sm-12 " >
+        <div class="zoom mx-auto" id="img-container">
+      
+        </div>
+       
+        </div>
+        <div class=" co-xxl-6 col-xl-6 col-md-6 col-sm-12">
+        
+        <span class="fs-2 ">{{product.description}}</span>
+         <p> <span  class="text-success fs-3">₹{{product.offerPrice}}</span><span class="text-danger text-decoration-line-through fs-5 ps-3" >₹{{product.orginalPrice}}</span> <span class="fs-3">{{product.offerpercentage}}%off</span></p>
+        <p><span class="fs-5"> Available offers </span><br>
+
+<i class="bi bi-bookmark-fill pe-1 text-success"></i>Bank Offer10% off on Slice Cards, up to ₹200. On orders of ₹1000 and  <a href="#" class="text-decoration-none">aboveT&C</a><br>
+
+<i class="bi bi-bookmark-fill pe-1 text-success" ></i>Bank Offer5% Cashback on Flipkart Axis Bank a <a href="#" class="text-decoration-none" >CardT&C</a> <br>
+
+<i class="bi bi-bookmark-fill pe-1 text-success"></i>Partner OfferBuy this product and get upto ₹500 off on Flipkart Furniture <a href="#" class="text-decoration-none"> Know More</a><br>
+
+<i class="bi bi-bookmark-fill pe-1 text-success"></i>Partner OfferSign up for Men's card Pay Later and get Card worth ₹100* <a href="#" class="text-decoration-none">Know More</a><br>     
+   
+
+    <div class="dropdown">
+        Available:
+  <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    size
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="#">small</a></li>
+    <li><a class="dropdown-item" href="#">medium</a></li>
+    <li><a class="dropdown-item" href="#">large</a></li>
+    <li><a class="dropdown-item" href="#">extra large</a></li>
+  </ul>
+</div>
+</span>
+</p>
+
+   
+   <div class="text-center">
+       <button type="submit" class="btn btn-dark">Add Cart</button>
+   </div>
+      
+        </div>
+      </div>
+            
+        
+  
+
+
+
+        </div>
+    </div>
+</section>
+<script>
+    var options = {
+        width: 400,
+        height: 400,
+        zoomWidth: 400,
+        offset: {vertical: 0,horizontal: 10},
+        scale: .7
+    }
+
+    new ImageZoom(document.getElementById("img-container"), options)
+</script>

@@ -1,10 +1,10 @@
 <section >
-  <div class="container py-5">
-    <div class="row d-flex justify-content-center my-4">
-      <div class="col-md-8">
+  <div class="container py-5 ">
+    <div class="row d-flex justify-content-center my-4" >
+      <div class="col-md-8" >
         <div class="card mb-4">
-          <div class="card-header py-3 bg-dark">
-            <h5 class="mb-0 text-light">Cart - {{cartCount}} items</h5>
+          <div class="card-header py-3">
+            <h5 class="mb-0 " style="color: rgb(0, 0, 0);">Cart - {{cartCount}} items</h5>
           </div>
           <div class="card-body">
             <!-- Single item -->
@@ -15,7 +15,7 @@
                 <!-- Image -->
                 <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
                   <img src="/product-images/{{this.product._id}}.jpg"
-                    class="w-100 " s alt="Blue Jeans Jacket" />
+                    class="w-100 " alt="Blue Jeans Jacket" />
                   <a href="#!">
                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                   </a>
@@ -44,7 +44,7 @@
                 <!-- Quantity -->
                 <div class="d-flex mb-4">
                 <label class="form-label ms-3 mt-3 me-3" for="form1">Quantity:</label>
-                <button class="cart-item-count mr-3 mt-3 h-25 text-success fs-6"  onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',1)">+</button><span class="fs-5 mt-3 me-3" id="{{this.product._id}}">{{this.quantity}}</span><button class="cart-item-count mr-3 mt-3 text-danger h-25 fs-6" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',-1)">-</button>
+                <button class="badge rounded-pill  h-25 pl-2 me-2 mt-3" style="background-color: darkorange; color:black"  onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',1)">+</button><span class="fs-5 mt-3 me-3" id="{{this.product._id}}">{{this.quantity}}</span><button class="badge rounded-pill  h-25  mt-3" style="background-color: rgb(255, 0, 0); color:black; " onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',-1)">-</button>
                    
                  {{!-- <a href="#" class="fs-2 mb-3 me-2 text-decoration-none text-success" >+</a>
                   <div class="form-outline mt-2">
@@ -98,8 +98,8 @@
       </div>
       <div class="col-md-4">
         <div class="card mb-4">
-          <div class="card-header py-3 bg-dark">
-            <h5 class="mb-0 text-light" >Summary</h5>
+          <div class="card-header py-3">
+            <h5 class="mb-0 text-dark" >Summary</h5>
           </div>
           <div class="card-body">
             <ul class="list-group list-group-flush">
@@ -124,7 +124,7 @@
               </li>
             </ul>
 
-            <button type="button" class="btn btn-success btn-lg btn-block text-light">
+            <button type="button" class="btn btn-lg btn-block text-light" style="background-color: darkorange;">
               <a href="/place-order" class="text-decoration-none text-light"> Go to checkout</a>
             </button>
           </div>

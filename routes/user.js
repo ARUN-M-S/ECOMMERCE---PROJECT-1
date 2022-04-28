@@ -8,7 +8,7 @@ const userHelpers = require("../helpers/user-hepers");
 
 const serviceSsid = "VA853a986f6220d20e98db1060e8fd5d22";
 const AccountSsid = "ACa9fb707809f831f236ac61507083c641";
-const token = "8f253073a5c100ee2a9ab162aff20761";
+const token = "130e8f058126d5c7470bfcaa39a55211";
 const client = require("twilio")(AccountSsid, token);
 
 const verifylogin = (req, res, next) => {
@@ -118,20 +118,45 @@ router.get('/add-to-cart/:id',(req,res)=>{
 
 })
 
+// wishlist ----------------------------------
+
+router.get("/wishlist", verifylogin, async (req, res) => {
+  let products=await userHelpers.getWishProducts(req.session.user._id)
+  // let totalValue=await userHelpers.getTotalAmount(req.session.user._id)
+
+ console.log(products);
+  res.render("user/wishlist");
+});
+
+router.get('/add-to-wishlist/:id',verifylogin,(req,res)=>{
+  userHelpers.addToWishlist(req.params.id,req.session.user._id).then(()=>{
+    res.redirect("/")
+
+  })
+
+
+})
+ 
 
 
 
 
+// wishlist
 
-router.get("/view-image/:id", async (req, res) => {
+
+
+
+router.get("/view-image/:id", async(req, res) => {
+  // let product = await productHelpers.getAllproductsDetails(req.params.id)
   var imgId = req.params.id;
   let product = await userHelpers.imageDetails(imgId);
   res.render("user/view-image", { product });
+  // res.render("user/single-product",{product});
 });
 
 //otp verfication
 
-router.get("/verify-phone", (req, res) => {
+router.get("/verify-phone", (req, res) => { 
   res.render("user/verify-phone");
 });
 router.post("/verify-phone", (req, res) => {
@@ -226,6 +251,7 @@ router.get('/category-view/:id',(req,res)=>{
   userHelpers. categoryView(category).then((products)=>{
   console.log(products);
   res.render('user/view-category',{products})
+  
   })
 
 })
@@ -278,8 +304,29 @@ router.get('/orders',verifylogin,async(req,res)=>{
   let orders=await userHelpers.getUserOrders(req.session.user?._id)
 res.render('user/orders',{user:req.session.user,orders})
 })
+
+
+// ------------view-orders from order--------
 router.get('/view-order-products/:id',async(req,res)=>{
-  let products=await userHelpers.getOrderProducts(req.params.id)
-  res.render('user/view-order-products')
+  var imgId = req.params.id;
+  let product = await userHelpers.imageDetails(req.params.id);
+  // let product=await userHelpers.getOrderProducts(req.params.id)
+   res.render('user/view-order-products',{product})
+  // res.render("user/view-image",{product});
 })
+
+
+router.get('/arun',async(req,res)=>{
+  // let category=req.params.id
+  // userHelpers. categoryView(category).then((products)=>{
+  // console.log(products);
+  res.render("user/single-product")
+  })
+  
+
+
+
+
+
+
 module.exports = router;
