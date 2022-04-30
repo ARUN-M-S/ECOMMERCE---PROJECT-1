@@ -1,12 +1,25 @@
 
-<section>
-    <div class="container-fluid mt-5">
+<section style="background-color: antiquewhite;">
+    <div class="container-fluid pt-5" style="min-height: 100vh;" >
     <div class="row">
         <div class=" co-xxl-6 col-xl-6 col-md-6 col-sm-12 " >
         <div class="zoom mx-auto" id="img-container">
+
+		<img class="zoom" src="/product-images/{{product._id}}.jpg">
       
         </div>
-       
+        {{!-- ==========================for image zoom================= --}}
+       {{!-- <div class="t">
+	<div class="mn"> 
+		<img src="/product-images/{{product._id}}.jpg">
+	</div>
+	<div class="view">
+		<img src="/product-images/{{product._id}}.jpg">
+	</div>
+	<div class="cs"></div>
+</div> --}}
+        {{!-- ==========================for image zoom================= --}}
+
         </div>
         <div class=" co-xxl-6 col-xl-6 col-md-6 col-sm-12">
         
@@ -42,10 +55,7 @@
    <div class="text-center">
        <button type="submit" class="btn btn-dark">Add Cart</button>
    </div>
-              <div>
-<img src="/product-images1/{{product._id}}.jpg" class="smallimage" onclick="change(event)" alt="images">
-
-        </div>
+ 
         </div>
  
       </div>
@@ -59,6 +69,9 @@
     </div>
     
 </section>
+
+
+  
 <script>
     var options = {
         width: 400,
@@ -67,6 +80,8 @@
         offset: {vertical: 0,horizontal: 10},
         scale: .7
     }
+    new ImageZoom(document.getElementById("img-container"), options)
+
 
   function change(event){
     document.getElementById('img-container')=URL.createObjectURL(event.target.files[0])
@@ -76,5 +91,4 @@
   }
 
 
-    new ImageZoom(document.getElementById("img-container"), options)
 </script>

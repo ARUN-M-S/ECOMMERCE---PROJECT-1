@@ -1,6 +1,7 @@
+<section style="background-color: antiquewhite;">
 <div class="container">
   <form action="/place-order" id="checkout-form">
-<div class="row mt-5">
+<div class="row pt-5">
   <div class="col-md-8 mb-4">
     <div class="card mb-4">
       <div class="card-header py-3 bg-dark">
@@ -12,14 +13,14 @@
           <div class="row mb-4">
             <div class="col">
               <div class="form-outline">
-                <input type="text" id="form7Example1" name="name" class="form-control" />
+                <input type="text" id="form7Example1" name="name" class="form-control" required />
                 <input type="text" value="{{user._id}}" name="userId" class="form-control" hidden/>
                 <label class="form-label" for="form7Example1">Name</label>
               </div>
             </div>
             <div class="col">
               <div class="form-outline">
-                <input type="text" id="form7Example2" name="phoneNumber" class="form-control" />
+                <input type="text" id="form7Example2" name="phoneNumber" class="form-control" required/>
                 <label class="form-label" for="form7Example2">Phone Number</label>
               </div>
             </div>
@@ -29,7 +30,7 @@
           <div class="row mb-4">
             <div class="col">
           <div class="form-outline mb-4">
-            <input type="text" id="form7Example3" name="state" class="form-control" />
+            <input type="text" id="form7Example3" name="state" class="form-control" required />
             <label class="form-label" for="form7Example3">State</label>
           </div>
           </div>
@@ -37,7 +38,7 @@
           <!-- Text input -->
            <div class="col">
           <div class="form-outline mb-4">
-            <input type="text" id="form7Example4" name="pincode" class="form-control"/>
+            <input type="text" id="form7Example4" name="pincode" class="form-control" required/>
             <label class="form-label" for="form7Example4">Pincode</label>
           </div>
            </div>
@@ -47,14 +48,14 @@
            <div class="row mb-4">
             <div class="col">
           <div class="form-outline mb-4">
-            <input type="text" id="form7Example5" name="city" class="form-control" />
+            <input type="text" id="form7Example5" name="city" class="form-control" required />
             <label class="form-label" for="form7Example5">City</label>
           </div>
         </div>
           <!-- Number input -->
           <div class="col">
           <div class="form-outline mb-4">
-            <input type="number" id="form7Example6" name="house" class="form-control" />
+            <input type="number" id="form7Example6" name="house" class="form-control" required />
             <label class="form-label" for="form7Example6">House No,Building Name</label>
           </div>
           </div>
@@ -79,19 +80,19 @@
       </div>
       <div class="card-body">
         <ul class="list-group list-group-flush">
-          <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+          <li class="d-flex justify-content-between align-items-center border-0 px-0 pb-0">
             Products items:
             <span>$53.98</span>
           </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+          <li class=" d-flex justify-content-between align-items-center px-0">
             Shipping
             <span>free</span>
           </li>
-           <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+           <li class=" d-flex justify-content-between align-items-center px-0">
             Delivery charge
             <span>free</span>
           </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+          <li class="d-flex justify-content-between align-items-center border-0 px-0 mb-3">
             <div>
               <strong>Total amount</strong>
               <strong>
@@ -131,6 +132,7 @@
 </div>
  </form>
 </div>
+</section>
 <script>
   $("#checkout-form").submit((e)=>{
     e.preventDefault()
@@ -139,7 +141,10 @@
       method:'post',
       data:$('#checkout-form').serialize(),
       success:(response)=>{
-        alert(response)
+        alert1();
+      function alert1(){
+
+        }
         if(response.status){
           location.href='/order-success'
         }

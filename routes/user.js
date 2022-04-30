@@ -125,7 +125,7 @@ router.get("/wishlist", verifylogin, async (req, res) => {
   // let totalValue=await userHelpers.getTotalAmount(req.session.user._id)
 
  console.log(products);
-  res.render("user/wishlist");
+  res.render("user/wishlist",{products,'user':req.session.user});
 });
 
 router.get('/add-to-wishlist/:id',verifylogin,(req,res)=>{
@@ -150,7 +150,12 @@ router.get("/view-image/:id", async(req, res) => {
   // let product = await productHelpers.getAllproductsDetails(req.params.id)
   var imgId = req.params.id;
   let product = await userHelpers.imageDetails(imgId);
-  res.render("user/view-image", { product });
+  cartCount=null
+  if (req.session.user) {
+    var cartCount=await userHelpers.getCarCount(req.session.user._id)
+  }
+  
+  res.render("user/view-image", { product,user:req.session.user,cartCount});
   // res.render("user/single-product",{product});
 });
 
@@ -250,7 +255,7 @@ router.get('/category-view/:id',(req,res)=>{
   let category=req.params.id
   userHelpers. categoryView(category).then((products)=>{
   console.log(products);
-  res.render('user/view-category',{products})
+  res.render('user/view-category',{products,user:req.session.user})
   
   })
 

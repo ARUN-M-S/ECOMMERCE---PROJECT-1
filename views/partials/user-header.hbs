@@ -1,4 +1,4 @@
-  <header>
+  {{!-- <header>
       <nav class="navbar navbar-expand-lg navbar-light " id="navbar" >
         <div>
         <a class="navbar-brand text-light ms-5 mt-1" href="/"><img src="/product-images/logo.png" id="logo" style="width: 3rem;" alt="logo"></a>
@@ -23,7 +23,7 @@
               </li> 
 </div>
           <span class="top-0 start-10 translate-middle p-1 count" id="cartCount"  style='font-size:15px' >{{cartCount}}
-    <span class="visually-hidden">New alerts</span>
+  
   </span>
                       
               <li class="nav-item mt-4 me-5">
@@ -95,7 +95,7 @@
       <i class="fas fa-user pe-2"></i>LOGIN
     {{/if}}
   </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+  <ul class="dropdown-menu"  aria-labelledby="dropdownMenuButton1">
      {{#if user}}
     <li><a class="dropdown-item" href="/logout">Logout</a></li>
     {{else}}
@@ -133,4 +133,89 @@
 
       </nav>
 
-    </header>
+    </header> --}}
+
+
+
+
+    <!---header-->
+<nav class="navbar navbar-expand-lg navbar-light bg-dark shadow">
+  <div class="container d-flex justify-content-between align-items-center">
+    <a class="navbar-brand h1" href="/">
+      <span class="t h4" style="color: darkorange;">K</span>
+      <span class="text-white h4">IDDIE</span>
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbar-toggler-success" aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="
+            align-self-center
+            collapse
+            navbar-collapse
+            flex-fill
+            d-lg-flex
+            justify-content-lg-between
+          " id="navbar-toggler-success">
+      <div class="flex-fill mx-xl-5 mb-2">
+        <ul class="
+                nav
+                navbar-nav
+                d-flex
+                justify-content-between
+                mx-xl-5
+                text-center text-dark
+              ">
+          <li class="nav-item">
+            <a class="nav-link btn-outline-danger rounded-pill px-3" href="/category-view/BOYS">BOYS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn-outline-danger rounded-pill px-3" href="/category-view/GIRLS">GIRLS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn-outline-danger rounded-pill px-3" href="/category-view/FOOTWEAR">FOOTWEAR</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn-outline-danger rounded-pill px-3" id="cartCount"  href="/cart">CART <span  class="badge bg-dark">{{cartCount}}</span>
+            </a>
+            
+
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn-outline-danger rounded-pill px-3" href="/wishlist">WISHLIST</a>
+          </li>
+          <div class="dropdown">
+            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              {{#if user}}
+              {{user.name}}
+              {{else}}
+              <i class="fas fa-user pe-2"></i>LOGIN
+              {{/if}}
+            </button>
+            <ul class="dropdown-menu" style="margin: 0; padding:0;" aria-labelledby="dropdownMenuButton1">
+              {{#if user}}
+              <li><a class="dropdown-item" href="/logout">Logout</a></li>
+              {{else}}
+              <li><a class="dropdown-item" href="/login">Login</a></li>
+              {{/if}}
+            </ul>
+          </div>
+        </ul>
+      </div>
+
+      {{!-- <div class="navbar align-self-center d-flex">
+        <a class="nav-link" href="">
+          <i class="fab fa-facebook text-danger"></i>
+        </a>
+        <a class="nav-link" href="">
+          <i class="fab fa-instagram text-danger"></i>
+        </a>
+        <a class="nav-link" href="">
+          <i class="fab fa-youtube text-danger"></i>
+        </a>
+      </div> --}}
+    </div>
+  </div>
+</nav>
