@@ -200,6 +200,10 @@
               {{else}}
               <li><a class="dropdown-item" href="/login">Login</a></li>
               {{/if}}
+                {{#if user}}
+              <li><a class="dropdown-item" href="/myprofile">{{user.name}}</a></li>
+              
+              {{/if}}
             </ul>
           </div>
         </ul>

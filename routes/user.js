@@ -18,6 +18,17 @@ const verifylogin = (req, res, next) => {
     res.redirect("/login");
   }
 };
+// ==========my details===============
+
+// const mydetails = (req, res, next) => {
+//   if (!profiledata) {
+//     next();
+//   } else {
+//     res.redirect("/myProfile");
+//   }
+// };
+
+
 
 /* GET home page. */
 router.get("/", async function (req, res, next) {
@@ -49,6 +60,8 @@ router.get("/signup", (req, res) => {
 router.post("/signup", (req, res) => {
   let email = req.body.email;
   let phone = req.body.phoneNumber;
+ 
+  
   console.log(email);
   console.log(phone);
   userHelpers.emailCheck(email, phone).then((resolve) => {
@@ -150,12 +163,16 @@ router.get("/view-image/:id", async(req, res) => {
   // let product = await productHelpers.getAllproductsDetails(req.params.id)
   var imgId = req.params.id;
   let product = await userHelpers.imageDetails(imgId);
+  let relatedpro = await product.category;
+  console.log(relatedpro);
+  let relatedproduct=await userHelpers.getrelatedproducts(relatedpro)
+  console.log(relatedproduct);
   cartCount=null
   if (req.session.user) {
     var cartCount=await userHelpers.getCarCount(req.session.user._id)
   }
   
-  res.render("user/view-image", { product,user:req.session.user,cartCount});
+  res.render("user/view-image", { product,user:req.session.user,cartCount,relatedproduct});
   // res.render("user/single-product",{product});
 });
 
@@ -328,7 +345,22 @@ router.get('/arun',async(req,res)=>{
   res.render("user/single-product")
   })
   
+// ============================my profile=======================
+router.get("/myprofile",async(req,res)=>{
+  let profile=await userHelpers.getMydetals(req.session.user?._id)
+  
+  res.render("user/myprofile",{profile})
 
+});
+
+// ==================================add details======================
+
+router.get("/add-details",verifylogin,async(req,res)=>{
+  let details = await userHelpers.addToProfile(req.session.user._id)
+  res.render("user/profile-Details")
+
+  
+})
 
 
 

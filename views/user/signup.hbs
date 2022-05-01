@@ -6,7 +6,7 @@
           <div class="card-body p-5 text-center">
               
          
-              <form action="/signup" method="post">
+              <form action="/signup" method="post" enctype="multipart/form-data">
             <div class="mb-md-5 mt-md-4 pb-5">
              
             
@@ -23,12 +23,34 @@
                 <p id="Name-error" class="error text-danger"></p>
                 
               </div>
-                 
+        
+
+
                <div class="form-outline form-white mb-4">
                 <input type="email" name="email" placeholder="Email" id="email" class="form-control form-control-lg" required onkeyup="validateEmail()"/>
                   <p id="Email-error" class="error text-danger"></p>
                </div>
+                 
+                    <label class="labels">Gender</label>
+                    <div class="form-check-inline">
 
+                  <input class="form-check-input mt-1" type="radio" value="Male" name="gender" id="flexRadioDefault1">
+                  <label class="labels form-check-label " for="flexRadioDefault1">
+                   Male
+                </label>
+                <input class="form-check-input mt-1" value="Female" type="radio" name="gender" id="flexRadioDefault2" checked>
+                 <label class="labels form-check-label" for="flexRadioDefault2">
+                 Female
+                  </label>
+
+                   <input class="form-check-input mt-1" value="Other" type="radio" name="gender" id="flexRadioDefault2" checked>
+                 <label class="labels form-check-label" for="flexRadioDefault2">
+                 Other
+                  </label>
+
+                </div>
+
+                     <div class="mb-3"><input type="number" class="form-control" placeholder="enter your age" name="age"  value=""></div> 
                   
                <div class="form-outline form-white mb-4">
                 <input type="password" name="password" placeholder="Password" id="password" class="form-control form-control-lg" required  onkeyup="validatePassword()"/>
@@ -46,6 +68,8 @@
                 <input type="tel" maxlength="10" placeholder="PhoneNumber" name="phoneNumber" id="phoneNumber" class="form-control form-control-lg" required onkeyup="validatePhoneNUmber()"/>
                   <p id="Phone-error" class="error text-danger"></p>
                </div>
+               
+             
 
               <p class="small pb-lg-2"><a class="text-black" href="#!">Forgot password?</a></p>
 

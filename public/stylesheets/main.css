@@ -632,3 +632,26 @@ body {
 @media (max-width: 767.98px) { .border-sm-start-none { border-left: none !important; } }
 /* ==================================view-images=================== */
 
+#img-container{
+  width:30rem;
+  margin: 0;
+  z-index: 2;
+  scale: 3;
+ 
+  
+
+}
+
+
+.zoom1{
+  margin: 0;
+  width: 1000px;
+}
+/* .zoom{
+  width: 50rem;
+} */
+.related{
+  padding-top: 50px;
+  padding-left: 50px;
+  text-decoration: underline;
+}

@@ -473,6 +473,93 @@ module.exports = {
           resolve(wishProducts[0].wishProducts)
            
       })
-  }
+  },
+  getrelatedproducts:(relatedpro)=>{
+    return new promise(async (resolve,reject)=>{
+      let relpro = await db.get().collection(collection.PRODUCT_COLLECTION).find({category:relatedpro}).toArray();
+      resolve(relpro)
+    })
+  },
+  getMydetals:(userId)=>{
+    // console.log(userId);
+    return new promise(async(resolve,reject)=>{
+      let profile = await db.get().collection(collection.USER_COLLECTION).findOne({_id:objectId(userId)})
+      // console.log(profile);
+      resolve(profile)
+    })
+  },
+
+
+
+
+  // addToProfile: (proId,userId) => {
+  //   return new Promise(async (resolve, reject) => {
+  //     let userDetails = await db
+  //       .get()
+  //       .collection(collection.PROFILE_COLLECTION)
+  //       .findOne({ details: objectId(userId) });
+  //       // console.log(userDetails);
+
+  //     if (!userDetails) {
+  //       let profile = {
+  //         user: objectId(userId),
+  //         details: [objectId(proId)],
+  //       };
+  //       db.get()
+  //         .collection(collection.PROFILE_COLLECTION)
+  //         .insertOne(profile)
+  //         .then((response) => {
+  //           resolve(profile);
+  //         });
+
+
+  //     } else{
+  //       console.log("user is here");
+  //       resolve();
+  //     }
+      
+  //   });
+  // },
+  getWishProducts:(userId)=>{
+      return new Promise(async(resolve,reject)=>{
+          let wishProducts = await db.get().collection(collection.WISHLIST_COLLECTION).aggregate([
+              {
+                  $match:{user:objectId(userId)}
+              },
+              {
+                  $lookup:{
+                      from:collection.PRODUCT_COLLECTION,
+                      let:{wishList:'$products'},
+                      pipeline:[ 
+                          { 
+                              $match:{
+                                  $expr:{
+                                       $in:['$_id',"$$wishList"]
+                                  }
+
+                              }
+
+                          }
+                      ],
+                      as:'wishProducts'
+                      
+                  }
+              }
+          ]).toArray()
+          resolve(wishProducts[0].wishProducts)
+           
+      })
+  },
+
+
+
+
+
+
+
+
+
+
+
 };
   
