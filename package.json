@@ -21,6 +21,7 @@
     "nodemon": "^2.0.15",
     "promis": "^1.1.4",
     "promise": "^8.1.0",
+    "razorpay": "^2.8.1",
     "twilio": "^3.76.1"
   }
 }

@@ -180,4 +180,14 @@ router.get("/delete-users/:id", (req, res) => {
   });
 });
 
+
+
+
+
+// ================adminorders======================
+
+router.get('/orders',verifylogin,(req,res)=>{
+  productHelper.get
+})
+
 module.exports = router;

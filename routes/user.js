@@ -6,9 +6,9 @@ var router = express.Router();
 const productHelpers = require("../helpers/product-helpers");
 const userHelpers = require("../helpers/user-hepers");
 
-const serviceSsid = "VA853a986f6220d20e98db1060e8fd5d22";
-const AccountSsid = "ACa9fb707809f831f236ac61507083c641";
-const token = "130e8f058126d5c7470bfcaa39a55211";
+const serviceSsid = "VA57b99e042133ed4144f37b3003e009b8";
+const AccountSsid = "AC8d35f9dcfb5c3192cf04162426e70fa1";
+const token = "d50e7f9738a4e0c59a10930f8e484a58";
 const client = require("twilio")(AccountSsid, token);
 
 const verifylogin = (req, res, next) => {
@@ -61,26 +61,104 @@ router.post("/signup", (req, res) => {
   let email = req.body.email;
   let phone = req.body.phoneNumber;
  
+
+
+
+  // userHelpers.checkPhone(phone).then((number) => {
+  //   // console.log(number);
+  //   // console.log(number.userBlock)
+
+  //   if (number) {
+  //     if (number.userBlock) {
+  //       res.render("user/verify-phone", { userBlock: true });
+  //     } else {
+  //       if (number) {
+  //         let phone = number.phoneNumber;
+  //         console.log(phone);
+  //         client.verify
+  //           .services(serviceSsid)
+  //           .verifications.create({ to: `+91${phone}`, channel: "sms" })
+  //           .then((resp) => {
+  //             console.log(resp);
+  //           });
+  //         res.render("user/verify-otp", { phone });
+  //       } else {
+  //         res.render("user/verify-phone", { number: true });
+  //         number = false;
+  //       }
+  //     }
+  //   } else {
+  //     res.render("user/verify-phone", { number: true });
+  //     number = false;
+  //   }
+  // });
+
+
   
-  console.log(email);
-  console.log(phone);
   userHelpers.emailCheck(email, phone).then((resolve) => {
     if (resolve) {
       if (resolve.phoneNumber == phone) {
-        res.render("user/signup", { phone: true, phoneAll: "phone invaid" });
+        res.render("user/signup", { phone: true, phoneAll: "Phone invalid" });
         phoneAll = false;
       } else {
-        res.render("user/signup", { email: true });
+        res.render("user/signup", { email: true,email:"Email already exist" });
         email = false;
       }
     } else {
-      userHelpers.doSignup(req.body).then((response) => {
-        console.log(response);
-        res.redirect("/login");
-      });
+      userSignup=req.body;
+      console.log(phone);
+      client.verify
+        .services(serviceSsid)
+        .verifications.create({ to: `+91${phone}`, channel: "sms" })
+        .then((resp) => {
+          console.log(resp);
+          res.render("user/signUpotp", { phone });
+        });
+     
+    
     }
   });
 });
+
+
+
+// =============================otpsignup=============================
+
+router.get('/signupOtp',(req,res)=>{
+  console.log(req.body+"ffffffffffffff");
+  res.header(
+    "Cache-Control",
+    "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+  );
+  let phoneNumber=req.query.phonenumber;
+  let otpNumber=req.query.otpnumber;
+  console.log(phoneNumber);
+  console.log(otpNumber);
+
+  client.verify
+        .services(serviceSsid)
+        .verificationChecks.create({
+        to: "+91"+phoneNumber,
+        code:otpNumber,
+      }).then((resp)=>{
+        console.log("tttt",resp);
+        if(resp.valid){
+          userHelpers.doSignup(userSignup).then((response)=>{
+            console.log("haaa",response);
+            if(response.acknowledged){
+                let valid=true;
+                signupSuccess="You are successfully signed up"
+                res.send(valid)
+          }else{
+              let valid=false;
+              res.send(valid);
+          }
+          })
+        }
+      })
+  
+})
+// ====================================otpsignup============================
 
 router.post("/login", (req, res) => {
   userHelpers.doLogin(req.body).then((response) => {
@@ -106,7 +184,7 @@ router.get("/logout", (req, res) => {
 });
 
 
-//cart routes
+//============================================cart routes======================================
 router.get("/cart", verifylogin, async (req, res) => {
   let products=await userHelpers.getCartProducts(req.session.user._id)
   let totalValue=await userHelpers.getTotalAmount(req.session.user._id)
@@ -131,7 +209,7 @@ router.get('/add-to-cart/:id',(req,res)=>{
 
 })
 
-// wishlist ----------------------------------
+//=========================================== wishlist ==================================
 
 router.get("/wishlist", verifylogin, async (req, res) => {
   let products=await userHelpers.getWishProducts(req.session.user._id)
@@ -154,7 +232,7 @@ router.get('/add-to-wishlist/:id',verifylogin,(req,res)=>{
 
 
 
-// wishlist
+//=============================================== wishlist============================
 
 
 
@@ -176,7 +254,7 @@ router.get("/view-image/:id", async(req, res) => {
   // res.render("user/single-product",{product});
 });
 
-//otp verfication
+//=======================================otp verfication====================================
 
 router.get("/verify-phone", (req, res) => { 
   res.render("user/verify-phone");
@@ -267,7 +345,7 @@ router.get('/resent-otp/:phone',(req,res)=>{
 
 })
 
-//category view
+//======================================category view=========================================
 router.get('/category-view/:id',(req,res)=>{
   let category=req.params.id
   userHelpers. categoryView(category).then((products)=>{
@@ -278,7 +356,7 @@ router.get('/category-view/:id',(req,res)=>{
 
 })
 
-// quantity
+// =========================================quantity==========================================
 router.post('/change-product-quantity',(req,res,next)=>{
   console.log(req.body);
   
@@ -309,10 +387,23 @@ router.post('/place-order',async(req,res)=>{
   let products=await userHelpers.getCartProductList(req.body.userId)
   let totalPrice=await userHelpers.getTotalAmount(req.body.userId)
 
-userHelpers.placeOrder(req.body,products,totalPrice).then((response)=>{
-  res.json({status:true})
+userHelpers.placeOrder(req.body,products,totalPrice).then((orderId)=>{
+  console.log(orderId);
+  if(req.body['payment-method']==='COD'){
 
-})
+    res.json  ({codSuccess:true})
+
+  }else {
+
+    userHelpers.generateRazorpay(orderId,totalPrice).then((response)=>{
+      res.json(response)
+
+    })
+
+  }
+  
+
+});
 
 router.get('/order-success',(req,res)=>{
   res.render('user/order-success',{user:req.session.user})
@@ -329,13 +420,28 @@ res.render('user/orders',{user:req.session.user,orders})
 
 
 // ------------view-orders from order--------
+// router.get('/view-order-products/:id',async(req,res)=>{
+//   var imgId = req.params.id;
+//   let product = await userHelpers.imageDetails(req.params.id);
+//   // let product=await userHelpers.getOrderProducts(req.params.id)
+//    res.render('user/view-order-products',{product})
+//   // res.render("user/view-image",{product});
+// })
+// ------------view-orders from order--------
 router.get('/view-order-products/:id',async(req,res)=>{
   var imgId = req.params.id;
-  let product = await userHelpers.imageDetails(req.params.id);
-  // let product=await userHelpers.getOrderProducts(req.params.id)
-   res.render('user/view-order-products',{product})
+  // let product = await userHelpers.imageDetails(req.params.id);
+  let products=await userHelpers.getOrderProducts(req.params.id)
+   res.render('user/view-order-products',{products,user:req.session.user})
   // res.render("user/view-image",{product});
 })
+
+
+
+
+
+
+
 
 
 router.get('/arun',async(req,res)=>{
@@ -349,7 +455,7 @@ router.get('/arun',async(req,res)=>{
 router.get("/myprofile",async(req,res)=>{
   let profile=await userHelpers.getMydetals(req.session.user?._id)
   
-  res.render("user/myprofile",{profile})
+  res.render("user/myprofile",{profile,user:req.session.user})
 
 });
 
@@ -360,10 +466,103 @@ router.get("/add-details",verifylogin,async(req,res)=>{
   res.render("user/profile-Details")
 
   
+});
+
+// ========================add profile post================
+
+
+// router.post("/add-details", (req, res) => {
+//   console.log("call is here");
+//   userHelpers.addToProfile(req.body, (id) => {
+   
+//     let image = req.files.image;
+//     if (
+//         image.mv("./public/profile-image/" + id + ".jpg"),
+//       (err, done) => {
+//         if (!err) {
+//           res.render("user/myprofile", { admin: true });
+//         } else {
+//           console.log(err);
+//         }
+//       })
+    
+//       res.render("user/myprofile");
+//   });
+// });
+
+
+
+
+
+
+
+
+
+router.post("/profilepic",verifylogin,async(req,res)=>{
+  
+id=await req.session.user._id;
+  
+  
+  let image = req.files.image;
+image.mv("./public/profile-image/" + id + ".jpg")
+    
+      res.redirect("/myprofile");
+   
+ 
+
+})
+
+// ========================================changepassword====================================
+
+
+router.post("/changepassword",verifylogin,(req,res)=>{
+
+
+  userHelpers.changePassword(req.body).then((response)=>{
+
+console.log("Password Succesfully changed");
+
+
+  })
+  if(response.status){
+   
+          res.redirect("/myprofile")
+          
+        }else{
+          alert("Password not changed")
+        }
+ 
+
+
+})
+
+// =====================================changeEmail======================
+
+router.post("/changeEmail",verifylogin,(req,res)=>{
+  userHelpers.changeEmail(req.body).then(async()=>{
+    let profile=await userHelpers.getMydetals(req.session.user?._id)
+  
+  // let profile=await userHelpers.getMydetals(req.session.user?._id)
+  
+  res.render("user/myprofile",{profile,user:req.session.user})
+  // res.render("user/myprofile")
+  })
+
 })
 
 
-
+router.post('/verify-payment',(req,res)=>{
+  console.log(req.body);
+  userHelpers.verifyPayment(req.body).then(()=>{
+    userHelpers.changePaymentStatus(req.body['order[receipt]']).then(()=>{
+      console.log("payment successfull");
+      res.json({status:true})
+    })
+  }).catch((err)=>{
+    console.log(err);
+    res.json({status:false,errMsg:''})
+  })
+})
 
 
 module.exports = router;
