@@ -6,9 +6,9 @@ var router = express.Router();
 const productHelpers = require("../helpers/product-helpers");
 const userHelpers = require("../helpers/user-hepers");
 
-const serviceSsid = "VA57b99e042133ed4144f37b3003e009b8";
+const serviceSsid = "	VA57b99e042133ed4144f37b3003e009b8";
 const AccountSsid = "AC8d35f9dcfb5c3192cf04162426e70fa1";
-const token = "d50e7f9738a4e0c59a10930f8e484a58";
+const token = "351a705f744d9bda78dd3623b7796eb6";
 const client = require("twilio")(AccountSsid, token);
 
 const verifylogin = (req, res, next) => {
@@ -41,6 +41,10 @@ router.get("/", async function (req, res, next) {
   
   productHelpers.getAllproducts().then((products) => {
     productHelpers.getAllcategory().then((category) => {
+      
+       
+      //  let ok = offerprice
+      //  console.log(ok);
       res.render("user/view-products", { products, user, category ,cartCount});
     });
   });
@@ -215,8 +219,12 @@ router.get("/wishlist", verifylogin, async (req, res) => {
   let products=await userHelpers.getWishProducts(req.session.user._id)
   // let totalValue=await userHelpers.getTotalAmount(req.session.user._id)
 
- console.log(products);
-  res.render("user/wishlist",{products,'user':req.session.user});
+ if(products){
+  res.render("user/wishlist",{products,'user':req.session.user});}
+  else{
+    res.render("user/wishlistEmpty")
+
+  }
 });
 
 router.get('/add-to-wishlist/:id',verifylogin,(req,res)=>{
@@ -562,6 +570,66 @@ router.post('/verify-payment',(req,res)=>{
     console.log(err);
     res.json({status:false,errMsg:''})
   })
+})
+// ========================changephone=========================
+
+router.post("/changePhone",verifylogin,(req,res)=>{
+  userSignup=req.body;
+  console.log(userSignup);
+  phone=req.body.phone;
+  console.log(phone);
+  client.verify
+    .services(serviceSsid)
+    .verifications.create({ to: `+91${phone}`, channel: "sms" })
+    .then((resp) => {
+      console.log(resp);
+      res.render("user/phoneOtp", { phone });
+    });
+ 
+    
+    
+    
+ 
+  // res.render("user/myprofile")
+  
+
+})
+
+// ======================================phoneOtp==================
+router.get('/phoneOtp',(req,res)=>{
+  console.log(req.body+"arunms");
+  res.header(
+    "Cache-Control",
+    "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+  );
+  let phoneNumber=req.query.phonenumber;
+  let otpNumber=req.query.otpnumber;
+  console.log(phoneNumber);
+  console.log(otpNumber);
+
+  client.verify
+        .services(serviceSsid)
+        .verificationChecks.create({
+        to: "+91"+phoneNumber,
+        code:otpNumber,
+      }).then((resp)=>{
+        console.log("tttt",resp);
+        if(resp.valid){
+          userHelpers.changePhone(userSignup).then((response)=>{
+            console.log("haaa",response);
+            if(response){
+              console.log("acknoledgedtrue");
+                let valid=true;
+                signupSuccess="You are successfully signed up"
+                res.send(valid)
+          }else{
+              let valid=false;
+              res.send(valid);
+          }
+          })
+        }
+      })
+  
 })
 
 

@@ -1,37 +1,37 @@
-<section>
+<section style="background-color: antiquewhite;">
     <div class="container">
     <div class="row">
       <h2>Edit Product</h2>
         <form action="/admin/edit-product/{{product._id}}" method="post" enctype="multipart/form-data">
   <div class="col-md-6">
     
-    <input type="text" name="brand" placeholder="Brand={{product.brand}}" class="form-control">
+    <input type="text" name="brand"value="{{product.brand}}" class="form-control">
   <div class="mt-3">
     
-    <input type="text" name="category"  placeholder="Category={{product.category}}" class="form-control" id="exampleInputPassword1">
+    <input type="text" name="category"  value="{{product.category}}" class="form-control" id="exampleInputPassword1">
   </div>
 
  
      <div class="mt-3">
  
-    <input type="text" name="description" placeholder="Description={{product.description}}" class="form-control" id="exampleInputPassword1">
+    <input type="text" name="description" value="{{product.description}}" class="form-control" id="exampleInputPassword1">
   </div>
 
 
   <div class="mt-3">
     
-    <input type="text" name="orginalPrice" placeholder="CP={{product.orginalPrice}}" class="form-control" id="OP">
+    <input type="text" name="orginalPrice" value="{{product.orginalPrice}}" class="form-control" id="OP">
   </div>
  
   <div class="mt-3">
    
-    <input type="text" name="offerPrice" placeholder="Ofr.P={{product.offerPrice}}" class="form-control" id="OFFER PRICE">
+    <input type="text" name="offerPrice" value="{{product.offerPrice}}" class="form-control" id="OFFER PRICE" hidden>
   </div>
 
 
   <div class="mt-3">
     
-    <input type="text" name="offerpercentage" placeholder="Offer%={{product.offerpercentage}}" class="form-control" id="OFR %">
+    <input type="text" name="offerpercentage" value="{{product.offerpercentage}}" class="form-control" id="OFR %">
   </div>
 
   <div class="mt-3">

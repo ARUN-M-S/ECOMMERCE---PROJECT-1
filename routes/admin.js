@@ -72,7 +72,7 @@ router.post("/add-product", (req, res) => {
 
 router.get("/edit-product/:id", verifylogin, async (req, res) => {
   let product = await productHelper.getAllproductsDetails(req.params.id);
-  console.log(product);
+  
   res.render("admin/edit-product", { product, admin: true });
 });
 router.post("/edit-product/:id", (req, res) => {

@@ -529,6 +529,7 @@ console.log(profile);
   },
   getWishProducts:(userId)=>{
       return new Promise(async(resolve,reject)=>{
+        
           let wishProducts = await db.get().collection(collection.WISHLIST_COLLECTION).aggregate([
               {
                   $match:{user:objectId(userId)}
@@ -553,7 +554,11 @@ console.log(profile);
                   }
               }
           ]).toArray()
-          resolve(wishProducts[0].wishProducts)
+          if(wishProducts === null){
+          resolve(wishProducts[0].wishProducts)}
+          else{
+            resolve()
+          }
            
       })
   },
@@ -741,6 +746,94 @@ getCartProductList: (userId) => {
       .findOne({ user: objectId(userId) });
     resolve(cart.products);
   });
+},
+
+
+// ===============================offer price=====================================
+// offerPrice: (userId) => {
+//   return new promise(async (resolve, reject) => {
+//     let total = await db
+//       .get()
+//       .collection(collection.PRODUCT_COLLECTION)
+//       .aggregate([
+//         {
+//           $match: { user: objectId(userId) },
+//         },
+//         {
+//           $unwind: "$products",
+//         },
+//         {
+//           $project: {
+//             item: "$products.item",
+//             quantity: "$products.quantity",
+//           },
+//         },
+//         {
+//           $lookup: {
+//             from: collection.PRODUCT_COLLECTION,
+//             localField: "item",
+//             foreignField: "_id",
+//             as: "product",
+//           },
+//         },
+//         {
+//           $project: {
+//             item: 1,
+//             quantity: 1,
+//             product: { $arrayElemAt: ["$product", 0] },
+//           },
+//         },
+//         {
+//           $group: {
+//             _id: null,
+//             total: {
+//               $sum: {
+//                 $multiply: ["$quantity", { $toInt: "$product.offerPrice" }],
+//               },
+//             },
+//           },
+//         },
+//       ])
+//       .toArray();
+
+//     resolve(total[0]?.total);
+//   });
+// },
+
+// ======================================change otp=========================
+
+changePhone:(userData)=>{
+  return new promise(async(resolve,reject)=>{
+    let user = await db
+    .get()
+    .collection(collection.USER_COLLECTION)
+    .findOne({ _id:objectId(userData.userId)});
+
+    if(user){
+      bcrypt.compare(userData.password, user.password).then(async(status) => {
+        if(status){
+         
+          console.log("password matched for PhoneNumber Change");
+          db.get().collection(collection.USER_COLLECTION).updateOne({ _id:objectId(userData.userId)},{$set:{
+            phoneNumber:userData.newphone,
+          
+          }}).then((response)=>{
+            if(response){
+              resolve({status:true})
+              
+            }
+
+          })
+
+        }
+      })
+
+
+     }   
+
+
+
+  })
 },
 
 };

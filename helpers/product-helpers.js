@@ -8,24 +8,54 @@ const async = require('hbs/lib/async');
 const { resolve, reject } = require('promise');
 const { response } = require('express');
 const userHepers = require('./user-hepers');
+const { set } = require('../app');
 module.exports={
     addproduct:(product,callback)=>{
-        console.log(product);
-        db.get().collection('product').insertOne(product).then((data)=>{
-            console.log(data);
+        // console.log(product);
+        db.get().collection('product').insertOne(product).then(async (data)=>{
+           
+           let products= await db.get().collection(collection.PRODUCT_COLLECTION).find().toArray()
+           console.log(products);
+    
+
+           for(i=0;i<products.length;i++){
+            let OP =  parseInt( products[i].orginalPrice)
+            let OfP =  parseInt( products[i].offerpercentage)
+       
+
+            var offerPrice= OP-(OP*(OfP/100)).toFixed(0)
+             var ids = products[i]._id
+              
+
+           }
+            //  console.log(offerprice);
+              
+             
+         
+             
+            db.get().collection(collection.PRODUCT_COLLECTION).findOneAndUpdate({_id:objectId(ids)},{$set:{"offerPrice":offerPrice}})
+            // console.log(data);
          callback(data.insertedId)
         })
 
     },
     getAllproducts:()=>{
         return new Promise(async(resolve,reject)=>{
-            // let OP = db.get().collection(collection.PRODUCT_COLLECTION).find({$convert:{ input: "", to: "int" }}).project({orginalPrice:1, _id:0}).toArray()
-            // let OFP = await db.get().collection(collection.PRODUCT_COLLECTION).find({}).project({offerPrice:1, _id:0}).toArray()
-            // let offer = {$convert:{ input: "OP", to: "int" }}
+            // let OP =await db.get().collection(collection.PRODUCT_COLLECTION).find({}).project({brand:1}).toArray()
+            // // let OFP = await db.get().collection(collection.PRODUCT_COLLECTION).find({}).project({offerPrice:1, _id:0}).toArray()
+            // // let offer = {$convert:{ input: "OP", to: "int" }}
 
-            // console.log(OP);
-            // console.log(offer);
+            // console.log(OP+"abcd");
+            // // console.log(OFP);
+
+
             let products= await db.get().collection(collection.PRODUCT_COLLECTION).find().toArray()
+        
+
+  
+            
+            // console.log(products);
+           
             resolve(products)
         })
     },
@@ -57,14 +87,22 @@ module.exports={
 
         updateProduct:(proid,prodetails)=>{
     console.log(prodetails);
+    let OP =  parseInt( prodetails.orginalPrice)
+  let OfP =  parseInt( prodetails.offerpercentage)
+  
+
+
+    var offerPrice= OP-(OP*(OfP/100)).toFixed(0)
+    
+      
             return new promise((resolve,reject)=>{
                 db.get().collection(collection.PRODUCT_COLLECTION).updateOne({_id:objectId(proid)},{$set:{
                     brand:prodetails.brand,
                     description:prodetails.description,
                     category:prodetails.category,
                     orginalPrice:prodetails. orginalPrice,
-                    offerPrice:prodetails.offerPrice,
-                    offerpercentage:prodetails.  offerpercentage
+                    offerPrice:offerPrice,
+                    offerpercentage:prodetails.offerpercentage
             
                 }
             }).then((response)=>{

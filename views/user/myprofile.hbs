@@ -1,6 +1,6 @@
 <section style="background-color: #eee;">
     <div class="container py-5">
- 
+
 
         <div class="row">
             <div class="col-lg-4">
@@ -57,17 +57,15 @@
                                         </div>
                                         <div class="modal-body">
                                             <form action="/changepassword" method="post">
- <input   name="userId" value="{{profile._id}}" hidden>
+                                                <input name="userId" value="{{profile._id}}" hidden>
                                                 <div class="form-outline form-white mb-4">
                                                     <input type="password" name="password" placeholder="Old password"
-                                                        id="password" class="form-control form-control-lg" required
-                                                         />
+                                                        id="password" class="form-control form-control-lg" required />
                                                     <p id="Password-error" class="error text-danger"></p>
                                                 </div>
-                                                 <div class="form-outline form-white mb-4">
+                                                <div class="form-outline form-white mb-4">
                                                     <input type="password" name="newPassword" placeholder="New Password"
-                                                        id="password" class="form-control form-control-lg" required
-                                                         />
+                                                        id="password" class="form-control form-control-lg" required />
                                                     <p id="Password-error" class="error text-danger"></p>
                                                 </div>
 
@@ -111,43 +109,46 @@
                                 <p class="mb-0">Email</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{profile.email}}   <button type="button" style="border: 0;" class="fas fa-edit" data-bs-toggle="modal"
-                                data-bs-target="#myModal2"></button>
-                            <div class="modal" id="myModal2">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Change Email</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="/changeEmail" method="post">
- <input   name="userId" value="{{profile._id}}" hidden>
-<div class="form-outline form-white mb-4">
-                <input type="email" name="email" placeholder="Email" id="email" class="form-control form-control-lg" required onkeyup="validateEmail()"/>
-                  <p id="Email-error" class="error text-danger"></p>
-               </div>
-                 
+                                <p class="text-muted mb-0">{{profile.email}} <button type="button" style="border: 0;"
+                                        class="fas fa-edit" data-bs-toggle="modal" data-bs-target="#myModal2"></button>
+                                <div class="modal" id="myModal2">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Change Email</h5>
+                                                <button type="button" class="btn-close"
+                                                    data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="/changeEmail" method="post">
+                                                    <input name="userId" value="{{profile._id}}" hidden>
+                                                    <div class="form-outline form-white mb-4">
+                                                        <input type="email" name="email" placeholder="Email" id="email"
+                                                            class="form-control form-control-lg" required
+                                                            onkeyup="validateEmail()" />
+                                                        <p id="Email-error" class="error text-danger"></p>
+                                                    </div>
 
 
-                                                <div class="form-outline form-white mb-4">
-                                                    <input type="password" name="password" placeholder="Password"
-                                                        id="password" class="form-control form-control-lg" required
-                                                         />
-                                                    <p id="Password-error" class="error text-danger"></p>
-                                                </div>
-                                                
+
+                                                    <div class="form-outline form-white mb-4">
+                                                        <input type="password" name="password" placeholder="Password"
+                                                            id="password" class="form-control form-control-lg"
+                                                            required />
+                                                        <p id="Password-error" class="error text-danger"></p>
+                                                    </div>
 
 
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                            </form>
 
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                </form>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
                                 </p>
                             </div>
@@ -158,42 +159,55 @@
                                 <p class="mb-0">Mobile</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0">{{profile.phoneNumber}}  <button type="button" style="border: 0;" class="fas fa-edit" data-bs-toggle="modal"
-                                data-bs-target="#myModal3"></button>            <div class="modal" id="myModal3">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Change Phone</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="/changeEmail" method="post">
- <input   name="userId" value="{{profile._id}}" hidden>
-<div class="form-outline form-white mb-4">
-                <input type="email" name="email" placeholder="Email" id="email" class="form-control form-control-lg" required onkeyup="validateEmail()"/>
-                  <p id="Email-error" class="error text-danger"></p>
-               </div>
-                 
+                                <p class="text-muted mb-0">{{profile.phoneNumber}} <button type="button"
+                                        style="border: 0;" class="fas fa-edit" data-bs-toggle="modal"
+                                        data-bs-target="#myModal4"></button>
+                                <div class="modal" id="myModal4">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Change Phone</h5>
+                                                <button type="button" class="btn-close"
+                                                    data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="/changePhone" method="post">
+                                                    <input name="userId" value="{{profile._id}}" hidden>
+                                                    <div class="form-outline form-black">
+                                                        <input type="tel" maxlength="10" placeholder="PhoneNumber"
+                                                            name="newphone" id="phoneNumber"
+                                                            class="form-control form-control-lg" required
+                                                            onkeyup="validatePhoneNUmber()" />
+                                                        <p id="Phone-error" class="error text-danger"></p>
+                                                    </div>
+                                                    <div class="form-outline form-black">
+                                                        <input type="tel" maxlength="10"
+                                                            value="{{profile.phoneNumber}} " name="phone"
+                                                            id="phoneNumber" class="form-control form-control-lg"
+                                                            hidden />
+
+                                                    </div>
+
+                                                    <div class="form-outline form-white mb-4">
+                                                        <input type="password" name="password" placeholder="Password"
+                                                            id="password" class="form-control form-control-lg"
+                                                            required />
+                                                        <p id="Password-error" class="error text-danger"></p>
+                                                    </div>
 
 
-                                                <div class="form-outline form-white mb-4">
-                                                    <input type="password" name="password" placeholder="Password"
-                                                        id="password" class="form-control form-control-lg" required
-                                                         />
-                                                    <p id="Password-error" class="error text-danger"></p>
-                                                </div>
-                                                
 
 
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                            </form>
 
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                </form>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             </div>
                         </div>
                         <hr>
@@ -461,23 +475,36 @@
 
 
 <script>
+    var phoneError = document.getElementById('Phone-error')
+    var emailError = document.getElementById('Email-error');
 
-var emailError=document.getElementById('Email-error');
+    function validateEmail() {
+        var email = document.getElementById('email').value;
 
-  function validateEmail(){
-    var email = document.getElementById('email').value;
-
-    if(email.length==0){
-        emailError.innerHTML='Email is required'
-        return false;
+        if (email.length == 0) {
+            emailError.innerHTML = 'Email is required'
+            return false;
+        }
+        if (!email.match(/^[A-Za-z\._\-[0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)) {
+            emailError.innerHTML = 'Email invalid'
+            return false;
+        }
+        emailError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+        return true;
     }
-    if(!email.match(/^[A-Za-z\._\-[0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)){
-        emailError.innerHTML = 'Email invalid'
-        return false;
+    function validatePhoneNUmber() {
+        var message = document.getElementById('phoneNumber').value;
+        var required = 10;
+        var left = required - message.length;
+
+        if (left > 0) {
+            phoneError.innerHTML = left + 'more character required';
+            return false;
+        }
+
+        phoneError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
+        return true;
     }
-    emailError.innerHTML = '<i class="fa-solid fa-circle-check text-success"></i>';
-    return true;
-}
 
 
 </script>
