@@ -1,4 +1,4 @@
-<section>
+<section style="background-color: antiquewhite;">
     <div class="container-fluid col-md-3 mt-5" style="display: flex; justify-content:center ">
        
         <table class="table table-striped">
@@ -14,7 +14,7 @@
   <tbody>
      {{#each category}}
     <tr>
-      <th scope="row">1</th>
+      <th scope="row">{{@index}}</th>
       <td>
           {{this.brand}}
       </td>

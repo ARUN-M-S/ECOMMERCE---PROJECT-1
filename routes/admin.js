@@ -85,7 +85,18 @@ router.post("/edit-product/:id", (req, res) => {
 
       image.mv("./public/product-images/" + id + ".jpg", (err, done) => {});
       images.mv("./public/product-images1/" + id + ".jpg", (err, done) => {});
+    }else if(req.files.image){
+      let image = req.files.image;
+      image.mv("./public/product-images/" + id + ".jpg", (err, done) => {});
+
+
+    }else if(req.files.images){
+      let images = req.files.images;
+      images.mv("./public/product-images1/" + id + ".jpg", (err, done) => {});
+
+
     }
+
   });
 });
 router.get("/delete-product/:id", verifylogin, (req, res) => {
