@@ -38,7 +38,18 @@ module.exports={
          callback(data.insertedId)
         })
 
+    },getOfferproducts:()=>{
+        return new Promise(async(resolve,reject)=>{
+        let product= await db.get().collection(collection.PRODUCT_COLLECTION).find({offerpercentage:{$gt:'30'}}).toArray()
+    
+        resolve(product)
+    })
+
+
     },
+
+
+
     getAllproducts:()=>{
         return new Promise(async(resolve,reject)=>{
             // let OP =await db.get().collection(collection.PRODUCT_COLLECTION).find({}).project({brand:1}).toArray()
@@ -49,12 +60,13 @@ module.exports={
             // // console.log(OFP);
 
 
-            let products= await db.get().collection(collection.PRODUCT_COLLECTION).find().toArray()
-        
+           
+       
+            let products= await db.get().collection(collection.PRODUCT_COLLECTION).find({}).toArray()
 
   
             
-            // console.log(products);
+             
            
             resolve(products)
         })

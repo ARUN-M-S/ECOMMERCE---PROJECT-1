@@ -49,12 +49,13 @@ router.get("/", async function (req, res, next) {
   productHelpers.getAllproducts().then((products) => {
     productHelpers.getAllcategory().then((category) => {
       productHelpers.getAllcarousel().then((carousel) => {
+        productHelpers.getOfferproducts().then((offer)=>{
       
        
       //  let ok = offerprice
       //  console.log(ok);
-      res.render("user/view-products", { products, user, category ,cartCount,carousel});
-    });
+      res.render("user/view-products", { products, user, category ,cartCount,carousel,offer});
+    });})
   });
 
   });
@@ -411,13 +412,18 @@ router.post('/remove-product-wishlist',(req,res)=>{
 
 router.get('/place-order',verifylogin,async(req,res)=>{
   let total=await userHelpers.getTotalAmount(req.session.user._id)
+    let Address= await userHelpers.getAddress(req.session.user._id)
+    
+    console.log(Address,"pravenn sajeev");
   
+ 
   
-  res.render('user/Add-address',{total,user:req.session.user})
+  res.render('user/Add-address',{total,user:req.session.user,Address})
 })
 router.post('/place-order',async(req,res)=>{
   let products=await userHelpers.getCartProductList(req.body.userId)
   let totalPrice=await userHelpers.getTotalAmount(req.body.userId)
+  // let Address = await userHelpers.addOrderedAddress(req.body.userId)
 
 userHelpers.placeOrder(req.body,products,totalPrice).then((orderId)=>{
   console.log(orderId);
@@ -664,7 +670,18 @@ router.get('/view-order-products/:id',verifylogin,async(req,res)=>{
 })
 
 
+router.get('/arunms',verifylogin,(req,res)=>{
+  res.render("user/add-addressuser")
+})
+router.post("/useradd",verifylogin,(req,res)=>{
+  let userId=req.session.user._id
+  console.log(userId);
+userHelpers.userAddress(req.body,userId).then((responce)=>{
+  console.log(responce);
 
+})
+
+})
 
 
 module.exports = router;
