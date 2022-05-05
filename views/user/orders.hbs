@@ -1,114 +1,215 @@
-
-<style>
-    .gradient-custom {
-/* fallback for old browsers */
-background: #cd9cf2;
-
-/* Chrome 10-25, Safari 5.1-6 */
-background: -webkit-linear-gradient(to top left, rgba(205, 156, 242, 1), rgba(246, 243, 255, 1));
-
-/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-background: linear-gradient(to top left, rgba(205, 156, 242, 1), rgba(246, 243, 255, 1))
-}
-</style>
-<section class="gradient-custom">
-  <div class="container h-60">
-    <div class="row d-flex justify-content-center h-60 ">
-      <div class="col-lg-12 col-xl-12">
+<section style="background-color: antiquewhite; min-height:100vh" id="sec">
+  <div class="containe  py-5" style="background-color: antiquewhite;">
+    <div class="row d-flex justify-content-center align-items-center ">
+      <div class="col-lg-10 col-xl-8">
         <div class="card" style="border-radius: 10px;">
           <div class="card-header px-4 py-5">
-            <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #ff8d02;">{{user.name}}</span>!</h5>
+            <h5 class="text mb-0">Thanks for your Order, <span style="color: #158BD5;">{{user.Name}}</span>!</h5>
           </div>
           <div class="card-body p-4">
             <div class="d-flex justify-content-between align-items-center mb-4">
-              <p class="lead fw-normal mb-0" style="color: #ff8d02;">Receipt</p>
-             {{#each orders}}
+              <p class="lead fw-normal mb-0" style="color: #158BD5;">Orders</p>
+              {{!-- <p class="small text-muted mb-0">Receipt Voucher : 1KAU9-84UIL</p> --}}
             </div>
             <div class="card shadow-0 border mb-4">
               <div class="card-body">
                 <div class="row">
-                 
+
                   <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                    <p class=" mb-0"><strong>Address:<br></strong>{{this.deliveryDetails.address}},
-                     {{this.deliveryDetails.state}}<br>
-                    {{this.deliveryDetails.city}},
-                      {{this.deliveryDetails.pincode}}<br>
-                    {{this.deliveryDetails.mobile}}<br>
-                   
-                   
-
-
-                    </p>
-                  </div>
-                  <div class="col-md-1 text-center d-flex justify-content-center align-items-center">
-                    <p class="text-muted mb-0 small">White</p>
+                    <p class="text mb-0">Date</p>
                   </div>
                   <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                    <p class="text-muted mb-0 small">{{this.Date}}</p>
+                    <p class="text mb-0">Address</p>
                   </div>
-                   <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                    <p class="text-success mb-0 small"><span class="text-muted">Status: </span>{{this.status}}</p>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text mb-0 small">Pincode</p>
                   </div>
-                    <div class="col-md-1 text-center d-flex justify-content-center align-items-center">
-                    <p class="text-success mb-0 small"><span class="text-muted">Payment:</span>{{this.paymentMethode}}</p>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text mb-0 small">Moblie</p>
                   </div>
-                 
-                  <div class="col-md-1 text-center d-flex justify-content-center align-items-center">
-                    <p class=" mb-0 small">₹{{this.totalAmount}}</p>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text mb-0 small">Amount</p>
                   </div>
-                
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text mb-0 small">Payment</p>
+                  </div>
 
-                 <div class="col-md-1 text-center d-flex justify-content-center align-items-center">
-                 <a href="/view-order-products/{{this._id}}" class="btn btn-dark text-light">view product</a>
+                </div>
+                <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+
+                {{!-- next line --}}
+                {{#each orders}}
+                <div class="card-body">
+                  <div class="row">
+
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text mb-0">{{this.Date}}</p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text mb-0">{{this.deliveryDetails.address}}</p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text mb-0">{{this.deliveryDetails.pincode}}</p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text mb-0">{{this.deliveryDetails.mobile}}</p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text mb-0">{{this.totalAmount}}</p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text mb-0">{{this.paymentMethode}}</p>
+                    </div>
+
+                    <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+
+
+
+
+
+                    <div class="row d-flex align-items-center">
+                      <div class="col-md-2">
+                        <p class="text mb-0 small">Track Order</p>
+                      </div>
+                      <div class="col-md-10">
+                        <div class="progress" style="height: 6px; border-radius: 16px;">
+                          {{#if status}}
+                          <div class="progress-bar" role="progressbar"
+                            style="width: 65%; border-radius: 16px; background-color:#158BD5 ;" aria-valuenow="65"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                          {{else}}
+                          <div class="progress-bar" role="progressbar"
+                            style="width: 100%; border-radius: 16px; background-color:#098300 ;" aria-valuenow="65"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+
+                          {{/if}}
+
+                        </div>
+                        <div class="d-flex justify-content-around mb-1">
+                          {{!-- <p class="text mt-1 mb-0 small ms-xl-5">Out for delivary</p> --}}
+                          {{#if status}}
+                          <p class="text mt-1 mb-0 small ms-xl-5 text-primary">{{this.status}}</p>
+                          {{else}}
+                          <p class="text mt-1 mb-0 small ms-xl-5 text-success">Delivered</p>
+                          {{/if}}
+                        </div>
+                      </div>
+
+                    </div>
                   </div>
-                  
+                </div>
+                <div class="text-center">
+
+                  <a href="/view-order-products/{{this._id}}" class="btn btn-primary  ">View Products</a>
+
+                  {{#if status}}
+
+
+
+                  <a href="/cancelOrder/{{this._id}}" class="btn btn-primary  ">Cancel Order</a>
+                  {{else}}
+
+                  <a class="btn btn-success" href="">Return</a>
+
+                  {{/if}}
+
+
+
                 </div>
                 {{/each}}
-                <hr class="mb-4" style="background-color: #000000; opacity: 1;">
-                <div class="row d-flex align-items-center">
-                  <div class="col-md-2">
-                    <p class="text-muted mb-0 small">Track Order</p>
-                  </div>
-                  <div class="col-md-10">
-                    <div class="progress" style="height: 6px; border-radius: 16px;">
-                      <div class="progress-bar" role="progressbar"
-                        style="width: 65%; border-radius: 16px; background-color: #ff8d02;" aria-valuenow="65"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <div class="d-flex justify-content-around mb-1">
-                      <p class="text-muted mt-1 mb-0 small ms-xl-5">Out for delivary</p>
-                      <p class="text-muted mt-1 mb-0 small ms-xl-5">Delivered</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="d-flex justify-content-between pt-2">
-              <p class="fw-bold mb-0">Order Details</p>
-              <p class="text-muted mb-0"><span class="fw-bold me-4">Total</span> $898.00</p>
-            </div>
 
-            <div class="d-flex justify-content-between pt-2">
-              <p class="text-muted mb-0">Invoice Number : 788152</p>
-              <p class="text-muted mb-0"><span class="fw-bold me-4">Discount</span> $19.00</p>
-            </div>
 
-            <div class="d-flex justify-content-between">
-              
-              <p class="text-muted mb-0">Invoice Date : 26 apr,2021</p>
-              <p class="text-muted mb-0"><span class="fw-bold me-4">GST 18%</span> 123</p>
-            </div>
+                {{!--
+                <div class="d-flex justify-content-between pt-2">
+                  <p class="fw-bold mb-0">Order Details</p>
+                  <p class="text-muted mb-0"><span class="fw-bold me-4">Total</span> $898.00</p>
+                </div> --}}
 
-            <div class="d-flex justify-content-between mb-5">
-              <p class="text-muted mb-0">Recepits Voucher : 18KU-62IIK</p>
-              <p class="text-muted mb-0"><span class="fw-bold me-4">Delivery Charges</span> Free</p>
+                {{!-- <div class="d-flex justify-content-between pt-2">
+                  <p class="text-muted mb-0">Invoice Number : 788152</p>
+                  <p class="text-muted mb-0"><span class="fw-bold me-4">Discount</span> $19.00</p>
+                </div> --}}
+
+                {{!-- <div class="d-flex justify-content-between">
+                  <p class="text-muted mb-0">Invoice Date : 22 Dec,2019</p>
+                  <p class="text-muted mb-0"><span class="fw-bold me-4">GST 18%</span> 123</p>
+                </div> --}}
+
+                {{!-- <div class="d-flex justify-content-between mb-5">
+                  <p class="text-muted mb-0">Recepits Voucher : 18KU-62IIK</p>
+                  <p class="text-muted mb-0"><span class="fw-bold me-4">Delivery Charges</span> Free</p>
+                </div> --}}
+                {{!--
+              </div> --}}
+
+
+
+
             </div>
-            
           </div>
-         
         </div>
+
       </div>
-    </div>
-  </div>
+
 </section>
+
+<style>
+  {
+      {
+       !-- .gradient-custom {
+        /* fallback for old browsers */
+        background: #bebfd1;
+
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to top left, #f8f8f8, rgba(246, 243, 255, 1));
+
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to top left, #ffffff, rgba(246, 243, 255, 1))
+      }
+
+      --
+    }
+  }
+
+  #sec {
+    background: #000000;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #434343, #000000);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #434343, #000000);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+  }
+
+  #total {
+    background: #4CA1AF;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #C4E0E5, #4CA1AF);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #C4E0E5, #4CA1AF);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  }
+</style>
+
+<script>
+  function deliveryStatus(value, orderId) {
+    $.ajax({
+      url: '/admin/statusUpdate',
+      method: 'post',
+      data: {
+        status: value,
+        orderId: orderId
+      },
+      success: (response) => {
+        if (response) {
+
+          alert("Status Updated")
+          location.reload()
+        }
+      }
+    })
+
+  }
+</script>

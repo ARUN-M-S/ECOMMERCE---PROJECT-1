@@ -7,17 +7,19 @@
           <img  class="zoom1" src="/product-images/{{product._id}}.jpg">
 
         </div>
-        {{!-- ==========================for image zoom================= --}}
-        {{!-- <div class="t">
-          <div class="mn">
-            <img src="/product-images/{{product._id}}.jpg">
-          </div>
-          <div class="view">
-            <img src="/product-images/{{product._id}}.jpg">
-          </div>
-          <div class="cs"></div>
-        </div> --}}
-        {{!-- ==========================for image zoom================= --}}
+         <div class="flex" style="display: flex;">
+
+         <div class="card mt-3" style="width: 6rem; margin-left:5rem">
+        <img src="/product-images/{{product._id}}.jpg" class="zoom card-img-top" alt="...">     
+        </div>
+         <div class="card mt-3"  id="img-container1" style="width: 6rem; margin-left:35px">
+        <img src="/product-images1/{{product._id}}.jpg" class="zoom card-img-top" alt="...">     
+        </div>
+         <div class="card mt-3"   style="width: 6rem;margin-left:35px">
+        <img src="/product_image3/{{product._id}}.jpg" class="zoom card-img-top" alt="...">     
+        </div>
+
+       </div>
 
       </div>
       <div class=" co-xxl-6 col-xl-6 col-md-6 col-sm-12">
@@ -148,18 +150,24 @@
     height: 500,
     zoomWidth: 400,
     offset: { vertical: 0, horizontal: 10 },
-    scale: .7,
+    scale: 1,
 
   }
   new ImageZoom(document.getElementById("img-container"), options)
 
 
-  function change(event) {
-    document.getElementById('img-container') = URL.createObjectURL(event.target.files[0])
-  }
-  function viewImage1(event) {
-    document.getElementById('imgView1').src = URL.createObjectURL(event.target.files[0])
-  }
 
 
+  
+
+
+</script>
+<script>
+  $(document).ready(function(){
+$(".zoom").hover(function(){
+    $(".zoom1").attr('src',$(this).attr('src'
+    ))
+
+})
+})
 </script>

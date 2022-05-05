@@ -1,9 +1,9 @@
-var db=require('../confiq/connection')
-var collection=require('../confiq/collection');
-var bcrypt=require('bcrypt');
-var objectId=require('mongodb').ObjectId
+let db=require('../confiq/connection')
+let collection=require('../confiq/collection');
+let bcrypt=require('bcrypt');
+let objectId=require('mongodb').ObjectId
 
-var promise=require('promise');
+let promise=require('promise');
 const async = require('hbs/lib/async');
 const { resolve, reject } = require('promise');
 const { response } = require('express');
@@ -97,10 +97,12 @@ module.exports={
       
             return new promise((resolve,reject)=>{
                 db.get().collection(collection.PRODUCT_COLLECTION).updateOne({_id:objectId(proid)},{$set:{
+                    
                     brand:prodetails.brand,
                     description:prodetails.description,
                     category:prodetails.category,
                     orginalPrice:prodetails. orginalPrice,
+                  
                     offerPrice:offerPrice,
                     offerpercentage:prodetails.offerpercentage
             
@@ -112,7 +114,7 @@ module.exports={
             })
         
     },
-
+// ==================================Add Category========================
     addcategory:(category)=>{
        
         return new promise((resolve,reject)=>{
@@ -187,6 +189,82 @@ module.exports={
                 resolve(response)
             })
         })
-    }
-    
+    },
+
+    // ==============================orderstatusupdate=====================
+    statusUpdate:(status,orderId)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.ORDER_COLLECTION).updateOne({_id:objectId(orderId)},{
+                $set:{
+                  status:status,
+
+                  
+                 
+                
+                }
+            }).then((response)=>{
+                resolve(true)
+            })
+        })
+    },
+    // =======================================adminOrderDetails=======================
+    getAllOrders:()=>{
+        return new Promise(async (res,rej)=>{
+            let orders= await db.get().collection(collection.ORDER_COLLECTION).find().sort({Date:-1}).toArray()
+            console.log(orders);
+            res(orders)
+        })
+    },
+    getOrderProductDetails:(orderId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let orderItems= await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+                {
+                    $match:{_id:objectId(orderId)}
+                },
+                {
+                    $unwind:'$products'
+                },
+                {
+                    $project:{
+                        item:'$products.item',
+                        quantity:'$products.quantity'
+                    }
+                },
+                {
+                    $lookup:{
+                        from:collection.PRODUCT_COLLECTION,
+                        localField:'item',
+                        foreignField:'_id',
+                        as:'product'
+                    }
+                },
+                {
+                    $project:{
+                        item:1,quantity:1,product:{$arrayElemAt:['$product',0]}
+                    }
+                }
+               
+            ]).toArray()
+           
+           
+            resolve(orderItems)
+        })
+    },
+    addCarousel:(carousel)=>{
+       
+        return new promise((resolve,reject)=>{
+            db.get().collection('carousel').insertOne(carousel).then((data)=>{
+                resolve(data.insertedId);
+            })
+        })
+    },
+    // ===========================getAllcarousel==============
+    getAllcarousel:()=>{
+        return new promise(async(resolve,reject)=>{
+            let carousel=await db.get().collection(collection.CAROUSEL_COLLECTION).find().toArray()
+            resolve(carousel)
+        })
+        },
+       
+
 }

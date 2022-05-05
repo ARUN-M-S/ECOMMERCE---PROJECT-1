@@ -1,14 +1,17 @@
 const { response } = require("express");
-var express = require("express");
+let express = require("express");
 const async = require("hbs/lib/async");
 const { Db } = require("mongodb");
+const { getOrderProductDetails } = require("../helpers/product-helpers");
 var router = express.Router();
 const productHelpers = require("../helpers/product-helpers");
 const userHelpers = require("../helpers/user-hepers");
+const swal = require( 'sweetalert');
+
 
 const serviceSsid = "	VA57b99e042133ed4144f37b3003e009b8";
 const AccountSsid = "AC8d35f9dcfb5c3192cf04162426e70fa1";
-const token = "351a705f744d9bda78dd3623b7796eb6";
+const token = "0421b11737a011c00724f19f66dfa8f1";
 const client = require("twilio")(AccountSsid, token);
 
 const verifylogin = (req, res, next) => {
@@ -30,6 +33,10 @@ const verifylogin = (req, res, next) => {
 
 
 
+
+
+
+
 /* GET home page. */
 router.get("/", async function (req, res, next) {
   let user = req.session.user;
@@ -41,14 +48,21 @@ router.get("/", async function (req, res, next) {
   
   productHelpers.getAllproducts().then((products) => {
     productHelpers.getAllcategory().then((category) => {
+      productHelpers.getAllcarousel().then((carousel) => {
       
        
       //  let ok = offerprice
       //  console.log(ok);
-      res.render("user/view-products", { products, user, category ,cartCount});
+      res.render("user/view-products", { products, user, category ,cartCount,carousel});
     });
   });
+
+  });
 });
+
+
+
+
 router.get("/login", (req, res) => {
   if (req.session.loggedIn) {
     res.redirect("/");
@@ -57,6 +71,7 @@ router.get("/login", (req, res) => {
     req.session.loginErr = false;
   }
 });
+// =============================================signUppage==================
 router.get("/signup", (req, res) => {
   res.render("user/signup");
 });
@@ -161,7 +176,7 @@ router.get('/signupOtp',(req,res)=>{
         }
       })
   
-})
+});
 // ====================================otpsignup============================
 
 router.post("/login", (req, res) => {
@@ -217,13 +232,16 @@ router.get('/add-to-cart/:id',(req,res)=>{
 
 router.get("/wishlist", verifylogin, async (req, res) => {
   let products=await userHelpers.getWishProducts(req.session.user._id)
+  // console.log(products);
   // let totalValue=await userHelpers.getTotalAmount(req.session.user._id)
 
  if(products){
-  res.render("user/wishlist",{products,'user':req.session.user});}
-  else{
-    res.render("user/wishlistEmpty")
+  
+  res.render("user/wishlist",{products,'user':req.session.user});
 
+  }
+  else{
+    res.render("user/wishlistEmpty",{'user':req.session.user})
   }
 });
 
@@ -381,13 +399,19 @@ router.post('/remove-product-cart',(req,res)=>{
   })
 })
 
-
+// =================================removeWishlist==================
+router.post('/remove-product-wishlist',(req,res)=>{
+  userHelpers.removeWishProduct(req.body).then((response)=>{
+    res.json(response)
+  })
+})
 
 
 //product orders
 
 router.get('/place-order',verifylogin,async(req,res)=>{
   let total=await userHelpers.getTotalAmount(req.session.user._id)
+  
   
   res.render('user/Add-address',{total,user:req.session.user})
 })
@@ -436,13 +460,13 @@ res.render('user/orders',{user:req.session.user,orders})
 //   // res.render("user/view-image",{product});
 // })
 // ------------view-orders from order--------
-router.get('/view-order-products/:id',async(req,res)=>{
-  var imgId = req.params.id;
-  // let product = await userHelpers.imageDetails(req.params.id);
-  let products=await userHelpers.getOrderProducts(req.params.id)
-   res.render('user/view-order-products',{products,user:req.session.user})
-  // res.render("user/view-image",{product});
-})
+// router.get('/view-order-products/:id',async(req,res)=>{
+//   var imgId = req.params.id;
+//   // let product = await userHelpers.imageDetails(req.params.id);
+//    let products=await userHelpers.getOrderProducts(req.params.id)
+//    res.render('user/view-order-products',{products,user:req.session.user})
+//   // res.render("user/view-image",{product});
+// })
 
 
 
@@ -628,9 +652,19 @@ router.get('/phoneOtp',(req,res)=>{
           }
           })
         }
-      })
+      });
   
+});
+
+router.get('/view-order-products/:id',verifylogin,async(req,res)=>{
+ 
+  let products= await userHelpers.getOrderProductDetails(req.params.id)
+  let user=req.session.user
+  res.render('user/view-order-products',{products,user})
 })
+
+
+
 
 
 module.exports = router;

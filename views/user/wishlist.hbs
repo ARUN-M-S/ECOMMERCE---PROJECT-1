@@ -1,54 +1,104 @@
-<div class="container" >
-<div class="row p-5" style="min-height: 100vh; " >
-     {{#each products}}
-    <div class="col-md-4 col-sm-6 col-lg-3">
-        <div class="product-grid">
-            <div class="product-image">
-                <a href="/view-image/{{this._id}}" class="image">
-                    <img class="img-1" src="/product-images/{{this._id}}.jpg">
-                    <img class="img-2" src="/product-images1/{{this._id}}.jpg">
-                </a>
-                <ul class="product-links">
-                   
-                    <li><a href="#"><i class="fa-solid fa-x"></i></a></li>
-                    <li><a  ><i > <button onclick="addToCart('{{this._id}}')" class="fa fa-shopping-cart "></button></i></a></li>
-                </ul>
-                
-            </div>
-            <div class="product-content">
-                <ul class="rating">
-                    <li class="fas fa-star"></li>
-                    <li class="fas fa-star"></li>
-                    <li class="fas fa-star"></li>
-                    <li class="fas fa-star"></li>
-                    <li class="fas fa-star disable"></li>
-                    <li class="disable">(1 reviews)</li>
-                </ul>
-                
-              
-                <h3 class="title"><a href="#">{{this.brand}}</a></h3>
-                <div class="price">₹{{this.offerPrice}} <span> ₹{{this.orginalPrice}}</span></div>
-                
+<div class="container">
+    <div class="row p-5" style="min-height: 100vh; ">
+        {{#each products}}
+        <div class="col-md-4 col-sm-6 col-lg-3">
+            <div class="product-grid">
+                <div class="product-image">
+
+                    <img class="img-1" src="/product-images/{{this.userWishlist._id}}.jpg">
+                    <img class="img-2" src="/product-images1/{{this.userWishlist._id}}.jpg">
+                    </a>
+                    <ul class="product-links">
+                         <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                  title="Remove item" onclick="removeCartProduct('{{this._id}}','{{this.userWishlist._id}}')">
+                  <i class="fas fa-trash"></i>
+                </button>
+
+                        <li><a> <button title="Remove item" class="fa-solid fa-x"
+                                        onclick="removeCartProduct('{{this._id}}','{{this.userWishlist._id}}')"></button></i></a>
+                        </li>
+                        <li><a> <button onclick="addToCart('{{this.userWishlist._id}}')"
+                                        class="fa fa-shopping-cart "></button></a></li>
+                    </ul>
+{{log this._id}}
+
+
+
+
+
+                </div>
+                <div class="product-content">
+                    <ul class="rating">
+                        <li class="fas fa-star"></li>
+                        <li class="fas fa-star"></li>
+                        <li class="fas fa-star"></li>
+                        <li class="fas fa-star"></li>
+                        <li class="fas fa-star disable"></li>
+                        <li class="disable">(1 reviews)</li>
+                    </ul>
+
+
+
+
+
+
+
+                    <h3 class="title"><a href="#">{{this.userWishlist.brand}}</a></h3>
+                    <div class="price">₹{{this.userWishlist.offerPrice}} <span>
+                            ₹{{this.wishlistspro.orginalPrice}}</span></div>
+
+                </div>
             </div>
         </div>
+        {{/each}}
     </div>
-    {{/each}}
-</div>
 </div>
 <script>
-        function addToCart(proId){
-            $.ajax({
-                url:'/add-to-cart/'+proId,
-                method:'get',
-                success:(response)=>{
-                    if(response.status){
-                        let count=$('#cartCount').html()
-                        count=parseInt(count)+1
-                        $("#cartCount").html(count)
-                    }
-                    
+    function addToCart(proId) {
+        console.log(proId)
+        $.ajax({
+            url: '/add-to-cart/' + proId,
+            method: 'get',
+            success: (response) => {
+                if (response.status) {
+                    let count = $('#cartCount').html()
+                    count = parseInt(count) + 1
+                    $("#cartCount").html(count)
                 }
-            })
-        }
-    </script>
 
+            }
+        })
+    }
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    function removeCartProduct(cardId, proId) {
+        swal({
+            text: 'Are you sure want to Remove item From Cart',
+            icon: "warning",
+            button: true,
+            dangerMode: true,
+
+        }).then((responce) => {
+            if (responce) {
+                $.ajax({
+                    url: '/remove-product-wishlist/',
+                    method: 'post',
+                    data: {
+                        cart: cardId,
+                        product: proId
+                    },
+
+                    success: (response) => {
+
+                        swal("Status Updated", {
+                            icon: "success"
+                        })
+                    }
+                })
+            }
+
+        })
+    }
+
+</script>

@@ -1,10 +1,10 @@
 const { response } = require("express");
-var express = require("express");
+let express = require("express");
 const async = require("hbs/lib/async");
 
 const productHelpers = require("../helpers/product-helpers");
-var router = express.Router();
-var productHelper = require("../helpers/product-helpers");
+let router = express.Router();
+let productHelper = require("../helpers/product-helpers");
 
 /* GET users listing. */
 
@@ -55,9 +55,11 @@ router.post("/add-product", (req, res) => {
   productHelper.addproduct(req.body, (id) => {
     let images = req.files.images;
     let image = req.files.image;
+    let image3 = req.files.image3;
+
     if (
       (image.mv("./public/product-images/" + id + ".jpg") &&
-        images.mv("./public/product-images1/" + id + ".jpg"),
+        images.mv("./public/product-images1/" + id + ".jpg")&& image3.mv("./public/product_image3/" + id + ".jpg"),
       (err, done) => {
         if (!err) {
           res.render("admin/add-product", { admin: true });
@@ -79,12 +81,16 @@ router.post("/edit-product/:id", (req, res) => {
   productHelpers.updateProduct(req.params.id, req.body).then(() => {
     let id = req.params.id;
     res.redirect("/admin/");
-    if (req.files.image && req.files.images) {
+    if (req.files.image && req.files.images&& req.files.image3) {
       let images = req.files.images;
       let image = req.files.image;
+      let image3 = req.files.image3;
+
 
       image.mv("./public/product-images/" + id + ".jpg", (err, done) => {});
       images.mv("./public/product-images1/" + id + ".jpg", (err, done) => {});
+      image3.mv("./public/product_image3/" + id + ".jpg", (err, done) => {});
+
     }else if(req.files.image){
       let image = req.files.image;
       image.mv("./public/product-images/" + id + ".jpg", (err, done) => {});
@@ -93,6 +99,12 @@ router.post("/edit-product/:id", (req, res) => {
     }else if(req.files.images){
       let images = req.files.images;
       images.mv("./public/product-images1/" + id + ".jpg", (err, done) => {});
+
+
+    }
+    else if(req.files.image3){
+      let image3 = req.files.image3;
+      image3.mv("./public/product_image3/" + id + ".jpg", (err, done) => {});
 
 
     }
@@ -197,8 +209,45 @@ router.get("/delete-users/:id", (req, res) => {
 
 // ================adminorders======================
 
-router.get('/orders',verifylogin,(req,res)=>{
-  productHelper.get
+router.get('/orderss',verifylogin,(req,res)=>{
+  productHelpers.getAllOrders().then((orders)=>{
+    res.render('admin/user-orders',{orders,admin:true})
+  })
 })
 
+router.get('/orderProductDetails/:id',verifylogin,async(req,res)=>{
+ 
+  let products= await productHelpers.getOrderProductDetails(req.params.id)
+  // let adm=req.session.adminLoggedIn
+ 
+  res.render('admin/orderProductDetails',{products,admin:true})
+})
+// ==============================orderStatusupdate======================
+router.post('/statusUpdate',(req,res)=>{
+  let status=req.body.status
+  let orderId=req.body.orderId
+  console.log("hiii",status);
+  console.log("hloo",orderId);
+  
+  productHelpers.statusUpdate(status,orderId).then((response)=>{
+   res.json(true)
+  })
+})
+
+// ======================================Addcarousel==================
+router.post("/add-curosel", (req, res) => {
+  productHelper.addCarousel(req.body).then((id) => {
+    let CarouselImage = req.files.image;
+    CarouselImage.mv("./public/Carousel/" + id + ".jpg", (err, done) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("admin/add-category", { admin: true });
+      }
+    });
+    res.render("admin/add-category");
+  });
+});
+
 module.exports = router;
+

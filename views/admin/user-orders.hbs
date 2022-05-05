@@ -1,0 +1,159 @@
+<div class="container mt-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-10">
+            <div class="rounded">
+                <div class="table-responsive table-borderless">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">
+                                    {{!-- <div class="toggle-btn">
+                                        <div class="inner-circle"></div>
+                                    </div> --}}
+                                </th>
+                                <th>No:</th>
+                                <th>User Name</th>
+                                <th>Address</th>
+                                <th>Date</th>
+                                <th>Total Price</th>
+                                <th>Product</th>
+                                <th>Payment</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        {{#each orders}}
+                        <tbody class="table-body">
+                            <tr  class="cell-1">
+                                <td class="text-center">
+                                    {{!-- <div class="toggle-btn">
+                                        <div class="inner-circle"></div>
+                                    </div> --}}
+                                </td>
+                                <td>{{@index}}</td>
+                                
+                                <td>{{this.deliveryDetails.name}}</td>
+                                <td>{{this.deliveryDetails.address}} <br>{{this.deliveryDetails.pincode}} <br>{{this.deliveryDetails.mobile}}</td>
+                                <td>{{this.Date}}</td>
+                                <td>{{this.totalAmount}}</td>
+                                {{!-- <a href="/admin/cancelOrder/{{this._id}}" class="btn btn-success"></a> --}}
+                                <td> <a href="/admin/orderProductDetails/{{this._id}}" class="btn btn-success">Details</a> </td>
+                                {{!-- <td><i class="fa fa-ellipsis-h text-black-50"></i></td> --}}
+                                <td>{{this.paymentMethod}}</td>
+                                 <td>   <select onchange="deliveryStatus(value,'{{this._id}}')" class="custom-select" style="width: 7rem;">
+                 {{#if this.status}}                    
+  <option value="{{this.status}}" selected disabled> {{this.status}}</option>
+{{else}}
+  <option value="{{this.status}}" selected disabled> Delivered</option>
+{{/if}}
+  <option   value="Pending">Pending</option>
+  <option   value="Cancelled">Cancel</option>
+  <option value="Shipped">Ship</option>
+  <option value=""  >Delivered</option>
+</select></td>
+                            </tr>
+                           
+                          
+                           
+                        </tbody>
+                        {{/each}}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Assistant');
+
+body {
+    background: #eee;
+    font-family: Assistant, sans-serif
+}
+
+.cell-1 {
+    border-collapse: separate;
+    border-spacing: 0 4em;
+    background: #fff;
+    border-bottom: 5px solid transparent;
+    background-clip: padding-box
+  
+    
+    
+}
+
+thead {
+    background: #dddcdc
+    
+}
+
+.toggle-btn {
+    width: 40px;
+    height: 21px;
+    background: grey;
+    border-radius: 50px;
+    padding: 3px;
+    cursor: pointer;
+    -webkit-transition: all 0.3s 0.1s ease-in-out;
+    -moz-transition: all 0.3s 0.1s ease-in-out;
+    -o-transition: all 0.3s 0.1s ease-in-out;
+    transition: all 0.3s 0.1s ease-in-out
+}
+
+.toggle-btn>.inner-circle {
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 50%;
+    -webkit-transition: all 0.3s 0.1s ease-in-out;
+    -moz-transition: all 0.3s 0.1s ease-in-out;
+    -o-transition: all 0.3s 0.1s ease-in-out;
+    transition: all 0.3s 0.1s ease-in-out
+}
+
+.toggle-btn.active {
+    background: blue !important
+}
+
+.toggle-btn.active>.inner-circle {
+    margin-left: 19px
+}
+</style>
+
+
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+function deliveryStatus(value,orderId){
+    swal({
+  text: 'Are you sure want to Change the Order status',
+  icon:"warning",
+  button: true,
+  dangerMode:true,
+  
+})
+.then((name) => {
+    if(name){
+      $.ajax({
+            url:'/admin/statusUpdate',
+            method:'post',
+            data:{
+                status:value,
+                orderId:orderId
+            },
+            success:(response)=>{
+              
+
+               swal("Status Updated",{
+icon:"success"
+               })
+               
+              }
+            })
+        }
+  
+})
+}
+
+</script>

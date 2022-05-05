@@ -1,20 +1,21 @@
-<section style="background-color: antiquewhite;">
-    <div class="container-fluid col-md-3 mt-5" style="display: flex; justify-content:center ">
+<section style="background-color: rgb(230, 191, 140); min-height:100vh; border:solid">
+    <div class="container-fluid col-md-3 pt-5" style="display: flex; ">
        
         <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">no</th>
-       <th scope="col">brand</th>
-      <th scope="col">category</th>
+      <th scope="col" ><h4>No</h4></th>
+       <th scope="col"><h4>Brand</h4></th>
+      <th scope="col"><h4>Category</h4></th>
       
-        <th scope="col">image</th>
+        <th scope="col"><h4>Image</h4></th>
+         <th scope="col"><h4>Actions</h4></th>
     </tr>
   </thead>
   <tbody>
      {{#each category}}
     <tr>
-      <th scope="row">{{@index}}</th>
+      <th scope="row" >{{@index}}</th>
       <td>
           {{this.brand}}
       </td>
@@ -23,12 +24,12 @@
       <td>{{this.category}}
       </td>
        
-       <td><img style="width: 40px; hieght: 40px;" src="/category-image/{{this._id}}.jpg" alt="">
+       <td><img style="width: 70px; hieght: 70px;" src="/category-image/{{this._id}}.jpg" alt="">
          
       </td>
       <td>
-           <a href="/admin/edit-category/{{this._id}}" class="btn btn-primary">Edit</a>
-        <a href="/admin/delete-category/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are You Want to Delete {{this.name}}?')">delete</a>
+           <a href="/admin/edit-category/{{this._id}}" class="btn btn-primary" style="width: 10rem;">Edit</a>
+        <a href="/admin/delete-category/{{this._id}}" class="btn btn-danger" style="width: 10rem;" onclick="return confirm('Are You Want to Delete {{this.name}}?')">delete</a>
       </td>
     </tr>
     

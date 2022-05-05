@@ -22,6 +22,7 @@
     "promis": "^1.1.4",
     "promise": "^8.1.0",
     "razorpay": "^2.8.1",
+    "sweetalert": "^2.1.2",
     "twilio": "^3.76.1"
   }
 }

@@ -1,5 +1,5 @@
-<section style="background-color: antiquewhite;">
-    <div class="container mt-5">
+<section style="background-color: antiquewhite; min-height:100vh">
+    <div class="container pt-5">
     <div class="row">
         <form action="/admin/add-product" method="post" enctype="multipart/form-data">
   <div class="col-md-6">
@@ -45,6 +45,10 @@
    <div class="mt-3">
     
     <input type="file" name="images" placeholder="IMAGE2" class="form-control" id="exampleInputPassword1" required>
+  </div>
+   <div class="mt-3">
+    
+    <input type="file" name="image3" placeholder="IMAGE3" class="form-control" id="exampleInputPassword1" required>
   </div>
 
   <button type="submit" class="btn btn-primary mt-3">Submit</button>
