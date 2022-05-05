@@ -327,10 +327,10 @@ module.exports = {
       resolve(total[0]?.total);
     });
   },
-  placeOrder: (order, products, total) => {
+  placeOrder: (order, products, total,method,userId) => {
     return new promise((resolve, reject) => {
-      console.log(order, products, total);
-      let status = order["payment-method"] === "COD" ? "placed" : "pending";
+      console.log(order, products, total,"aaaaaaaaaaaaaaaa");
+      let status = method["payment-method"] === "COD" ? "placed" : "pending";
       let orderObj = {
         deliveryDetails: {
           date: new Date(),
@@ -342,8 +342,8 @@ module.exports = {
           state: order.state,
           city: order.city,
         },
-        userId: objectId(order.userId),
-        paymentMethod: order["payment-method"],
+        userId: objectId(userId),
+        paymentMethod: method["payment-method"],
         products: products,
         totalAmount: total,
         status: status,
@@ -355,7 +355,7 @@ module.exports = {
         .then((response) => {
           db.get()
             .collection(collection.CART_COLLECTION)
-            .deleteOne({ user: objectId(order.userId) });
+            .deleteOne({ user: objectId(userId) });
           resolve(response.insertedId);
         });
     });
@@ -791,7 +791,7 @@ module.exports = {
         .get()
         .collection(collection.CART_COLLECTION)
         .findOne({ user: objectId(userId) });
-      resolve(cart.products);
+      resolve(cart);
     });
   },
 
@@ -1039,7 +1039,7 @@ getAddress:(userId)=>{
       resolve(address);
   });
 },
-EditAddress:(userId,addId)=>{
+EditAddress:(addId,userId)=>{
   return new promise(async(resolve,reject)=>{
       let address=await db.get().collection(collection.USER_COLLECTION).aggregate([
           {
@@ -1049,7 +1049,7 @@ EditAddress:(userId,addId)=>{
               $unwind:'$Address'
           },
           {  
-              $match:{'Address.Useraddress':objectId(addId)}                  
+              $match:{'Address.Useraddress':objectId(addId.checkoutAddress)}                  
           }
                  
         
@@ -1103,4 +1103,5 @@ deleteAddress:(userID,addId)=>{
 })
 
 },
+
 };

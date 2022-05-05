@@ -416,16 +416,24 @@ router.get('/place-order',verifylogin,async(req,res)=>{
     
     console.log(Address,"pravenn sajeev");
   
- 
+//  res.render('user/add',{Address})
   
-  res.render('user/Add-address',{total,user:req.session.user,Address})
+   res.render('user/Add-address',{total,user:req.session.user,Address})
 })
 router.post('/place-order',async(req,res)=>{
-  let products=await userHelpers.getCartProductList(req.body.userId)
-  let totalPrice=await userHelpers.getTotalAmount(req.body.userId)
-  // let Address = await userHelpers.addOrderedAddress(req.body.userId)
+  let userId= req.session.user._id
+  console.log(req.body,"myordersssssssssssssssss");
+  let products=await userHelpers.getCartProductList(userId)
+  let totalPrice=await userHelpers.getTotalAmount(userId)
+  console.log(totalPrice,"amountttttt");
+  
+  
+  let address= await userHelpers.EditAddress(req.body,userId)
+  let orderAddress=address[0].Address
 
-userHelpers.placeOrder(req.body,products,totalPrice).then((orderId)=>{
+
+
+userHelpers.placeOrder(orderAddress,products,totalPrice,req.body,userId).then((orderId)=>{
   console.log(orderId);
   if(req.body['payment-method']==='COD'){
 
