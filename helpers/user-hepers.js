@@ -1034,12 +1034,13 @@ getAddress:(userId)=>{
           },
         
       ]).toArray();
-      console.log("lllllllllllllllllllllllllllllllll");
+      // console.log("lllllllllllllllllllllllllllllllll");
       console.log(address);
       resolve(address);
   });
 },
 EditAddress:(addId,userId)=>{
+  console.log(addId,userId,"hellooooPraveen");
   return new promise(async(resolve,reject)=>{
       let address=await db.get().collection(collection.USER_COLLECTION).aggregate([
           {
@@ -1062,8 +1063,8 @@ EditAddress:(addId,userId)=>{
 },
 updateAddress:(userId,addressId,data)=>{
   console.log(userId)
-  console.log(addressId)
-  console.log(data);
+  console.log(addressId,"addressid")
+  console.log(data,"data is here");
   return new promise(async(resolve,reject)=>{
   
      await db.get().collection(collection.USER_COLLECTION).updateOne({
@@ -1082,7 +1083,7 @@ updateAddress:(userId,addressId,data)=>{
       }
       }
       ).then((resp)=>{
-          console.log(resp)
+          
           resolve(resp)
       })
 
@@ -1103,5 +1104,6 @@ deleteAddress:(userID,addId)=>{
 })
 
 },
+
 
 };

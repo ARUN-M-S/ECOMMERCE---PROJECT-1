@@ -9,9 +9,9 @@ const userHelpers = require("../helpers/user-hepers");
 const swal = require( 'sweetalert');
 
 
-const serviceSsid = "	VA57b99e042133ed4144f37b3003e009b8";
-const AccountSsid = "AC8d35f9dcfb5c3192cf04162426e70fa1";
-const token = "0421b11737a011c00724f19f66dfa8f1";
+const serviceSsid = "VA5440c48ff0e92ed96faf250b9359ce15";
+const AccountSsid = "ACf10e011f8facf58eeae5bd2139c0be95";
+const token = "ce179674c1763d2d2cf7c3dd3b34c38b";
 const client = require("twilio")(AccountSsid, token);
 
 const verifylogin = (req, res, next) => {
@@ -213,8 +213,14 @@ router.get("/cart", verifylogin, async (req, res) => {
   if (req.session.user) {
     var cartCount=await userHelpers.getCarCount(req.session.user._id)
   }
-  
+  if(cartCount){
   res.render("user/cart",{products,'user':req.session.user,cartCount,totalValue});
+
+
+  }else{
+    res.render("user/emptycart",{'user':req.session.user})
+  }
+  
 });
 router.get('/add-to-cart/:id',(req,res)=>{
   console.log(req.params.id);
@@ -423,12 +429,15 @@ router.get('/place-order',verifylogin,async(req,res)=>{
 router.post('/place-order',async(req,res)=>{
   let userId= req.session.user._id
   console.log(req.body,"myordersssssssssssssssss");
+  let address= await userHelpers.EditAddress(req.body,userId)
+
   let products=await userHelpers.getCartProductList(userId)
   let totalPrice=await userHelpers.getTotalAmount(userId)
   console.log(totalPrice,"amountttttt");
+  console.log(address,"amountttttt");
+
   
   
-  let address= await userHelpers.EditAddress(req.body,userId)
   let orderAddress=address[0].Address
 
 
@@ -677,7 +686,7 @@ router.get('/view-order-products/:id',verifylogin,async(req,res)=>{
   res.render('user/view-order-products',{products,user})
 })
 
-
+// ==========================for adding new address for user ===================
 router.get('/arunms',verifylogin,(req,res)=>{
   res.render("user/add-addressuser")
 })
@@ -686,10 +695,39 @@ router.post("/useradd",verifylogin,(req,res)=>{
   console.log(userId);
 userHelpers.userAddress(req.body,userId).then((responce)=>{
   console.log(responce);
+  res.redirect("/place-order")
 
 })
 
+});
+// =======================Address showing for user from profile======
+
+router.get('/myaddress',verifylogin,async(req,res)=>{
+  let Address=await userHelpers.getAddress(req.session.user._id)
+  
+  if(Address){
+  res.render("user/myAddres",{Address})
+
+
+  }
+  else{
+    res.redirect("/arunms")
+  }
+
 })
+
+router.post('/editcurrentAddress/:id',verifylogin,async(req,res)=>{
+  let addId=req.params.id;
+  let userId=req.session.user._id
+  let body=req.body
+  console.log(body,"akhillllllll");
+  
+   let Address = await userHelpers.updateAddress(userId,addId,body);
+   res.redirect("/myaddress")
+  
+})
+
+
 
 
 module.exports = router;
