@@ -1,132 +1,139 @@
 <section style="background-color: antiquewhite; ">
-<div class="container"  >
-  <form action="/place-order" id="checkout-form">
-<div class="row pt-5" >
-  <div class="col-md-8 mb-4" style="">
-    <div class="card mb-4">
-      <div class="card-header py-3 bg-dark" >
-        <span style="color: #f9900e;">Your Address</span><a href="/arunms" type="button" class="btn btn-light " style="margin-left: 25rem;  ">Address</a>
-        
-      </div>
-    <div class="row" style="background-color: antiquewhite;min-height:80vh">
+  <div class="container">
+    <form action="/place-order" id="checkout-form">
+      <div class="row pt-5">
+        <div class="col-md-8 mb-4" style="">
+          <div class="card mb-4">
+            <div class="card-header py-3 bg-dark">
+              <span style="color: #f9900e;">Your Address</span><a href="/arunms" type="button" class="btn btn-light "
+                style="margin-left: 25rem;  ">Address</a>
+
+            </div>
+            <div class="row" style="background-color: antiquewhite;min-height:80vh">
 
 
 
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
                 integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
 
-            <div class="col-md-12  ">
+              <div class="col-md-12  ">
                 <div class="row mt-4">
                   {{#each Address}}
-                    <div class="col-xl-4 col-lg-4 col-6">
-                        <div class="card l-bg-cherry">
-                            
+                  <div class="col-xl-4 col-lg-4 col-6">
+                    <div class="card l-bg-cherry">
 
 
-                                <div class="card-statistic-3  pl-3 pt-2" >
-                                    <div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
-                                    <div class="mb-4">
-                                        <h6 class="card-title mb-0" style="color: white; font-size:.7rem">{{this.Address.name}}</h6>
 
-                                        <span class="card-title mb-0" style="color: white; font-size:.6rem">{{this.Address.house}}</span> 
-                                        <span class="card-title mb-0" style="color: white; font-size:.6rem">{{this.Address.state}}</span> 
-                                        <span class="card-title mb-0" style="color: white; font-size:.6rem ">{{this.Address.phoneNumber}}</span> 
-                                        <span class="card-title mb-0" style="color: white; font-size:.6rem">{{this.Address.pincode}}</span> 
-                                        <h6 class="card-title mb-0" style="color: white;font-size:.6rem">{{this.Address.city}}</h6> 
-                                        
+                      <div class="card-statistic-3  pl-3 pt-2">
+                        <div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="mb-4">
+                          <h6 class="card-title mb-0" style="color: white; font-size:.7rem">{{this.Address.name}}</h6>
+
+                          <span class="card-title mb-0"
+                            style="color: white; font-size:.6rem">{{this.Address.house}}</span>
+                          <span class="card-title mb-0"
+                            style="color: white; font-size:.6rem">{{this.Address.state}}</span>
+                          <span class="card-title mb-0"
+                            style="color: white; font-size:.6rem ">{{this.Address.phoneNumber}}</span>
+                          <span class="card-title mb-0"
+                            style="color: white; font-size:.6rem">{{this.Address.pincode}}</span>
+                          <h6 class="card-title mb-0" style="color: white;font-size:.6rem">{{this.Address.city}}</h6>
 
 
-<div class="form-check form-switch">
-  {{log this.Address.Useraddress}}
-  <input class="form-check-input"   name="checkoutAddress" type="radio" id="exampleRadios1" value="{{this.Address.Useraddress}}" checked >
-  <label class="form-check-label" for="{{this.Address.Useraddress}}">
-                     {{this.Address.home}}
-              </label>
-</div>
-                                    </div>
 
-                                </div>
-                            
+                          <div class="form-check form-switch">
+                            {{log this.Address.Useraddress}}
+                            <input class="form-check-input" name="checkoutAddress" type="radio" id="exampleRadios1"
+                              value="{{this.Address.Useraddress}}" checked>
+                            <label class="form-check-label" for="{{this.Address.Useraddress}}">
+                              {{this.Address.home}}
+                            </label>
+                          </div>
                         </div>
+
+                      </div>
+
                     </div>
-                   
-                    
-                   {{/each}}
+                  </div>
+
+
+                  {{/each}}
                 </div>
+              </div>
+
             </div>
 
+
+          </div>
         </div>
 
-      
-    </div>
-  </div>
-
-  <div class="col-md-4 mb-4">
-    <div class="card mb-4">
-      <div class="card-header py-3 bg-dark text-light">
-        <h5 class="mb-0">Amount</h5>
-      </div>
-      <div class="card-body">
-        <ul class="list-group list-group-flush">
-          <li class="d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-            Products items:
-            <span>$53.98</span>
-          </li>
-          <li class=" d-flex justify-content-between align-items-center px-0">
-            Shipping
-            <span>free</span>
-          </li>
-           <li class=" d-flex justify-content-between align-items-center px-0">
-            Delivery charge
-            <span>free</span>
-          </li>
-          <li class="d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-            <div>
-              <strong>Total amount</strong>
-              <strong>
-                <p class="mb-0">(including GST)</p>
-              </strong>
+        <div class="col-md-4 mb-4">
+          <div class="card mb-4">
+            <div class="card-header py-3 bg-dark text-light">
+              <h5 class="mb-0">Amount</h5>
             </div>
-            <span><strong>${{total}}</strong></span>
-          </li>
-        </ul>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                  Products items:
+                  <span>$53.98</span>
+                </li>
+                <li class=" d-flex justify-content-between align-items-center px-0">
+                  Shipping
+                  <span>free</span>
+                </li>
+                <li class=" d-flex justify-content-between align-items-center px-0">
+                  Delivery charge
+                  <span>free</span>
+                </li>
+                <li class="d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                  <div>
+                    <strong>Total amount</strong>
+                    <strong>
+                      <p class="mb-0">(including GST)</p>
+                    </strong>
+                  </div>
+                  <span><strong>${{total}}</strong></span>
+                </li>
+              </ul>
 
-     
-      </div>
+
+            </div>
 
 
-         <div class="card-header py-3 bg-dark text-light">
-        <h5 class="mb-0">Payment Method</h5>
+            <div class="card-header py-3 bg-dark text-light">
+              <h5 class="mb-0">Payment Method</h5>
+            </div>
+            <div class="card-body mt-4">
+
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="radio1" name="payment-method" value="COD"
+                  checked><strong>Cash On Delivery</strong>
+                <label class="form-check-label" for="radio1"></label>
+              </div>
+
+              <div class="form-check mt-4">
+                <input type="radio" class="form-check-input" id="radio1" name="payment-method" value="ONLINE"
+                  checked><strong>Online Pyment</strong>
+                <label class="form-check-label" for="radio1"></label>
+              </div>
+              </ul>
+              <button type="submit" class="btn btn-primary btn-lg btn-block mt-4">
+                PLACE ORDER
+              </button>
+            </div>
+
+          </div>
+        </div>
       </div>
-      <div class="card-body mt-4">
- 
-         <div class="form-check">
-  <input type="radio" class="form-check-input" id="radio1" name="payment-method" value="COD" checked><strong>Cash On Delivery</strong>
-  <label class="form-check-label" for="radio1"></label>
-</div>
-        
-          <div class="form-check mt-4">
-  <input type="radio" class="form-check-input" id="radio1" name="payment-method" value="ONLINE" checked><strong>Online Pyment</strong>
-  <label class="form-check-label" for="radio1"></label>
-</div>
-        </ul>
-        <button type="submit"  class="btn btn-primary btn-lg btn-block mt-4">
-          PLACE ORDER
-        </button>
-      </div>
-     
-    </div>
+    </form>
   </div>
-</div>
- </form>
-</div>
- 
 
 
-{{!-- ===============for curosel============== --}}
-   
 
-    </section>
+  
+
+</section>
 
 
 
@@ -140,18 +147,18 @@
 
 
 <script>
-   $("#checkout-form").submit((e)=>{
+  $("#checkout-form").submit((e) => {
     e.preventDefault()
     $.ajax({
-      url:'/place-order',
-      method:'post',
-      data:$('#checkout-form').serialize(),
-      success:(response)=>{
+      url: '/place-order',
+      method: 'post',
+      data: $('#checkout-form').serialize(),
+      success: (response) => {
         alert(response);
-     
-        if(response.codSuccess){
-          location.href='/order-success'
-        }else{
+
+        if (response.codSuccess) {
+          location.href = '/order-success'
+        } else {
 
           razorpayPayment(response)
 
@@ -160,113 +167,112 @@
     })
   })
 
-  function razorpayPayment(order){
+  function razorpayPayment(order) {
     var options = {
-    "key": "rzp_test_aScLPZGnWnxvJB", // Enter the Key ID generated from the Dashboard
-    "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-    "currency": "INR",
-    "name": "Men Fashion",
-    "description": "Test Transaction",
-    "image": "https://example.com/your_logo",
-    "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-    "handler": function (response){
-      
+      "key": "rzp_test_aScLPZGnWnxvJB", // Enter the Key ID generated from the Dashboard
+      "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": "INR",
+      "name": "Men Fashion",
+      "description": "Test Transaction",
+      "image": "https://example.com/your_logo",
+      "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      "handler": function (response) {
 
-        verfyPayment(response,order)
-    },
-    "prefill": {
+
+        verfyPayment(response, order)
+      },
+      "prefill": {
         "name": "Gaurav Kumar",
         "email": "gaurav.kumar@example.com",
         "contact": "9999999999"
-    },
-    "notes": {
+      },
+      "notes": {
         "address": "Razorpay Corporate Office"
-    },
-    "theme": {
+      },
+      "theme": {
         "color": "#3399cc"
-    }
-   };
+      }
+    };
 
     var rzp1 = new Razorpay(options);
     rzp1.open();
 
-   }
+  }
 
-   function verfyPayment(payment,order){
+  function verfyPayment(payment, order) {
 
-      $.ajax({
-        url:'/verify-payment',
-        data:{
-          payment,
-          order
-        },
-        method:'post',
-        success:(response)=>{
-          if(response.status){
+    $.ajax({
+      url: '/verify-payment',
+      data: {
+        payment,
+        order
+      },
+      method: 'post',
+      success: (response) => {
+        if (response.status) {
 
-            location.href='/order-success'
+          location.href = '/order-success'
 
-          }else{
-            alert("payment failed")
-          }
+        } else {
+          alert("payment failed")
         }
-      })
-   }
+      }
+    })
+  }
 </script>
 
 <style>
+  .card {
+    background-color: #fff;
+    border-radius: 20px;
+    border: none;
+    position: relative;
 
-    .card {
-        background-color: #fff;
-        border-radius: 20px;
-        border: none;
-        position: relative;
-       
-        box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1), 0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12), 0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
-    }
+    box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1), 0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12), 0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
+  }
 
-    .l-bg-cherry {
-        background: linear-gradient(to right, #493240, rgb(255, 0, 153)) !important;
-        color: #fff;
-    }
+  .l-bg-cherry {
+    background: linear-gradient(to right, #493240, rgb(255, 0, 153)) !important;
+    color: #fff;
+  }
 
-   
 
-    .card .card-statistic-3 .card-icon-large .fas,
-    .card .card-statistic-3 .card-icon-large .far,
-    .card .card-statistic-3 .card-icon-large .fab,
-    .card .card-statistic-3 .card-icon-large .fal {
-        font-size: 70px;
-    }
 
-    .card .card-statistic-3 .card-icon {
-        text-align: center;
-        line-height: 50px;
-       
-        color: #000;
-        position: absolute;
-        right: -5px;
-        top: 20px;
-        opacity: 0.1;
-    }
+  .card .card-statistic-3 .card-icon-large .fas,
+  .card .card-statistic-3 .card-icon-large .far,
+  .card .card-statistic-3 .card-icon-large .fab,
+  .card .card-statistic-3 .card-icon-large .fal {
+    font-size: 70px;
+  }
 
-    .l-bg-cyan {
-        background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
-        color: #fff;
-    }
+  .card .card-statistic-3 .card-icon {
+    text-align: center;
+    line-height: 50px;
 
-    .l-bg-green {
-        background: linear-gradient(135deg, #23bdb8 0%, #43e794 100%) !important;
-        color: #fff;
-    }
+    color: #000;
+    position: absolute;
+    right: -5px;
+    top: 20px;
+    opacity: 0.1;
+  }
 
-    .l-bg-orange {
-        background: linear-gradient(to right, #f9900e, #ffba56) !important;
-        color: #fff;
-    }
+  .l-bg-cyan {
+    background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
+    color: #fff;
+  }
 
-    .l-bg-cyan {
-        background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
-        color: #fff;
-    }
+  .l-bg-green {
+    background: linear-gradient(135deg, #23bdb8 0%, #43e794 100%) !important;
+    color: #fff;
+  }
+
+  .l-bg-orange {
+    background: linear-gradient(to right, #f9900e, #ffba56) !important;
+    color: #fff;
+  }
+
+  .l-bg-cyan {
+    background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
+    color: #fff;
+  }
 </style>

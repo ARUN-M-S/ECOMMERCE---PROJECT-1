@@ -1,6 +1,7 @@
 const { response } = require("express");
 let express = require("express");
 const async = require("hbs/lib/async");
+const { resolve } = require("promise");
 
 const productHelpers = require("../helpers/product-helpers");
 let router = express.Router();
@@ -40,8 +41,11 @@ router.get("/admin-logout", verifylogin, (req, res) => {
   res.redirect("/admin");
 });
 
-router.get("/", verifylogin, function (req, res, next) {
-  res.render("admin/admin-home", { home: true });
+router.get("/",verifylogin,async(req, res,)=> {
+  console.log("is here");
+   let totalIncome = await productHelper.getTotalIncome();
+   console.log(totalIncome,"incomee");
+  res.render("admin/admin-home", { home: true ,totalIncome});
 });
 router.get("/products", verifylogin, (req, res) => {
   productHelpers.getAllproducts().then((products) => {
@@ -248,6 +252,22 @@ router.post("/add-curosel", (req, res) => {
     res.render("admin/add-category");
   });
 });
+// =========================salesreport==================
+router.get("/getChartDates",async(req,res)=>{
+  console.log("arunms");
+
+  let weeklyTotal = await productHelper.getWeeklyTotal();
+ let monthlyTotal = await productHelper.getMontlyTotal();
+  let yearlyTotal = await productHelper.getYearlyTotal();
+
+  res.json({weeklyTotal,monthlyTotal,yearlyTotal})
+
+
+
+
+
+
+})
 
 module.exports = router;
 

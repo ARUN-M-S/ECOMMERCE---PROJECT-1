@@ -726,6 +726,45 @@ router.post('/editcurrentAddress/:id',verifylogin,async(req,res)=>{
    res.redirect("/myaddress")
   
 })
+// ============================forgraph==============
+
+
+
+
+// ========================for total sales===================
+// router.get("/totalOrder",async(req,res)=>{
+//   // let amount = await productHelpers. getWeeklyIncome();
+//   let Amounts= await productHelpers.getToatlIncome();
+//   console.log(Amounts);
+ 
+
+
+// });
+// =====================weeklysales=======================
+// router.get("/totalWeeklyOrder",async(req,res)=>{
+//   // let amount = await productHelpers. getWeeklyIncome();
+//   let Amounts= await productHelpers.getWeeklyTotal();
+//   console.log(Amounts);
+ 
+
+
+// });
+// router.get("/yearlysales",async(req,res)=>{
+//   // let amount = await productHelpers. getWeeklyIncome();
+//   let Amounts= await productHelpers.getYearlyTotal();
+//   console.log(Amounts);
+ 
+
+
+// });
+// router.get("/montlyTotal",async(req,res)=>{
+//   // let amount = await productHelpers. getWeeklyIncome();
+//   let Amounts= await productHelpers. getMontlyTotal();
+//   console.log(Amounts);
+ 
+
+
+// });
 
 
 

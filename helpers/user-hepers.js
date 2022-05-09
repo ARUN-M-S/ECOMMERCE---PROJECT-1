@@ -327,9 +327,9 @@ module.exports = {
       resolve(total[0]?.total);
     });
   },
-  placeOrder: (order, products, total,method,userId) => {
+  placeOrder: (order, products, total, method, userId) => {
     return new promise((resolve, reject) => {
-      console.log(order, products, total,"aaaaaaaaaaaaaaaa");
+      console.log(order, products, total, "aaaaaaaaaaaaaaaa");
       let status = method["payment-method"] === "COD" ? "placed" : "pending";
       let orderObj = {
         deliveryDetails: {
@@ -976,7 +976,7 @@ module.exports = {
   // =========================Remove Wishproduct====================
   removeWishProduct: (details) => {
     return new promise((resolve, reject) => {
-      console.log("detaidddddddddddddddddddddddddd");
+      
       console.log(details);
       console.log(objectId(details.cart));
       db.get()
@@ -994,116 +994,126 @@ module.exports = {
     });
   },
 
+  // ==============================Saving Address to the collection============
 
-// ==============================Saving Address to the collection============
-
-userAddress:(userdata,userId)=>{
-  console.log(userdata);
-  let address={
-    Useraddress:new objectId(),
-    name:userdata.name,
-    phoneNumber:userdata.phoneNumber,
-    state:userdata.state,
-    pincode:userdata.pincode,
-    house:userdata.house,
-    city:userdata.city,
-    address:userdata.address,
-    
-}
-  return new promise((resolve,reject)=>{
-     db.get().collection(collection.USER_COLLECTION).updateOne({_id:objectId(userId)},{
-       $push:{Address:address}
-     }).then((response)=>{
-       console.log(response,"address");
-       resolve(response)
-     })
-    resolve()
-    
-  })
-},
-
-// ============================get Address for order==============
-getAddress:(userId)=>{
-  return new promise(async (resolve, reject) => {
-      let address = await db.get().collection(collection.USER_COLLECTION).aggregate([
+  userAddress: (userdata, userId) => {
+    console.log(userdata);
+    let address = {
+      Useraddress: new objectId(),
+      name: userdata.name,
+      phoneNumber: userdata.phoneNumber,
+      state: userdata.state,
+      pincode: userdata.pincode,
+      house: userdata.house,
+      city: userdata.city,
+      address: userdata.address,
+    };
+    return new promise((resolve, reject) => {
+      db.get()
+        .collection(collection.USER_COLLECTION)
+        .updateOne(
+          { _id: objectId(userId) },
           {
-              $match: { _id: objectId(userId) }
+            $push: { Address: address },
+          }
+        )
+        .then((response) => {
+          console.log(response, "address");
+          resolve(response);
+        });
+      resolve();
+    });
+  },
+
+  // ============================get Address for order==============
+  getAddress: (userId) => {
+    return new promise(async (resolve, reject) => {
+      let address = await db
+        .get()
+        .collection(collection.USER_COLLECTION)
+        .aggregate([
+          {
+            $match: { _id: objectId(userId) },
           },
           {
-              $unwind: '$Address'
+            $unwind: "$Address",
           },
-        
-      ]).toArray();
+        ])
+        .toArray();
       // console.log("lllllllllllllllllllllllllllllllll");
       console.log(address);
       resolve(address);
-  });
-},
-EditAddress:(addId,userId)=>{
-  console.log(addId,userId,"hellooooPraveen");
-  return new promise(async(resolve,reject)=>{
-      let address=await db.get().collection(collection.USER_COLLECTION).aggregate([
+    });
+  },
+  EditAddress: (addId, userId) => {
+    console.log(addId, userId, "hellooooPraveen");
+    return new promise(async (resolve, reject) => {
+      let address = await db
+        .get()
+        .collection(collection.USER_COLLECTION)
+        .aggregate([
           {
-              $match:{_id:objectId(userId)}
+            $match: { _id: objectId(userId) },
           },
           {
-              $unwind:'$Address'
+            $unwind: "$Address",
           },
-          {  
-              $match:{'Address.Useraddress':objectId(addId.checkoutAddress)}                  
+          {
+            $match: { "Address.Useraddress": objectId(addId.checkoutAddress) },
+          },
+        ])
+        .toArray();
+     
+      resolve(address);
+    });
+  },
+  updateAddress: (userId, addressId, data) => {
+    console.log(userId);
+    console.log(addressId, "addressid");
+    console.log(data, "data is here");
+    return new promise(async (resolve, reject) => {
+      await db
+        .get()
+        .collection(collection.USER_COLLECTION)
+        .updateOne(
+          {
+            _id: objectId(userId),
+            "Address.Useraddress": objectId(addressId),
+          },
+          {
+            $set: {
+              "Address.$.name": data.name,
+              "Address.$.phoneNumber": data.phoneNumber,
+              "Address.$.state": data.state,
+              "Address.$.pincode": data.pincode,
+              "Address.$.house": data.house,
+              "Address.$.city": data.city,
+              "Address.$.home": data.location,
+              "Address.$.address": data.address,
+            },
           }
-                 
-        
-      ]).toArray()
-      console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
-      console.log(address);
-      resolve(address)
-  })
-  
-},
-updateAddress:(userId,addressId,data)=>{
-  console.log(userId)
-  console.log(addressId,"addressid")
-  console.log(data,"data is here");
-  return new promise(async(resolve,reject)=>{
-  
-     await db.get().collection(collection.USER_COLLECTION).updateOne({
-          _id:objectId(userId),
-          "Address.Useraddress":objectId(addressId)},
-      {$set:{
-          "Address.$.name":data.name,
-          "Address.$.phoneNumber":data.phoneNumber,
-          "Address.$.state":data.state,
-          "Address.$.pincode":data.pincode,
-          "Address.$.house":data.house,
-          "Address.$.city":data.city,
-          "Address.$.home":data.location,
-          "Address.$.address":data.address
-          
-      }
-      }
-      ).then((resp)=>{
-          
-          resolve(resp)
-      })
+        )
+        .then((resp) => {
+          resolve(resp);
+        });
+    });
+  },
+  deleteAddress: (userID, addId) => {
+    return new promise(async (resolve, reject) => {
+      await db
+        .get()
+        .collection(collection.USER_COLLECTION)
+        .updateOne(
+          { _id: objectId(userID) },
+          {
+            $pull: { Address: { Useraddress: objectId(addId) } },
+          }
+        )
 
-  })
-},
-deleteAddress:(userID,addId)=>{
-  return new promise(async(resolve,reject)=>{
-     await db.get().collection(collection.USER_COLLECTION).updateOne({_id:objectId(userID)},
-      {
-          $pull:{Address:{Useraddress:objectId(addId)}}
-      }
-      )
-
-.then((resp)=>{
-      console.log(resp)
-      resolve(resp)
-  })
-})
-
-},
-
-
+        .then((resp) => {
+          console.log(resp);
+          resolve(resp);
+        });
+    });
+  },
 };

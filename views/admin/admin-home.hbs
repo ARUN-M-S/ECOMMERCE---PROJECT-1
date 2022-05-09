@@ -451,7 +451,7 @@ nav .profile-details i{
 
      </style>
    </head>
-<body>
+<body onload="weekReport()">
   <div class="sidebar">
     <div class="logo-details">
     
@@ -524,7 +524,7 @@ nav .profile-details i{
         <div class="box">
           <div class="right-side">
             <div class="box-topic">Total Order</div>
-            <div class="number">40,876</div>
+            <div class="number">{{totalIncome}}</div>
             <div class="indicator">
               <i class='bx bx-up-arrow-alt'></i>
               <span class="text">Up from yesterday</span>
@@ -568,13 +568,192 @@ nav .profile-details i{
       </div>
 
 {{!-- =============================salesreport======================== --}}
+<div class="chartCard">
+      <div class="chartBox">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+     <div class="chartCard">
+      <div class="chartBox">
+        <canvas id="myChart2"></canvas>
+      </div>
+    </div>
+       <div class="chartCard">
+      <div class="chartBox">
+        <canvas id="myChart3"></canvas>
+      </div>
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+     
+    <script>
+         function weekReport() {
+        $.ajax({
+            url: '/admin/getChartDates',
+            method: 'get',
+            success: async(chartDatas) => {
+              console.log(chartDatas)
+                data1 = []
+                chartDatas.weeklyTotal.map((value) => {
+                    data1.push({ x: value._id, y: value.total})
+                })
+
+                const data = {
+                    labels: chartDatas.daysOfWeek,
+                    datasets: [{
+                        label: 'Weekly Sales',
+                        data: data1,
+                        backgroundColor: [
+                            'rgba(255, 26, 104, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(0, 0, 0, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 26, 104, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(0, 0, 0, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                };
+                // config 
+                const config = {
+                    type: 'bar',
+                    data,
+                    options: {
+                        scales: {
+                            x: {
+                                type: 'time',
+                                time: {
+                                    unit: 'day'
+                                }
+                            },
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                };
+
+                // render init block
+                const myChart = new Chart(
+                    document.getElementById('myChart'),
+                    config
+                );
+            }
+        })
+    }
+     $(document).ready(function () {
+        $.ajax({
+            url: '/admin/getChartDates',
+            method: 'get',
+            success: (response) => {
+                let data2 = []
+                response.yearlyTotal.map((value) => {
+                    data2.push({ x: value._id, y: value.total })
+                })
+                const ctx = document.getElementById('myChart2').getContext('2d');
+                const myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        datasets: [{
+                            label: 'Yearly Sales Report',
+                            data: data2,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+
+        })
+
+    })
+     $(document).ready(function () {
+        $.ajax({
+            url: '/admin/getChartDates',
+            method: 'get',
+            success: (response) => {
+                let data2 = []
+                response.monthlyTotal.map((value) => {
+                    data2.push({ x: value._id, y: value.total })
+                })
+                const ctx = document.getElementById('myChart3').getContext('2d');
+                const myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        datasets: [{
+                            label: 'Monthly Sales Report',
+                            data: data2,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+
+        })
+
+    })
+      </script>
 
 
 
 
 
-
-
+{{!-- ===============================salesreport================================ --}}
      </div>
      
      
@@ -591,6 +770,42 @@ sidebarBtn.onclick = function() {
   sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
 }
  </script>
+
+ <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+      .chartMenu {
+        width: 100vw;
+        height: 5rem;
+        background: #ffffff;
+        color: #ffffff;
+      }
+      .chartMenu p {
+        padding: 10px;
+        font-size: 20px;
+      }
+      .chartCard {
+        margin-top: -11rem;
+        width: 100vw;
+        height: calc(100vh - 40px);
+        background:#ffffff;
+        display: flex;
+      padding-top: 120px;
+        align-items: center;
+       
+      }
+      .chartBox {
+         margin-left: 2rem;
+        width: 50rem;
+
+        border-radius: 20px;
+        border: solid 3px rgb(0, 0, 0);
+        background: #ffffff;
+      }
+    </style>
 
 </body>
 </html>
