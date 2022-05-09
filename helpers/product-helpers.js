@@ -336,7 +336,7 @@ module.exports = {
       resolve(carousel);
     });
   },
-
+// ==================================TotalIncome===================
   getTotalIncome: () => {
     return new promise(async (resolve, reject) => {
       let totalSales = await db
@@ -360,6 +360,7 @@ module.exports = {
       console.log(totalSales,"producthelpers");
     });
   },
+  // ===================weeklyIncome===================
   getWeeklyTotal:()=>{
       console.log("praveennnnnn");
     return new promise(async (resolve, reject) => {
@@ -420,7 +421,32 @@ module.exports = {
         console.log(yearlySales,"yearly");
       });
 
-  }
+  },
+  // ======================getting all user count=============
+  getAlluser: () => {
+    return new promise(async (resolve, reject) => {
+      let users = await db
+        .get()
+        .collection(collection.USER_COLLECTION)
+        .find().count()
+        
+        console.log(users);
+      resolve(users);
+    });
+   },
+  // =============================allorder for home===============
+   getAllorder: () => {
+    return new Promise(async (res, rej) => {
+      let orders = await db
+        .get()
+        .collection(collection.ORDER_COLLECTION)
+        .find()
+        .count()
+     
+      console.log(orders);
+      res(orders);
+    });
+  },
   
  
 };

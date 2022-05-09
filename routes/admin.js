@@ -41,11 +41,15 @@ router.get("/admin-logout", verifylogin, (req, res) => {
   res.redirect("/admin");
 });
 
-router.get("/",verifylogin,async(req, res,)=> {
+router.get("/", verifylogin, async (req, res) => {
   console.log("is here");
-   let totalIncome = await productHelper.getTotalIncome();
-   console.log(totalIncome,"incomee");
-  res.render("admin/admin-home", { home: true ,totalIncome});
+  let Income = await productHelper.getTotalIncome();
+  let users = await productHelper.getAlluser();
+  let orders = await productHelper.getAllorder();
+
+  totalIncome = Income[0].total;
+
+  res.render("admin/admin-home", { home: true, totalIncome, users, orders });
 });
 router.get("/products", verifylogin, (req, res) => {
   productHelpers.getAllproducts().then((products) => {
@@ -63,7 +67,8 @@ router.post("/add-product", (req, res) => {
 
     if (
       (image.mv("./public/product-images/" + id + ".jpg") &&
-        images.mv("./public/product-images1/" + id + ".jpg")&& image3.mv("./public/product_image3/" + id + ".jpg"),
+        images.mv("./public/product-images1/" + id + ".jpg") &&
+        image3.mv("./public/product_image3/" + id + ".jpg"),
       (err, done) => {
         if (!err) {
           res.render("admin/add-product", { admin: true });
@@ -78,41 +83,31 @@ router.post("/add-product", (req, res) => {
 
 router.get("/edit-product/:id", verifylogin, async (req, res) => {
   let product = await productHelper.getAllproductsDetails(req.params.id);
-  
+
   res.render("admin/edit-product", { product, admin: true });
 });
 router.post("/edit-product/:id", (req, res) => {
   productHelpers.updateProduct(req.params.id, req.body).then(() => {
     let id = req.params.id;
     res.redirect("/admin/");
-    if (req.files.image && req.files.images&& req.files.image3) {
+    if (req.files.image && req.files.images && req.files.image3) {
       let images = req.files.images;
       let image = req.files.image;
       let image3 = req.files.image3;
 
-
       image.mv("./public/product-images/" + id + ".jpg", (err, done) => {});
       images.mv("./public/product-images1/" + id + ".jpg", (err, done) => {});
       image3.mv("./public/product_image3/" + id + ".jpg", (err, done) => {});
-
-    }else if(req.files.image){
+    } else if (req.files.image) {
       let image = req.files.image;
       image.mv("./public/product-images/" + id + ".jpg", (err, done) => {});
-
-
-    }else if(req.files.images){
+    } else if (req.files.images) {
       let images = req.files.images;
       images.mv("./public/product-images1/" + id + ".jpg", (err, done) => {});
-
-
-    }
-    else if(req.files.image3){
+    } else if (req.files.image3) {
       let image3 = req.files.image3;
       image3.mv("./public/product_image3/" + id + ".jpg", (err, done) => {});
-
-
     }
-
   });
 });
 router.get("/delete-product/:id", verifylogin, (req, res) => {
@@ -207,36 +202,31 @@ router.get("/delete-users/:id", (req, res) => {
   });
 });
 
-
-
-
-
 // ================adminorders======================
 
-router.get('/orderss',verifylogin,(req,res)=>{
-  productHelpers.getAllOrders().then((orders)=>{
-    res.render('admin/user-orders',{orders,admin:true})
-  })
-})
+router.get("/orderss", verifylogin, (req, res) => {
+  productHelpers.getAllOrders().then((orders) => {
+    res.render("admin/user-orders", { orders, admin: true });
+  });
+});
 
-router.get('/orderProductDetails/:id',verifylogin,async(req,res)=>{
- 
-  let products= await productHelpers.getOrderProductDetails(req.params.id)
+router.get("/orderProductDetails/:id", verifylogin, async (req, res) => {
+  let products = await productHelpers.getOrderProductDetails(req.params.id);
   // let adm=req.session.adminLoggedIn
- 
-  res.render('admin/orderProductDetails',{products,admin:true})
-})
+
+  res.render("admin/orderProductDetails", { products, admin: true });
+});
 // ==============================orderStatusupdate======================
-router.post('/statusUpdate',(req,res)=>{
-  let status=req.body.status
-  let orderId=req.body.orderId
-  console.log("hiii",status);
-  console.log("hloo",orderId);
-  
-  productHelpers.statusUpdate(status,orderId).then((response)=>{
-   res.json(true)
-  })
-})
+router.post("/statusUpdate", (req, res) => {
+  let status = req.body.status;
+  let orderId = req.body.orderId;
+  console.log("hiii", status);
+  console.log("hloo", orderId);
+
+  productHelpers.statusUpdate(status, orderId).then((response) => {
+    res.json(true);
+  });
+});
 
 // ======================================Addcarousel==================
 router.post("/add-curosel", (req, res) => {
@@ -253,21 +243,22 @@ router.post("/add-curosel", (req, res) => {
   });
 });
 // =========================salesreport==================
-router.get("/getChartDates",async(req,res)=>{
+router.get("/getChartDates", async (req, res) => {
   console.log("arunms");
 
   let weeklyTotal = await productHelper.getWeeklyTotal();
- let monthlyTotal = await productHelper.getMontlyTotal();
+  let monthlyTotal = await productHelper.getMontlyTotal();
   let yearlyTotal = await productHelper.getYearlyTotal();
 
-  res.json({weeklyTotal,monthlyTotal,yearlyTotal})
-
-
-
-
-
+  res.json({ weeklyTotal, monthlyTotal, yearlyTotal });
+});
+// ====================coupen=======
+router.get("/Coupen",(req,res)=>{
+  res.render("admin/Coupen")
+});
+router.post("/add-Coupen",async(req,res)=>{
+  productHelper.addCoupen(req.body)
 
 })
 
 module.exports = router;
-

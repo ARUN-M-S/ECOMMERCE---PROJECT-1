@@ -500,6 +500,12 @@ nav .profile-details i{
             <span class="links_name">All orders</span>
           </a>
         </li>
+         <li>
+          <a href="/admin/Coupen">
+            <i class='bx bx-user' ></i>
+            <span class="links_name">Coupens</span>
+          </a>
+        </li>
        
         <li class="log_out">
           <a href="/admin/admin-logout">
@@ -524,35 +530,27 @@ nav .profile-details i{
         <div class="box">
           <div class="right-side">
             <div class="box-topic">Total Order</div>
-            <div class="number">{{totalIncome}}</div>
-            <div class="indicator">
-              <i class='bx bx-up-arrow-alt'></i>
-              <span class="text">Up from yesterday</span>
-            </div>
+            <div class="number">{{orders}}</div>
+            
           </div>
           <i class='bx bx-cart-alt cart'></i>
         </div>
         <div class="box">
           <div class="right-side">
             <div class="box-topic">Total Sales</div>
-            <div class="number">38,876</div>
-            <div class="indicator">
-              <i class='bx bx-up-arrow-alt'></i>
-              <span class="text">Up from yesterday</span>
-            </div>
+            <div class="number">{{totalIncome}}</div>
+           
           </div>
           <i class='bx bxs-cart-add cart two' ></i>
         </div>
         <div class="box">
           <div class="right-side">
-            <div class="box-topic">Total Profit</div>
-            <div class="number">$12,876</div>
-            <div class="indicator">
-              <i class='bx bx-up-arrow-alt'></i>
-              <span class="text">Up from yesterday</span>
-            </div>
+            <div class="box-topic"><i class="fa-solid fa-user"></i>Total Users</div>
+            <div class="number">{{users}}</div>
+            
           </div>
-          <i class='bx bx-cart cart three' ></i>
+       
+
         </div>
         <div class="box">
           <div class="right-side">
