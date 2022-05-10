@@ -1,4 +1,5 @@
 <section style="background-color: rgb(255, 255, 255);">
+  <body onload="couponTimeout()">
   <div class="container py-5 ">
     <div class="row d-flex justify-content-center my-4">
       <div class="col-md-8">
@@ -10,6 +11,7 @@
             <!-- Single item -->
             <div class="row ">
               {{#each products}}
+              <form action="/coupenAdding" id="coupenForm"></form>
 
               <div class="col-lg-3 col-md-12 mb-4  mt-2 mb-lg-0">
                 <!-- Image -->
@@ -38,18 +40,17 @@
                 <!-- Data -->
               </div>
 
-
               <div class="col-lg-4 col-md-6 mb-4 mt-2 mb-lg-0 ">
                 <!-- Quantity -->
                 <div class="d-flex mb-4">
-                  <label class="form-label ms-3 mt-3 me-3" for="form1">Quantity:</label>
-                  <button class="badge rounded-pill  h-25 pl-2 me-2 mt-3"
+                  <label class="form-label  mt-3 me-3" for="form1">Quantity:</label>
+                  <button class="badge rounded-pill  h-25  me-2 mt-3"
                     style="background-color: darkorange; color:black"
                     onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',1)">+</button><span
-                    class="fs-5 mt-3 me-3" id="{{this.product._id}}">{{this.quantity}}</span><button
+                    class="fs-5 mt-3 " id="{{this.product._id}}">{{this.quantity}}</span><button
                     class="badge rounded-pill  h-25  mt-3" style="background-color: rgb(255, 0, 0); color:black; "
                     onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',-1)">-</button>
-{{log this._id}}
+                  {{log this._id}}
                   {{!-- <a href="#" class="fs-2 mb-3 me-2 text-decoration-none text-success">+</a>
                   <div class="form-outline mt-2">
                     <input id="form1" name="quantity" value="{{this.quantity}}" type="button" class="form-control" />
@@ -122,9 +123,22 @@
                     <p class="mb-0">(including GST)</p>
                   </strong>
                 </div>
-                <span><strong>$<span id="total">{{totalValue}}</span></strong></span>
+                <span><strong>$<span id="total">{{finalAmount}}</span></strong></span>
+
+                <h4><strong><span id="price">{{price}}</span></strong></h4>
+
               </li>
             </ul>
+            <h4 class="text-danger ms-auto" id="userAll"></h4><br>
+            <div class="input-group mb-3" style="width:14rem">
+
+              <input type="text" class="form-control" form="coupenForm" placeholder="Coupen Code" name="coupon" style="border: 0; padding:0;" >
+  <button onclick=" applyCoupen()"class="btn btn-outline-secondary" form="coupenForm" type="submit"
+                style="width:fit-content;padding:0" id="button-addon2">Apply</button>
+
+
+
+            </div>
 
             <button type="button" class="btn btn-lg btn-block text-light" style="background-color: darkorange;">
               <a href="/place-order" class="text-decoration-none text-light"> Go to checkout</a>
@@ -198,3 +212,63 @@
   }
 
 </script>
+
+
+<script>
+  $("#coupenForm").submit((e) => {
+    e.preventDefault()
+    $.ajax({
+      url: '/coupenAdding',
+      method: 'post',
+      data: $('#coupenForm').serialize(),
+      success: (response) => {
+        if (response.user) {
+          document.getElementById('userAll').innerHTML = 'already used';
+        } else if (response.discount) {
+          console.log(response.discount)
+          document.getElementById('price').innerHTML = '₹' + response.discount;
+
+        } else {
+          document.getElementById('userAll').innerHTML = 'coupon invalid';
+        }
+      }
+    })
+  })
+</script>
+   <script>
+        function addToCart(proId) {
+            $.ajax({
+                url: '/add-to-cart/' + proId,
+                method: 'get',
+                success: (response) => {
+                    if (response.status) {
+                        let count = $('#cartCount').html()
+                        count = parseInt(count) + 1
+                        $("#cartCount").html(count)
+                    }
+
+                }
+            })
+        }
+
+    </script>
+     <script>
+        function couponTimeout() {
+            $.ajax({
+                url: '/couponTime',
+                method: 'get',
+                success: (response) => {
+                    if (response.status) {
+                        let count = $('#cartCount').html()
+                        count = parseInt(count) + 1
+                        $("#cartCount").html(count)
+                    }
+
+                }
+            })
+        }
+
+    </script>
+
+
+

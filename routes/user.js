@@ -41,6 +41,7 @@ const verifylogin = (req, res, next) => {
 router.get("/", async function (req, res, next) {
   let user = req.session.user;
   console.log(user);
+  req.session.finalAmount=0
   cartCount=null
   if (req.session.user) {
     var cartCount=await userHelpers.getCarCount(req.session.user._id)
@@ -208,13 +209,15 @@ router.get("/logout", (req, res) => {
 router.get("/cart", verifylogin, async (req, res) => {
   let products=await userHelpers.getCartProducts(req.session.user._id)
   let totalValue=await userHelpers.getTotalAmount(req.session.user._id)
+  req.session.total=totalValue
+  let finalAmount= req.session.total
 
   cartCount=null
   if (req.session.user) {
     var cartCount=await userHelpers.getCarCount(req.session.user._id)
   }
   if(cartCount){
-  res.render("user/cart",{products,'user':req.session.user,cartCount,totalValue});
+  res.render("user/cart",{products,'user':req.session.user,cartCount,finalAmount});
 
 
   }else{
@@ -417,8 +420,15 @@ router.post('/remove-product-wishlist',(req,res)=>{
 //product orders
 
 router.get('/place-order',verifylogin,async(req,res)=>{
-  let total=await userHelpers.getTotalAmount(req.session.user._id)
+  let total;
+   price=await userHelpers.getTotalAmount(req.session.user._id)
     let Address= await userHelpers.getAddress(req.session.user._id)
+    // req.session.finalAmount=price;
+    if(req.session.finalAmount){
+       total= req.session.finalAmount;
+    }else{
+ total=price;
+    }
     
     console.log(Address,"pravenn sajeev");
   
@@ -433,6 +443,9 @@ router.post('/place-order',async(req,res)=>{
 
   let products=await userHelpers.getCartProductList(userId)
   let totalPrice=await userHelpers.getTotalAmount(userId)
+  if(req.session.finalAmount){
+    totalPrice=parseInt(req.session.finalAmount);
+  }
   console.log(totalPrice,"amountttttt");
   console.log(address,"amountttttt");
 
@@ -766,6 +779,45 @@ router.post('/editcurrentAddress/:id',verifylogin,async(req,res)=>{
 
 // });
 
+  
+router.post('/coupenAdding',verifylogin,async(req,res)=>{
+  let coupon=req.body.coupon;
+  let total= req.session.total
+  // console.log(total,"shyam");
+  // console.log(coupon,"akhilasif");
+  let validateCoupon= await  userHelpers.validateCoupon(coupon);
+  if(validateCoupon){
+    let userId=req.session.user._id
+    let couponCode = validateCoupon.code;
+    let couponoffer = validateCoupon.offer;
+  
+
+    
+ let validateUser=await userHelpers.addusertoCoupon(userId,couponCode);
+ 
+ if(validateUser){
+  res.json({user:true})
+ }else{
+   discount=total-(total*(couponoffer))/100
+   req.session.finalAmount=discount
+  res.json({discount})
+   
+ }
+  }else{
+    res.json({coupon:true})
+  }
+  
+ 
+  
+})
+
+// ============================coupon Expiry=====================
+router.get('/couponTime',verifylogin,async(req,res)=>{
+  console.log("coupon on user.js");
+  await productHelpers.couponExpiry();
+
+
+})
 
 
 

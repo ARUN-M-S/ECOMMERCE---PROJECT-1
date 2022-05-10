@@ -7,6 +7,7 @@ const async = require("hbs/lib/async");
 const { resolve, reject } = require("promise");
 const { response } = require("express");
 const Razorpay = require("razorpay");
+const { get } = require("http");
 var instance = new Razorpay({
   key_id: "rzp_test_aScLPZGnWnxvJB",
   key_secret: "lcaGOMaRalCTNEtBsNtQBGVj",
@@ -1116,4 +1117,57 @@ module.exports = {
         });
     });
   },
+  validateCoupon:(coupon)=>{
+    return new promise(async(resolve,reject)=>{
+      console.log("is here");
+     await db.get().collection(collection.COUPEN_COLLECTION).findOne({code:coupon}).then((res)=>{
+      resolve(res)
+        
+     })
+      
+       
+    
+     })
+    
+    
+  },addusertoCoupon:(userId,couponCode)=>{
+    console.log("addusertoCoupon");
+    return new promise(async(resolve, reject) => {
+     
+     
+          let users=await db.get().collection(collection.COUPEN_COLLECTION).findOne({code:couponCode,usedUsers:{$elemMatch:{user_id:userId}}})
+          
+          
+          if(users){
+            console.log(users,"akillllll");
+           
+            resolve(users)
+            
+          }else{
+            let users={
+              user_id:userId,
+            }
+            db.get()
+          .collection(collection.COUPEN_COLLECTION)
+          .updateOne(
+            { code: couponCode },
+            {
+              $push: { usedUsers: users },
+            }
+          )
+          .then((response) => {
+            console.log(response, "usedUsers");
+            resolve(response);
+          });
+        resolve();
+  
+          }
+        })
+       
+
+
+
+
+    
+  }
 };

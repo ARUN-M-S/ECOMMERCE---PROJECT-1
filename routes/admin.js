@@ -258,7 +258,9 @@ router.get("/Coupen",(req,res)=>{
 });
 router.post("/add-Coupen",async(req,res)=>{
   productHelper.addCoupen(req.body)
+  res.redirect("Coupen")
 
 })
+// ======================coupondeleting====================
 
 module.exports = router;

@@ -383,6 +383,7 @@ module.exports = {
       });
 
   },
+  // ========================monthlyTotal======================
   getMontlyTotal:()=>{
     return new promise(async (resolve, reject) => {
         let monthlySales = await db
@@ -401,8 +402,9 @@ module.exports = {
         console.log(monthlySales,"Months");
       });
 
-  }
-  ,
+  },
+  // ===================yearly Total====================
+  
   getYearlyTotal:()=>{
     return new promise(async (resolve, reject) => {
         let yearlySales = await db
@@ -447,6 +449,26 @@ module.exports = {
       res(orders);
     });
   },
-  
+  // ===================CoupenCreation================
+  addCoupen: (coupen) => {
+    return new promise((resolve, reject) => {
+      db.get()
+        .collection("coupen")
+        .insertOne(coupen)
+        .then((data) => {
+          resolve(data.insertedId);
+        });
+    });
+  },
+  couponExpiry:()=>{
+    console.log("coupon is here");
+return new promise ((resolve,reject)=>{
+  let date= new Date()
+  console.log(date,"hiarunms");
+ let coupon= db.get().collection(collection.COUPEN_COLLECTION).find();
+ console.log(coupon,"hipraveennn");
+})
+
+  }
  
 };
