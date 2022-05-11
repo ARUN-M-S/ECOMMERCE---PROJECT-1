@@ -1,0 +1,98 @@
+<section class=" gradient-custom">
+    <div class="container " style="min-height: 100vh;">
+        <div class="row d-flex justify-content-center mt-3">
+            <div class="col-lg-12 col-xl-12">
+                <div class="card" style="border-radius: 10px;border-color: white;">
+                    <div class="card-header px-4 py-3" style="border-color: white;">
+                        <h5 class="text-muted mb-0">Thanks for your Order, <span
+                                style="color: #ffffff;">{{user.name}}</span>!</h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <p class="lead fw-normal mb-0" style="color: #ffffff;">Your Orders</p>
+
+                        </div>
+                        <div class="card mb-4" style="border-color: white;">
+                            {{#each orders}}
+                            <div class="card-body mt-2" id="card" style="">
+                                <div class="row">
+
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                        <p class=" mb-0"><strong>Address:<br></strong>{{this.deliveryDetails.address}},
+                                            {{this.deliveryDetails.state}}<br>
+                                            {{this.deliveryDetails.city}},
+                                            {{this.deliveryDetails.pincode}}<br>
+                                            {{this.deliveryDetails.mobile}}<br>
+
+
+
+
+                                        </p>
+                                    </div>
+                                    <div class="col-md-1 text-center d-flex justify-content-center align-items-center">
+                                        <p class="text-muted mb-0 small">White</p>
+                                    </div>
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                        <p class="text-muted mb-0 small">{{this.Date}}</p>
+                                    </div>
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                        <p class="text-success mb-0 small"><span class="text-muted">Status:
+                                            </span>{{this.status}}</p>
+                                    </div>
+                                    <div class="col-md-1 text-center d-flex justify-content-center align-items-center">
+                                        <p class="text-success mb-0 small"><span
+                                                class="text-muted">Payment:</span>{{this.paymentMethode}}</p>
+                                    </div>
+
+                                    <div class="col-md-1 text-center d-flex justify-content-center align-items-center">
+                                        <p class=" mb-0 small">₹{{this.totalAmount}}</p>
+                                    </div>
+
+
+                                    <div class="col-md-1 text-center  justify-content-center align-items-center mt-3">
+                                        <a href="/view-order-products/{{this._id}}" class="btn btn-dark text-light">view
+                                            product</a>
+                                        {{#if Delivered}}
+                                        <a href="#" class="btn btn-dark text-light  "
+                                            style="margin-top: 1rem; width:7.4rem ;">return</a>
+                                        {{else if Cancelled}}
+
+                                        {{else}}
+                                        <a href="/cancel-order/{{this._id}}" class="btn btn-dark text-light  "
+                                            style="margin-top: 1rem; width:7.4rem ;">cancel</a>
+
+                                        {{/if}}
+
+                                    </div>
+
+                                </div>
+
+                                <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                                <div class="row d-flex align-items-center">
+
+
+                                </div>
+                            </div>
+
+                            {{/each}}
+                        </div>
+
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    #card {
+        background-color: #b8c6db;
+        background-image: linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%);
+
+    }
+</style>

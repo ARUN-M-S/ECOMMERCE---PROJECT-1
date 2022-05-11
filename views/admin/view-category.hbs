@@ -1,7 +1,8 @@
 <section style="background-color: rgb(230, 191, 140); min-height:100vh; border:solid">
+  <div  style="text-align: center; padding-top:10px; text-decoration: underline;" ><h1>Edit Categories</h1></div>
     <div class="container-fluid col-md-3 pt-5" style="display: flex; ">
        
-        <table class="table table-striped">
+        <table class="table table-striped" style="">
   <thead>
     <tr>
       <th scope="col" ><h4>No</h4></th>
@@ -15,7 +16,7 @@
   <tbody>
      {{#each category}}
     <tr>
-      <th scope="row" >{{@index}}</th>
+      <th scope="row" >{{inc @index}}</th>
       <td>
           {{this.brand}}
       </td>

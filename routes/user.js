@@ -7,6 +7,7 @@ var router = express.Router();
 const productHelpers = require("../helpers/product-helpers");
 const userHelpers = require("../helpers/user-hepers");
 const swal = require( 'sweetalert');
+const paypal= require('paypal-rest-sdk')
 
 
 const serviceSsid = "VA5440c48ff0e92ed96faf250b9359ce15";
@@ -482,8 +483,12 @@ router.get('/order-success',(req,res)=>{
 
 router.get('/orders',verifylogin,async(req,res)=>{
   console.log(req.session.user?._id);
+  
   let orders=await userHelpers.getUserOrders(req.session.user?._id)
-res.render('user/orders',{user:req.session.user,orders})
+  console.log(orders,"praveeeeennnnnnnnnnnagdgsgsg");
+// res.render('user/orders',{user:req.session.user,orders})
+res.render('user/ordersssss',{user:req.session.user,orders})
+
 })
 
 
@@ -713,18 +718,32 @@ userHelpers.userAddress(req.body,userId).then((responce)=>{
 })
 
 });
+// =========================fromprofile============================
+router.post("/useraddress",verifylogin,(req,res)=>{
+  let userId=req.session.user._id
+  console.log(userId);
+userHelpers.userAddress(req.body,userId).then((responce)=>{
+  console.log(responce);
+  res.redirect("/myprofile")
+
+})
+
+});
 // =======================Address showing for user from profile======
 
 router.get('/myaddress',verifylogin,async(req,res)=>{
   let Address=await userHelpers.getAddress(req.session.user._id)
+ 
   
-  if(Address){
-  res.render("user/myAddres",{Address})
+  let user=req.session.user
+  
+  if(Address[0]?.Address){
+  res.render("user/myAddres",{Address,user})
 
 
   }
   else{
-    res.redirect("/arunms")
+    res.render("user/add-addressuser")
   }
 
 })
@@ -818,7 +837,32 @@ router.get('/couponTime',verifylogin,async(req,res)=>{
 
 
 })
+router.get('/deleteadd/:id',verifylogin,async(req,res)=>{
+  let id = req.params.id;
+  let userId=req.session.user._id
+  console.log(userId,"arunmsudevan",id);
+  userHelpers.deleteAddress(userId,id).then((responce)=>{
+    res.redirect("/myaddress")
+  })
+ 
+});
+router.get('/cancel-order/:id',async(req,res)=>{
+  orderId=req.params.id
+  // console.log(id,"rohitttt");
+  productHelpers.cancelOrder(orderId).then((responce)=>{
+    res.redirect("/orders")
+  })
+})
 
+// router.post("/statusUpdate", (req, res) => {
+//   let status = req.body.status;
+//   let orderId = req.body.orderId;
+//   console.log("hiii", status);
+//   console.log("hloo", orderId);
 
+//   productHelpers.statusUpdate(status, orderId).then((response) => {
+    
+//   });
+// });
 
 module.exports = router;

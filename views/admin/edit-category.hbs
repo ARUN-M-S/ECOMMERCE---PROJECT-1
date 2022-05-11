@@ -1,8 +1,14 @@
-<section style="background-color: antiquewhite; min-height:100vh"> 
-    <div class="container pt-5" >
-    <div class="row">
+
+
+<section style="background-color: antiquewhite; min-height:100vh;"> 
+    <div class="container pt-5"  >
+  <div  style="text-align: center; padding-top:10px; text-decoration: underline;" ><h1>Edit Categories</h1></div>
+
+    <div class="row" >
         <form action="/admin/edit-category/{{category._id}}" method="post" enctype="multipart/form-data">
-  <div class="col-md-6">
+  
+  <div class="col-md-8" style="padding-left: 200px;" >
+    
     <label for="" class="form-label"><h3>Brand:</h3></label>
     <input type="text" name="brand" value="{{category.brand}}" class="form-control">
   <div class="mt-3">

@@ -908,7 +908,7 @@ module.exports = {
               localField: "item",
               foreignField: "_id",
               as: "product",
-            },
+            }
           },
           {
             $project: {
@@ -1046,6 +1046,26 @@ module.exports = {
       resolve(address);
     });
   },
+  getMyAddress: (userId) => {
+    return new promise(async (resolve, reject) => {
+      let address = await db
+        .get()
+        .collection(collection.USER_COLLECTION)
+        .aggregate([
+          {
+            $match: { _id: objectId(userId) },
+          },
+          {
+            $unwind: "$Address",
+          },
+        ])
+        .toArray();
+        let myaddress=address[0]
+      // console.log("lllllllllllllllllllllllllllllllll");
+      console.log(myaddress,"makallllllllllllllllll");
+      resolve(address);
+    });
+  },
   EditAddress: (addId, userId) => {
     console.log(addId, userId, "hellooooPraveen");
     return new promise(async (resolve, reject) => {
@@ -1169,5 +1189,16 @@ module.exports = {
 
 
     
-  }
+  },
+  // deleteMyaddress: (id) => {
+  //   return new promise((resolve, reject) => {
+  //     db.get()
+  //       .collection(collection.USER_COLLECTION)
+  //       .deleteOne({ _id: objectId(id) })
+  //       .then((response) => {
+  //         resolve(response);
+  //       });
+  //   });
+  // },
+
 };

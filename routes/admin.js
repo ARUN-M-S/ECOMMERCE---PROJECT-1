@@ -1,7 +1,9 @@
 const { response } = require("express");
 let express = require("express");
 const async = require("hbs/lib/async");
+const { Db } = require("mongodb");
 const { resolve } = require("promise");
+const collection = require("../confiq/collection");
 
 const productHelpers = require("../helpers/product-helpers");
 let router = express.Router();
@@ -204,8 +206,9 @@ router.get("/delete-users/:id", (req, res) => {
 
 // ================adminorders======================
 
-router.get("/orderss", verifylogin, (req, res) => {
-  productHelpers.getAllOrders().then((orders) => {
+router.get("/orderss", verifylogin, async(req, res) => {
+ await productHelpers.getAllOrders().then((orders) => {
+    console.log(orders[0].Delivered,"manuuuughsgsggss");
     res.render("admin/user-orders", { orders, admin: true });
   });
 });
@@ -253,8 +256,11 @@ router.get("/getChartDates", async (req, res) => {
   res.json({ weeklyTotal, monthlyTotal, yearlyTotal });
 });
 // ====================coupen=======
-router.get("/Coupen",(req,res)=>{
-  res.render("admin/Coupen")
+router.get("/Coupen",async(req,res)=>{
+  coupons = await productHelper.couponsfind()
+  console.log(coupons,"amallllll");
+
+  res.render("admin/Coupen",{coupons, admin: true })
 });
 router.post("/add-Coupen",async(req,res)=>{
   productHelper.addCoupen(req.body)

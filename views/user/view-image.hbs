@@ -33,11 +33,11 @@
           <i class="bi bi-bookmark-fill pe-1 text-success"></i>Bank Offer10% off on Slice Cards, up to ₹200. On orders
           of ₹1000 and <a href="#" class="text-decoration-none">aboveT&C</a><br>
 
-          <i class="bi bi-bookmark-fill pe-1 text-success"></i>Bank Offer5% Cashback on Flipkart Axis Bank a <a href="#"
+          <i class="bi bi-bookmark-fill pe-1 text-success"></i>Bank Offer5% Cashback on Kiddie Axis Bank a <a href="#"
             class="text-decoration-none">CardT&C</a> <br>
 
           <i class="bi bi-bookmark-fill pe-1 text-success"></i>Partner OfferBuy this product and get upto ₹500 off on
-          Flipkart Furniture <a href="#" class="text-decoration-none"> Know More</a><br>
+          Kiddie Furniture <a href="#" class="text-decoration-none"> Know More</a><br>
 
           <i class="bi bi-bookmark-fill pe-1 text-success"></i>Partner OfferSign up for Men's card Pay Later and get
           Card worth ₹100* <a href="#" class="text-decoration-none">Know More</a><br>
@@ -48,7 +48,8 @@
           <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
             aria-expanded="false">
             size
-          </button>
+          </button> <button type="submit"  onclick="addToCart('{{product._id}}')" class="btn btn-dark">Add Cart</button>
+       
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item" href="#">small</a></li>
             <li><a class="dropdown-item" href="#">medium</a></li>
@@ -60,9 +61,7 @@
         </p>
 
 
-        <div class="text-center">
-          <button type="submit"  onclick="addToCart('{{product._id}}')" class="btn btn-dark">Add Cart</button>
-        </div>
+       
 
       </div>
 
@@ -89,8 +88,8 @@
                 </a>
                 <ul class="product-links">
                    
-                    <li><a href="#"><i class="fa-solid fa-x"></i></a></li>
-                    <li><a  ><i > <button onclick="addToCart('{{this._id}}')" class="fa fa-shopping-cart "></button></i></a></li>
+                    <li><a href="#" style="background-color: aliceblue;"><i class="fa-solid fa-x"></i></a></li>
+                    <li ><a style="padding-top: .3rem;" > <button onclick="addToCart('{{this._id}}')"  style="background-color: aliceblue; border:0" class="fa fa-shopping-cart "></button></a></li>
                 </ul>
                 
             </div>

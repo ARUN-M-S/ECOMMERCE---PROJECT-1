@@ -1,6 +1,8 @@
-<div class="container mt-5">
+<div class="container">
+  <div  style="text-align: center; padding-top:10px; text-decoration: underline;" ><h1>All Orders</h1></div>
+
     <div class="d-flex justify-content-center row">
-        <div class="col-md-10">
+        <div class="col-md-10" style="padding-left: 100px;">
             <div class="rounded">
                 <div class="table-responsive table-borderless">
                     <table class="table">
@@ -30,7 +32,7 @@
                                         <div class="inner-circle"></div>
                                     </div> --}}
                                 </td>
-                                <td>{{@index}}</td>
+                                <td>{{inc @index}}</td>
                                 
                                 <td>{{this.deliveryDetails.name}}</td>
                                 <td>{{this.deliveryDetails.address}} <br>{{this.deliveryDetails.pincode}} <br>{{this.deliveryDetails.mobile}}</td>
@@ -40,17 +42,28 @@
                                 <td> <a href="/admin/orderProductDetails/{{this._id}}" class="btn btn-success">Details</a> </td>
                                 {{!-- <td><i class="fa fa-ellipsis-h text-black-50"></i></td> --}}
                                 <td>{{this.paymentMethod}}</td>
-                                 <td>   <select onchange="deliveryStatus(value,'{{this._id}}')" class="custom-select" style="width: 7rem;">
-                 {{#if this.status}}                    
+
+                                 <td>  
+                                      {{#if Cancelled}} 
+  <button type="button" class="btn btn-danger">Cancelled</button>
+  {{else if Delivered}}
+  <button type="button" class="btn btn-success">Delivered</button>
+
+  {{else}}
+                                     
+    <select onchange="deliveryStatus(value,'{{this._id}}')" class="custom-select" style="width: 7rem;">
+                      
+                            
+ 
+
   <option value="{{this.status}}" selected disabled> {{this.status}}</option>
-{{else}}
-  <option value="{{this.status}}" selected disabled> Delivered</option>
-{{/if}}
-  <option   value="Pending">Pending</option>
+    <option   value="Pending">Pending</option>
   <option   value="Cancelled">Cancel</option>
   <option value="Shipped">Ship</option>
   <option value="Delivered">Delivered</option>
-</select></td>
+</select>
+{{/if}}
+</td>
                             </tr>
                            
                           

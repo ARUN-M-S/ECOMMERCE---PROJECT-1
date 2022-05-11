@@ -1,0 +1,78 @@
+<section style="background-color: beige;">
+    <div class="container pt-5" >
+        <div class="row">
+<div class="col-md-12 mb-4">
+    <div class="card mb-4">
+      <div class="card-header py-3 bg-dark">
+        <h5 class="mb-0 text-light">ADD ADDRESS</h5>
+      </div>
+      
+      <div class="card-body bg-light">
+        <form action="/useradd" method="post">
+          <!-- 2 column grid layout with text inputs for the first and last names -->
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form7Example1" name="name" class="form-control" required />
+                <input type="text" value="{{user._id}}" name="userId" class="form-control" hidden/>
+                <label class="form-label" for="form7Example1">Name</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form7Example2" name="phoneNumber" class="form-control" required/>
+                <label class="form-label" for="form7Example2">Phone Number</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text input -->
+          <div class="row mb-4">
+            <div class="col">
+          <div class="form-outline mb-4">
+            <input type="text" id="form7Example3" name="state" class="form-control" required />
+            <label class="form-label" for="form7Example3">State</label>
+          </div>
+          </div>
+
+          <!-- Text input -->
+           <div class="col">
+          <div class="form-outline mb-4">
+            <input type="text" id="form7Example4" name="pincode" class="form-control" required/>
+            <label class="form-label" for="form7Example4">Pincode</label>
+          </div>
+           </div>
+           </div>
+
+          <!-- Email input -->
+           <div class="row mb-4">
+            <div class="col">
+          <div class="form-outline mb-4">
+            <input type="text" id="form7Example5" name="city" class="form-control" required />
+            <label class="form-label" for="form7Example5">City</label>
+          </div>
+        </div>
+          <!-- Number input -->
+          <div class="col">
+          <div class="form-outline mb-4">
+            <input type="number" id="form7Example6" name="house" class="form-control" required />
+            <label class="form-label" for="form7Example6">House No,Building Name</label>
+          </div>
+          </div>
+          </div>
+
+          <!-- Message input -->
+          <div class="form-outline mb-4">
+            <textarea class="form-control" id="form7Example7" name="address" rows="4"></textarea>
+            <label class="form-label" for="form7Example7">Address information</label>
+          </div>
+  <button type="submit" class="btn btn-primary mt-3">Submit</button>
+
+          <!-- Checkbox -->
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  </section>

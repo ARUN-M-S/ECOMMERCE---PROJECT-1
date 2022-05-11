@@ -1,48 +1,100 @@
-<section style="background-color: antiquewhite; min-height:100vh">
-    <div class="container pt-5">
+<section style="background-color: antiquewhite; ">
+  <div class="container ">
+  <div  style="text-align: center; padding-top:10px; text-decoration: underline;" ><h1>Add Coupens</h1></div>
+    
     <div class="row">
-        <form action="/admin/add-Coupen" method="post" enctype="multipart/form-data">
-  <div class="col-md-6">
-   
-    <input type="text" name="name" placeholder="Coupen name" class="form-control">
-  {{!-- <div class="mt-3">
-    <label for="" class="form-label">category:</label>
-    <input type="text" name="category" class="form-control" id="exampleInputPassword1" required>
-  </div> --}}
-  <div class="mt-3">
-    
-    <input type="text" name="code" placeholder="Coupen Code" class="form-control" id="exampleInputPassword1" required>
-  </div>
-  <div class="mt-3">
-    
-    <input type="text" name="offer" placeholder="Offer percentage" class="form-control" id="exampleInputPassword1" required>
-  </div>
+      <form action="/admin/add-Coupen" method="post" enctype="multipart/form-data">
+        <div class="col-md-10" style="padding-left: 250px;">
 
- 
-      
+          <input type="text" name="name" placeholder="Coupen name" class="form-control">
+          {{!-- <div class="mt-3">
+            <label for="" class="form-label">category:</label>
+            <input type="text" name="category" class="form-control" id="exampleInputPassword1" required>
+          </div> --}}
+          <div class="mt-3">
 
- <div class="mt-3">
-    
-    <input type="date" name="startDate" placeholder="Starting Date" class="form-control" id="exampleInputPassword1" required>
-  </div>
+            <input type="text" name="code" placeholder="Coupen Code" class="form-control" id="exampleInputPassword1"
+              required>
+          </div>
+          <div class="mt-3">
 
-  {{!-- <div class="mt-3">
-   
-    <input type="text" name="offerPrice" placeholder="OFFER PRPCE" class="form-control" id="exampleInputPassword1" required>
-  </div> --}}
-  <div class="mt-3">
-    
-    <input type="date" name="endDate" placeholder="End Date" class="form-control" id="exampleInputPassword1" required>
-  </div>
+            <input type="text" name="offer" placeholder="Offer percentage" class="form-control"
+              id="exampleInputPassword1" required>
+          </div>
 
 
 
 
-  <button type="submit" class="btn btn-primary mt-3">Submit</button>
-</form>
+          <div class="mt-3">
+
+            <input type="date" name="startDate" placeholder="Starting Date" class="form-control"
+              id="exampleInputPassword1" required>
+          </div>
+
+          {{!-- <div class="mt-3">
+
+            <input type="text" name="offerPrice" placeholder="OFFER PRPCE" class="form-control"
+              id="exampleInputPassword1" required>
+          </div> --}}
+          <div class="mt-3">
+
+            <input type="date" name="endDate" placeholder="End Date" class="form-control" id="exampleInputPassword1"
+              required>
+          </div>
+
+
+
+
+          <button type="submit" class="btn btn-primary mt-3">Submit</button>
+      </form>
     </div>
-    </div>
+  </div>
 </section>
-<script>
+<section style="background-color: antiquewhite; min-height:100vh;">
+  <div class="container " style="padding-left: 200px;">
     
-</script>
+  <div  style="text-align: center; padding-top:10px; text-decoration: underline;" ><h1>All Coupons</h1></div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">Name</th>
+          <th scope="col">Code</th>
+          <th scope="col">Offer</th>
+          <th scope="col">Start-Date</th>
+          <th scope="col">End-Date</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        {{#each coupons}}
+          <tr>
+            <th scope="row">{{inc @index}}</th>
+            <td>
+              {{this.name}}
+            </td>
+
+            <td>{{this.code}}
+            </td>
+            <td>
+              {{this.offer}}
+            </td>
+            <td>
+              {{this.startDate}}
+            </td>
+
+            <td>
+              {{this.endDate}}
+            </td>
+            
+           
+            
+          </tr>
+        {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+
+</section>

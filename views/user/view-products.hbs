@@ -9,8 +9,8 @@
                     aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
                     aria-label="Slide 3"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
-                    aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner">
                 {{#each carousel}}
@@ -71,6 +71,7 @@
                 </p>
             </div>
         </div>
+        <div class="container">
         <div class="row">
             {{#each category}}
             <div class="col-12 col-md-4 col-lg-4 col-sm-6 col-xl-4 p-5 mt-3">
@@ -84,6 +85,7 @@
                 </p>
             </div>
             {{/each}}
+        </div>
         </div>
     </section>
 
@@ -155,10 +157,10 @@
                         <span class="product-discount-label" style="width: max-content;">{{this.offerpercentage}}%
                             off</span>
                         <ul class="product-links">
-                            <li><a href="#"><i class="fa fa-search"></i></a></li>
-                            <li><a class="add-to-wishlist" href="/add-to-wishlist/{{this._id}}"><i
+                            
+                            <li><a  class="add-to-wishlist pt-1" href="/add-to-wishlist/{{this._id}}"><i
                                         class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-random"></i></a></li>
+                            <li><a href="#"><i class="fa fa-random pt-1"></i></a></li>
                         </ul>
 
                         <button class="add-to-cart" onclick="addToCart('{{this._id}}')"><a>Add to Cart</a></button>
@@ -251,11 +253,11 @@
     {{!-- =====================================shopnow====================== --}}
 
     <!--services Section-->
-    <div class="container-fluid background py-5">
+    <div class="container background ">
         <div class="row justify-content-center">
             <div class=" col- xxl-10">
-                <div class="card card-span shadow" style="border-radius:35px;">
-                    <div class="card-body py-5">
+                <div class="card card-span shadow" >
+                    <div class="card-body ">
                         <div class="row justify-content-evenly">
                             <div class="col-md-3">
                                 <div
@@ -297,92 +299,17 @@
             </div>
 
         </div>
-        <!---End of th services Section-->
+        </div>
 
-        <!---Offers Section-->
-        {{!-- <section class="background">
-            <div class="container">
-                <div class="row h-100">
-                    <div class=" col-lg-7 mx-auto text-center mb-6">
-                        <h2 class="fw-bold fs-3 fs-lg-5 lh-sm mb-3 mt-5 text-white">
-                            Today's Offer
-                        </h2>
-                    </div>
-                </div>
-                <div class="row gx-2">
-                    <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">
-                        <div class="card card-span h-100 text-white rounded-3">
-                            <img class="img-fluid rounded-3 h-100" src="/images/pexels-ray-piedra-1456740.jpg" alt="..">
-                            <div class="card-img-overlay ps-0">
-                                <span class="badge bg-danger p-2 ms-3">
-                                    <i class="fas fa-tag ,s-2 fs-0"></i>
-                                    <span class="fs-0">20% Off</span>
-                                </span>
-                            </div>
-
-                        </div>
-
-
-                    </div>
-                    <!------>
-                    <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">
-                        <div class="card card-span h-100 text-white rounded-3">
-                            <img class="img-fluid rounded-3 h-100" src="/images/annie-spratt-hqSdNrqPBbw-unsplash.jpg"
-                                alt="..">
-                            <div class="card-img-overlay ps-0">
-                                <span class="badge bg-danger p-2 ms-3">
-                                    <i class="fas fa-tag ,s-2 fs-0"></i>
-                                    <span class="fs-0">20% Off</span>
-                                </span>
-                            </div>
-
-                        </div>
-
-
-                    </div>
-                    <!------>
-                    <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">
-                        <div class="card card-span h-100 text-white rounded-3">
-                            <img class="img-fluid rounded-3 h-100" src="images/img-5.jpg" alt="..">
-                            <div class="card-img-overlay ps-0">
-                                <span class="badge bg-danger p-2 ms-3">
-                                    <i class="fas fa-tag ,s-2 fs-0"></i>
-                                    <span class="fs-0">20% Off</span>
-                                </span>
-                            </div>
-
-                        </div>
-
-
-                    </div>
-                    <!------>
-                    <div class="col-sm-6 col-md-4 col-lg-3 h-100 mb-5">
-                        <div class="card card-span h-100 text-white rounded-3">
-                            <img class="img-fluid rounded-3 h-100" src="images/img-6.jpg" alt="..">
-                            <div class="card-img-overlay ps-0">
-                                <span class="badge bg-danger p-2 ms-3">
-                                    <i class="fas fa-tag ,s-2 fs-0"></i>
-                                    <span class="fs-0">20% Off</span>
-                                </span>
-                            </div>
-
-                        </div>
-
-
-                    </div>
-                    <!------>
-                </div>
-            </div>
-
-        </section> --}}
-        <!--End of the Offers section-->
+        {{!-- =================End of the section======================== --}}
 
         <div class="content d-flex align-items-center justify-content-center">
             <div class="container rounded">
-                <div class="h1 fw-bold text-center mt-2" style="color: #ffa600;">KIDDIE WORLD</div>
-                <div class="h3 text-center pt-2" style="color: #ffa600;">With Great Outcomes!</div>
-                <div class="fs-5 text-center pb-3 mb-3" style="color: #ffa600;">Our patrons have gotten offers from
+                <div class="h1 fw-bold text-center " style="color: #ffa600;">KIDDIE WORLD</div>
+                <div class="h3 text-center " style="color: #ffa600;">With Great Outcomes!</div>
+                <div class="fs-5 text-center " style="color: #ffa600;">Our patrons have gotten offers from
                     awesome companies.</div>
+                    
                 <div class="rollers position-relative overflow-hidden">
                     <div class="start-roller"></div>
                     <div class="wrapper">

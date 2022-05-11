@@ -248,6 +248,43 @@ module.exports = {
   // ==============================orderstatusupdate=====================
   statusUpdate: (status, orderId) => {
     return new Promise((resolve, reject) => {
+      console.log(status,"statuss");
+
+      if(status==="Delivered"){
+        db.get()
+        .collection(collection.ORDER_COLLECTION)
+        .updateOne(
+          { _id: objectId(orderId) },
+          {
+            $set: {
+              status: status,
+              Delivered:true,
+              Cancelled:false
+            },
+          }
+        )
+        .then((response) => {
+          resolve(true);
+        });
+
+      } else if(status==="Cancelled"){
+        db.get()
+        .collection(collection.ORDER_COLLECTION)
+        .updateOne(
+          { _id: objectId(orderId) },
+          {
+            $set: {
+              status: status,
+              Delivered:false,
+              Cancelled:true,
+            },
+          }
+        )
+        .then((response) => {
+          resolve(true);
+        });
+
+      }else{
       db.get()
         .collection(collection.ORDER_COLLECTION)
         .updateOne(
@@ -260,7 +297,7 @@ module.exports = {
         )
         .then((response) => {
           resolve(true);
-        });
+        });}
     });
   },
   // =======================================adminOrderDetails=======================
@@ -272,7 +309,7 @@ module.exports = {
         .find()
         .sort({ Date: -1 })
         .toArray();
-      console.log(orders);
+      console.log(orders,"amalvisssssssssssss");
       res(orders);
     });
   },
@@ -462,13 +499,43 @@ module.exports = {
   },
   couponExpiry:()=>{
     console.log("coupon is here");
-return new promise ((resolve,reject)=>{
-  let date= new Date()
-  console.log(date,"hiarunms");
- let coupon= db.get().collection(collection.COUPEN_COLLECTION).find();
- console.log(coupon,"hipraveennn");
+return new promise (async(resolve,reject)=>{
+  
+  var dateObj = new Date().toISOString().split('T')[0];
+// 
+  console.log(dateObj,"hiarunms");
+  
+ let coupon=await db.get().collection(collection.COUPEN_COLLECTION).remove({endDate:dateObj})
+ 
 })
 
+  },
+  cancelOrder: (orderId) => {
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.ORDER_COLLECTION)
+        .updateOne(
+          { _id: objectId(orderId) },
+          {
+            $set: {
+              status: "Cancelled",
+              Delivered:false,
+              Cancelled:true,
+            },
+          }
+        )
+        .then((response) => {
+          resolve(true);
+        });
+    });
+  },couponsfind:()=>{
+    return new promise (async(resolve,reject)=>{
+      let coupons= await db.get().collection(collection.COUPEN_COLLECTION).find().toArray()
+      resolve(coupons)
+
+    })
+    
   }
  
 };
+
