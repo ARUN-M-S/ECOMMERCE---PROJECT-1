@@ -7,12 +7,17 @@ var router = express.Router();
 const productHelpers = require("../helpers/product-helpers");
 const userHelpers = require("../helpers/user-hepers");
 const swal = require( 'sweetalert');
-const paypal= require('paypal-rest-sdk')
+const paypal= require('paypal-rest-sdk');
+paypal.configure({
+  'mode': 'sandbox', //sandbox or live
+  'client_id': 'AUNC-SkKejcJ-JmppdiGiRJrtSnFsAL0-CykIfuVStKUZ0FhLXNwG8ThDeYhmWlYA80z-3md3bQUYd-J',
+  'client_secret': 'EL2Sspxfmlobh9pos-p0zMS_p71nEtVt5mJS9uqvi8KSZn69uUtMYm0_7_MNTWaDc3rqbxbf3SPboq_j'
+});
 
 
 const serviceSsid = "VA5440c48ff0e92ed96faf250b9359ce15";
 const AccountSsid = "ACf10e011f8facf58eeae5bd2139c0be95";
-const token = "ce179674c1763d2d2cf7c3dd3b34c38b";
+const token = "170df357d9d157cf3aa45e231e21e4d6";
 const client = require("twilio")(AccountSsid, token);
 
 const verifylogin = (req, res, next) => {
@@ -383,7 +388,8 @@ router.get('/resent-otp/:phone',(req,res)=>{
 })
 
 //======================================category view=========================================
-router.get('/category-view/:id',(req,res)=>{
+router.get('/category-view/:id',async(req,res)=>{
+  
   let category=req.params.id
   userHelpers. categoryView(category).then((products)=>{
   console.log(products);
@@ -462,14 +468,110 @@ userHelpers.placeOrder(orderAddress,products,totalPrice,req.body,userId).then((o
 
     res.json  ({codSuccess:true})
 
-  }else {
+  }
+  
+  
+  else if(req.body['payment-method']==='ONLINE') {
 
     userHelpers.generateRazorpay(orderId,totalPrice).then((response)=>{
       res.json(response)
 
     })
 
+  }else if (req.body['payment-method'] === "PAYPAL") {
+    console.log("entered to paypal");
+    val = totalPrice / 74;
+    totalPrice = val.toFixed(2);
+    let totals = totalPrice.toString();
+    req.session.total = totals;
+    var create_payment_json = {
+      "intent": "sale",
+      "payer": {
+        "payment_method": "paypal"
+      },
+      "redirect_urls": {
+        "return_url": "http://localhost:3000/order-success",
+        "cancel_url": "http://localhost:3000/cancel"
+      },
+      "transactions": [{
+        "item_list": {
+          "items": [{
+            "name": "item",
+            "sku": "001",
+            "price": totals,
+            "currency": "USD",
+            "quantity": 1
+          }]
+        },
+        "amount": {
+          "currency": "USD",
+          "total": totals
+        },
+        "description": "This is the payment description."
+      }]
+    };
+    paypal.payment.create(create_payment_json, function (error, payment) {
+      if (error) {
+        throw error;
+      }
+      else {
+        console.log("Create Payment Response");
+        console.log(payment);
+        for (var i = 0; i < payment.links.length; i++) {
+          console.log("1111")
+          if (payment.links[i].rel === "approval_url") {
+            console.log("2222")
+            let link = payment.links[i].href;
+            link = link.toString()
+            // console.log(paypalAmt)
+            // console.log(typeof paypalAmt)
+            res.json({ paypal: true, url: link })
+            // else{
+            //   console.log("paypal");
+            //   userHelpers.generatePaypal(orderId,totalPrice).then((response)=>{
+
+            //   })
+            // }
+
+          }
+        }
+      }
+    })
   }
+  router.get('/success', (req, res) => {
+    if (req.session.user.loggedIn) {
+      let paypalAmt = req.session.total
+      paypalAmt = paypalAmt.toString()
+      console.log(req.query)
+      const payerId = req.query.PayerID
+      const paymentId = req.query.paymentId
+      var execute_payment_json = {
+        "payer_id": payerId,
+        "transactions": [{
+          "amount": {
+            "currency": "USD",
+            "total": paypalAmt
+          }
+        }]
+      }
+      paypal.payment.execute(paymentId, execute_payment_json, function (error,
+        payment) {
+        if (error) {
+          console.log(error.response);
+          throw error;
+        } else {
+          console.log("Get Payment Response");
+          console.log(JSON.stringify(payment));
+          userHelpers.changePaymentStatus(req.session.orderId).then(() => {
+            res.render('user/order-success')
+          })
+        }
+      });
+    }
+    else {
+      res.render('user/login')
+    }
+  })
   
 
 });
@@ -482,10 +584,10 @@ router.get('/order-success',(req,res)=>{
 
 
 router.get('/orders',verifylogin,async(req,res)=>{
-  console.log(req.session.user?._id);
+  // console.log(req.session.user?._id);
   
   let orders=await userHelpers.getUserOrders(req.session.user?._id)
-  console.log(orders,"praveeeeennnnnnnnnnnagdgsgsg");
+  // console.log(orders,"praveeeeennnnnnnnnnnagdgsgsg");
 // res.render('user/orders',{user:req.session.user,orders})
 res.render('user/ordersssss',{user:req.session.user,orders})
 
@@ -832,7 +934,7 @@ router.post('/coupenAdding',verifylogin,async(req,res)=>{
 
 // ============================coupon Expiry=====================
 router.get('/couponTime',verifylogin,async(req,res)=>{
-  console.log("coupon on user.js");
+  // console.log("coupon on user.js");
   await productHelpers.couponExpiry();
 
 
@@ -840,17 +942,19 @@ router.get('/couponTime',verifylogin,async(req,res)=>{
 router.get('/deleteadd/:id',verifylogin,async(req,res)=>{
   let id = req.params.id;
   let userId=req.session.user._id
-  console.log(userId,"arunmsudevan",id);
+  // console.log(userId,"arunmsudevan",id);
   userHelpers.deleteAddress(userId,id).then((responce)=>{
     res.redirect("/myaddress")
   })
  
 });
 router.get('/cancel-order/:id',async(req,res)=>{
+  console.log("praveen is here");
   orderId=req.params.id
+  console.log(orderId,"ishres");
   // console.log(id,"rohitttt");
   productHelpers.cancelOrder(orderId).then((responce)=>{
-    res.redirect("/orders")
+    res.json(responce)
   })
 })
 
@@ -864,5 +968,8 @@ router.get('/cancel-order/:id',async(req,res)=>{
     
 //   });
 // });
+router.get("/newproduct",(req,res)=>{
+  res.render("user/new-product-page")
+})
 
 module.exports = router;

@@ -51,7 +51,7 @@ router.get("/", verifylogin, async (req, res) => {
 
   totalIncome = Income[0].total;
 
-  res.render("admin/admin-home", { home: true, totalIncome, users, orders });
+  res.render("admin/admin-home", { home: true, totalIncome, users, orders});
 });
 router.get("/products", verifylogin, (req, res) => {
   productHelpers.getAllproducts().then((products) => {
@@ -208,7 +208,7 @@ router.get("/delete-users/:id", (req, res) => {
 
 router.get("/orderss", verifylogin, async(req, res) => {
  await productHelpers.getAllOrders().then((orders) => {
-    console.log(orders[0].Delivered,"manuuuughsgsggss");
+    // console.log(orders[0].Delivered,"manuuuughsgsggss");
     res.render("admin/user-orders", { orders, admin: true });
   });
 });
@@ -269,4 +269,8 @@ router.post("/add-Coupen",async(req,res)=>{
 })
 // ======================coupondeleting====================
 
+
+router.get('/arunms',(req,res)=>{
+  res.render("admin/admin-dashboard",{admin:true})
+})
 module.exports = router;

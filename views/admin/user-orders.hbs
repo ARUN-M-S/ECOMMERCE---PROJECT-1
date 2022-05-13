@@ -1,5 +1,7 @@
 <div class="container">
-  <div  style="text-align: center; padding-top:10px; text-decoration: underline;" ><h1>All Orders</h1></div>
+    <div style="text-align: center; padding-top:10px; text-decoration: underline;">
+        <h1>All Orders</h1>
+    </div>
 
     <div class="d-flex justify-content-center row">
         <div class="col-md-10" style="padding-left: 100px;">
@@ -26,48 +28,51 @@
                         </thead>
                         {{#each orders}}
                         <tbody class="table-body">
-                            <tr  class="cell-1">
+                            <tr class="cell-1">
                                 <td class="text-center">
                                     {{!-- <div class="toggle-btn">
                                         <div class="inner-circle"></div>
                                     </div> --}}
                                 </td>
                                 <td>{{inc @index}}</td>
-                                
+
                                 <td>{{this.deliveryDetails.name}}</td>
-                                <td>{{this.deliveryDetails.address}} <br>{{this.deliveryDetails.pincode}} <br>{{this.deliveryDetails.mobile}}</td>
+                                <td>{{this.deliveryDetails.address}} <br>{{this.deliveryDetails.pincode}}
+                                    <br>{{this.deliveryDetails.mobile}}</td>
                                 <td>{{this.Date}}</td>
                                 <td>{{this.totalAmount}}</td>
                                 {{!-- <a href="/admin/cancelOrder/{{this._id}}" class="btn btn-success"></a> --}}
-                                <td> <a href="/admin/orderProductDetails/{{this._id}}" class="btn btn-success">Details</a> </td>
+                                <td> <a href="/admin/orderProductDetails/{{this._id}}"
+                                        class="btn btn-success">Details</a> </td>
                                 {{!-- <td><i class="fa fa-ellipsis-h text-black-50"></i></td> --}}
                                 <td>{{this.paymentMethod}}</td>
 
-                                 <td>  
-                                      {{#if Cancelled}} 
-  <button type="button" class="btn btn-danger">Cancelled</button>
-  {{else if Delivered}}
-  <button type="button" class="btn btn-success">Delivered</button>
+                                <td>
+                                    {{#if Cancelled}}
+                                    <button type="button" class="btn btn-danger">Cancelled</button>
+                                    {{else if Delivered}}
+                                    <button type="button" class="btn btn-success">Delivered</button>
 
-  {{else}}
-                                     
-    <select onchange="deliveryStatus(value,'{{this._id}}')" class="custom-select" style="width: 7rem;">
-                      
-                            
- 
+                                    {{else}}
 
-  <option value="{{this.status}}" selected disabled> {{this.status}}</option>
-    <option   value="Pending">Pending</option>
-  <option   value="Cancelled">Cancel</option>
-  <option value="Shipped">Ship</option>
-  <option value="Delivered">Delivered</option>
-</select>
-{{/if}}
-</td>
+                                    <select onchange="deliveryStatus(value,'{{this._id}}')" class="custom-select"
+                                        style="width: 7rem;">
+
+
+
+
+                                        <option value="{{this.status}}" selected disabled> {{this.status}}</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Cancelled">Cancel</option>
+                                        <option value="Shipped">Ship</option>
+                                        <option value="Delivered">Delivered</option>
+                                    </select>
+                                    {{/if}}
+                                </td>
                             </tr>
-                           
-                          
-                           
+
+
+
                         </tbody>
                         {{/each}}
                     </table>
@@ -80,93 +85,89 @@
 <style>
     @import url('https://fonts.googleapis.com/css?family=Assistant');
 
-body {
-    background: #eee;
-    font-family: Assistant, sans-serif
-}
+    body {
+        background: #eee;
+        font-family: Assistant, sans-serif
+    }
 
-.cell-1 {
-    border-collapse: separate;
-    border-spacing: 0 4em;
-    background: #fff;
-    border-bottom: 5px solid transparent;
-    background-clip: padding-box
-  
-    
-    
-}
+    .cell-1 {
+        border-collapse: separate;
+        border-spacing: 0 4em;
+        background: #fff;
+        border-bottom: 5px solid transparent;
+        background-clip: padding-box
+    }
 
-thead {
-    background: #dddcdc
-    
-}
+    thead {
+        background: #dddcdc
+    }
 
-.toggle-btn {
-    width: 40px;
-    height: 21px;
-    background: grey;
-    border-radius: 50px;
-    padding: 3px;
-    cursor: pointer;
-    -webkit-transition: all 0.3s 0.1s ease-in-out;
-    -moz-transition: all 0.3s 0.1s ease-in-out;
-    -o-transition: all 0.3s 0.1s ease-in-out;
-    transition: all 0.3s 0.1s ease-in-out
-}
+    .toggle-btn {
+        width: 40px;
+        height: 21px;
+        background: grey;
+        border-radius: 50px;
+        padding: 3px;
+        cursor: pointer;
+        -webkit-transition: all 0.3s 0.1s ease-in-out;
+        -moz-transition: all 0.3s 0.1s ease-in-out;
+        -o-transition: all 0.3s 0.1s ease-in-out;
+        transition: all 0.3s 0.1s ease-in-out
+    }
 
-.toggle-btn>.inner-circle {
-    width: 15px;
-    height: 15px;
-    background: #fff;
-    border-radius: 50%;
-    -webkit-transition: all 0.3s 0.1s ease-in-out;
-    -moz-transition: all 0.3s 0.1s ease-in-out;
-    -o-transition: all 0.3s 0.1s ease-in-out;
-    transition: all 0.3s 0.1s ease-in-out
-}
+    .toggle-btn>.inner-circle {
+        width: 15px;
+        height: 15px;
+        background: #fff;
+        border-radius: 50%;
+        -webkit-transition: all 0.3s 0.1s ease-in-out;
+        -moz-transition: all 0.3s 0.1s ease-in-out;
+        -o-transition: all 0.3s 0.1s ease-in-out;
+        transition: all 0.3s 0.1s ease-in-out
+    }
 
-.toggle-btn.active {
-    background: blue !important
-}
+    .toggle-btn.active {
+        background: blue !important
+    }
 
-.toggle-btn.active>.inner-circle {
-    margin-left: 19px
-}
+    .toggle-btn.active>.inner-circle {
+        margin-left: 19px
+    }
 </style>
 
 
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-function deliveryStatus(value,orderId){
-    swal({
-  text: 'Are you sure want to Change the Order status',
-  icon:"warning",
-  button: true,
-  dangerMode:true,
-  
-})
-.then((name) => {
-    if(name){
-      $.ajax({
-            url:'/admin/statusUpdate',
-            method:'post',
-            data:{
-                status:value,
-                orderId:orderId
-            },
-            success:(response)=>{
-              
+    function deliveryStatus(value, orderId) {
+        swal({
+            text: 'Are you sure want to Change the Order status',
+            icon: "warning",
+            button: true,
+            dangerMode: true,
 
-               swal("Status Updated",{
-icon:"success"
-               })
-               
-              }
+        })
+            .then((name) => {
+                if (name) {
+                    $.ajax({
+                        url: '/admin/statusUpdate',
+                        method: 'post',
+                        data: {
+                            status: value,
+                            orderId: orderId
+                        },
+                        success: (response) => {
+
+
+                            swal("Status Updated", {
+                                icon: "success"
+                            })
+
+                        }
+                    })
+                }
+
             })
-        }
-  
-})
-}
+    }
 
 </script>

@@ -58,7 +58,7 @@
                                         {{else if Cancelled}}
 
                                         {{else}}
-                                        <a href="/cancel-order/{{this._id}}" class="btn btn-dark text-light  "
+                                        <a onclick="cancelOrder('{{this._id}}')" type="button" class="btn btn-dark text-light  "
                                             style="margin-top: 1rem; width:7.4rem ;">cancel</a>
 
                                         {{/if}}
@@ -96,3 +96,40 @@
 
     }
 </style>
+
+
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    function cancelOrder(orderIds) {
+        swal({
+            text: 'Are you sure want to Change the Order status',
+            icon: "warning",
+            button: true,
+            dangerMode: true,
+
+        })
+            .then((name) => {
+                if (name) {
+                    $.ajax({
+                        url: '/cancel-order/'+orderIds,
+                        method: 'get',
+                      
+                        success: (response) => {
+                            location.reload()
+
+
+                            swal("Status Updated", {
+                                icon: "success"
+                            })
+
+                        }
+                    })
+                }
+
+            })
+    }
+
+</script>
+
+

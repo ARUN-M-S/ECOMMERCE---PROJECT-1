@@ -117,6 +117,11 @@
                   checked><strong>Online Pyment</strong>
                 <label class="form-check-label" for="radio1"></label>
               </div>
+              <div class="form-check mt-4">
+                <input type="radio" class="form-check-input" id="radio1" name="payment-method" value="PAYPAL"
+                  checked><strong>paypal</strong>
+                <label class="form-check-label" for="radio1"></label>
+              </div>
               </ul>
               <button type="submit" class="btn btn-primary btn-lg btn-block mt-4">
                 PLACE ORDER
@@ -158,7 +163,10 @@
 
         if (response.codSuccess) {
           location.href = '/order-success'
-        } else {
+        } else if(response.paypal){
+          location.href=response.url;
+        }
+        else {
 
           razorpayPayment(response)
 

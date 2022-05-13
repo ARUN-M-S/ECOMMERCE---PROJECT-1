@@ -9,15 +9,15 @@
                     <img class="img-2" src="/product-images1/{{this.userWishlist._id}}.jpg">
                     </a>
                     <ul class="product-links">
-                         <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                         {{!-- <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
                   title="Remove item" onclick="removeCartProduct('{{this._id}}','{{this.userWishlist._id}}')">
                   <i class="fas fa-trash"></i>
-                </button>
+                </button> --}}
 
-                        <li><a> <button title="Remove item" class="fa-solid fa-x"
+                        <li><a title="Remove item" class="fa-solid fa-x"
                                         onclick="removeCartProduct('{{this._id}}','{{this.userWishlist._id}}')"></button></i></a>
                         </li>
-                        <li><a> <button onclick="addToCart('{{this.userWishlist._id}}')"
+                        <li><a type="button" onclick="addToCart('{{this.userWishlist._id}}')"
                                         class="fa fa-shopping-cart "></button></a></li>
                     </ul>
 {{log this._id}}
